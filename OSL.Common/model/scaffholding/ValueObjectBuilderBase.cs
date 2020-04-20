@@ -14,7 +14,7 @@ limitations under the License.
 */
 using System;
 
-namespace GeoSports.Common.model.scaffholding
+namespace GeoSports.Common.Model.Scaffholding
 {
     public abstract class ValueObjectBuilderBase<T>
     {

@@ -15,7 +15,7 @@ limitations under the License.
 using System;
 using System.Threading.Tasks;
 
-namespace GeoSports.Common.service
+namespace GeoSports.Common.Service
 {
     public interface ILoggerService
     {

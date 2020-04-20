@@ -14,10 +14,10 @@ limitations under the License.
 */
 using FakeItEasy;
 using FluentAssertions;
-using GeoSports.Common.model;
-using GeoSports.Common.service;
-using GeoSports.Common.service.importer;
-using GeoSports.Common.Tests.service;
+using GeoSports.Common.Model;
+using GeoSports.Common.Service;
+using GeoSports.Common.Service.Importer;
+using GeoSports.Common.Tests.Service;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -133,7 +133,7 @@ namespace GeoSports.Common.Tests
             var activityVO = new ActivityVO.Builder
             {
                 Name = "A bike training",
-                Sport = model.ActivityVO.ACTIVITY_SPORT.BIKING,
+                Sport = Model.ActivityVO.ACTIVITY_SPORT.BIKING,
                 Track = trackBuilder.Build()
             };
 

@@ -14,25 +14,29 @@ limitations under the License.
 */
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace GeoSports.Common.Model
+namespace GeoSports.WPF.View
 {
-    public class AthleteEntity
+    /// <summary>
+    /// Interaction logic for OSLHome.xaml
+    /// </summary>
+    public partial class OSLHome : Page
     {
-        public string Id { get; private set; }
-        public List<ActivityVO> Activities { get; private set; }
-        public string Name { get; private set; }
-
-        /// <summary>
-        /// Entity Framework (proxy) constructor
-        /// </summary>
-        public AthleteEntity() { }
-
-        public AthleteEntity(List<ActivityVO> activities, string name, string id)
+        public OSLHome()
         {
-            Activities = activities;
-            Name = name;
-            Id = id;
+            InitializeComponent();
         }
     }
 }
