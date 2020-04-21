@@ -47,8 +47,10 @@ namespace GeoSports.Common.Service.Importer
 
         public IEnumerable<ActivityVO> ImportActivitiesStream(Stream stream)
         {
-            XmlReaderSettings settings = new XmlReaderSettings();
-            settings.Async = false;
+            XmlReaderSettings settings = new XmlReaderSettings
+            {
+                Async = false
+            };
             using (XmlReader reader = XmlReader.Create(stream, settings))
             {
                 // SAX parsing for performance

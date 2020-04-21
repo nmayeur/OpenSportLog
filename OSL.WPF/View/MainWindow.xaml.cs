@@ -12,31 +12,31 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Messaging;
+using GeoSports.WPF.ViewModel;
+using GeoSports.WPF.ViewModel.Scaffholding;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using static GeoSports.WPF.ViewModel.MainVM;
 
 namespace GeoSports.WPF.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class CloseApp : NavigationWindow
     {
-        public MainWindow()
+        public CloseApp()
         {
             InitializeComponent();
+            var vm = DataContext as MainVM; 
+            if (vm == null) return; 
+            vm.CloseApp += _CloseApp;
+        }
+
+        private void _CloseApp(object sender, CloseNotificationEventArgs args)
+        {
+            this.Close();
         }
     }
 }

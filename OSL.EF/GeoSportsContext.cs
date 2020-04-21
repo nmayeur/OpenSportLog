@@ -43,7 +43,9 @@ namespace GeoSports.EF
         {
             var connectionString = _Configuration["ConnectionStrings:Default"];
             options.UseSqlite(connectionString);
+#if DEBUG
             options.EnableSensitiveDataLogging();
+#endif
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

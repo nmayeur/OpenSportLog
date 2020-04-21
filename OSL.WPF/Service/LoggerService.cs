@@ -15,27 +15,24 @@ limitations under the License.
 using GeoSports.Common.Service;
 using System;
 using System.Threading.Tasks;
-using Xunit.Abstractions;
 
-namespace GeoSports.Common.Tests.Service
+namespace GeoSports.Common.Service
 {
-    public class TestLoggerService : ILoggerService
+    public class LoggerService : ILoggerService
     {
 
         public enum LEVEL { DEBUG = 1, INFO = 2, WARN = 3, ERROR = 4, FATAL = 5 };
 
-        private readonly LEVEL _Level;
+        private LEVEL _Level;
 
-        private readonly ITestOutputHelper _Output;
-        public TestLoggerService(ITestOutputHelper output, LEVEL level)
+        public LoggerService(LEVEL level)
         {
-            _Output = output;
             _Level = level;
         }
 
         public void Debug(string message)
         {
-            if (_Level <= LEVEL.DEBUG) _Output.WriteLine(message);
+            if (_Level <= LEVEL.DEBUG) Console.WriteLine(message);
         }
 
         public async Task DebugAsync(string message)
@@ -45,15 +42,15 @@ namespace GeoSports.Common.Tests.Service
 
         public void Error(string message)
         {
-            if (_Level <= LEVEL.ERROR) _Output.WriteLine(message);
+            if (_Level <= LEVEL.ERROR) Console.WriteLine(message);
         }
 
         public void Error(string message, Exception exception)
         {
             if (_Level <= LEVEL.ERROR)
             {
-                _Output.WriteLine(message);
-                _Output.WriteLine(exception.StackTrace);
+                Console.WriteLine(message);
+                Console.WriteLine(exception.StackTrace);
             }
         }
 
@@ -71,7 +68,7 @@ namespace GeoSports.Common.Tests.Service
         {
             if (_Level <= LEVEL.FATAL)
             {
-                _Output.WriteLine(message);
+                Console.WriteLine(message);
             }
         }
 
@@ -79,8 +76,8 @@ namespace GeoSports.Common.Tests.Service
         {
             if (_Level <= LEVEL.FATAL)
             {
-                _Output.WriteLine(message);
-                _Output.WriteLine(exception.StackTrace);
+                Console.WriteLine(message);
+                Console.WriteLine(exception.StackTrace);
             }
         }
 
@@ -98,7 +95,7 @@ namespace GeoSports.Common.Tests.Service
         {
             if (_Level <= LEVEL.INFO)
             {
-                _Output.WriteLine(message);
+                Console.WriteLine(message);
             }
             throw new NotImplementedException();
         }
@@ -112,7 +109,7 @@ namespace GeoSports.Common.Tests.Service
         {
             if (_Level <= LEVEL.WARN)
             {
-                _Output.WriteLine(message);
+                Console.WriteLine(message);
             }
         }
 
