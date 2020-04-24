@@ -20,6 +20,7 @@ using GeoSports.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -63,7 +64,7 @@ namespace GeoSports.WPF.Tests
             dbContext.Database.EnsureDeleted();
             dbContext.Database.Migrate();
 
-            string path = @"data\data_mini.fitlog";
+            string path = @"data\data_tiny.fitlog";
             FitLogImporter importer = new FitLogImporter(_LoggerService, new Dictionary<string, ActivityVO.ACTIVITY_SPORT> {
                 { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityVO.ACTIVITY_SPORT.BIKING},
                 { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityVO.ACTIVITY_SPORT.RUNNING},
@@ -81,6 +82,8 @@ namespace GeoSports.WPF.Tests
                 }
             }
             dbContext.SaveChanges();
+            var athletesCount = dbContext.Athletes.CountAsync().GetAwaiter().GetResult();
+            Assert.AreEqual(1, athletesCount);
 
             //dbContext.Database.EnsureDeleted();
         }

@@ -56,23 +56,23 @@ namespace GeoSports.WPF.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<MainVM>();
-            SimpleIoc.Default.Register<HomeVM>();
+            SimpleIoc.Default.Register<MainWindowVM>();
+            SimpleIoc.Default.Register<ActivitiesListVM>();
         }
 
-        public MainVM Main
+        public MainWindowVM MainWindow
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainVM>();
+                return ServiceLocator.Current.GetInstance<MainWindowVM>();
             }
         }
 
-        public HomeVM Home
+        public ActivitiesListVM ActivitiesList
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<HomeVM>();
+                return ServiceLocator.Current.GetInstance<ActivitiesListVM>();
             }
         }
 

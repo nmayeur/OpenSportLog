@@ -30,11 +30,11 @@ using System.Windows.Shapes;
 namespace GeoSports.WPF.View
 {
     /// <summary>
-    /// Interaction logic for OSLMain.xaml
+    /// Interaction logic for ActivitiesList.xaml
     /// </summary>
-    public partial class OSLMain : Page
+    public partial class ActivitiesList : UserControl
     {
-        public OSLMain()
+        public ActivitiesList()
         {
             InitializeComponent();
         }

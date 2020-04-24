@@ -218,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\ActivitiesList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -227,30 +231,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Service\LoggerService.cs" />
-    <Compile Include="ViewModel\HomeVM.cs" />
-    <Compile Include="ViewModel\MainVM.cs" />
+    <Compile Include="ViewModel\ActivitiesListVM.cs" />
+    <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\Scaffholding\MessengerMessages.cs" />
     <Compile Include="ViewModel\Scaffholding\ViewModelLocator.cs" />
+    <Compile Include="View\ActivitiesList.xaml.cs">
+      <DependentUpon>ActivitiesList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\OSLHome.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\OSLMain.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="View\OSLHome.xaml.cs">
-      <DependentUpon>OSLHome.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\OSLMain.xaml.cs">
-      <DependentUpon>OSLMain.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

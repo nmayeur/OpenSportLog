@@ -17,19 +17,19 @@ using GeoSports.WPF.ViewModel;
 using GeoSports.WPF.ViewModel.Scaffholding;
 using System.Windows;
 using System.Windows.Navigation;
-using static GeoSports.WPF.ViewModel.MainVM;
+using static GeoSports.WPF.ViewModel.MainWindowVM;
 
 namespace GeoSports.WPF.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class CloseApp : NavigationWindow
+    public partial class MainWindow : Window
     {
-        public CloseApp()
+        public MainWindow()
         {
             InitializeComponent();
-            var vm = DataContext as MainVM; 
+            var vm = DataContext as MainWindowVM; 
             if (vm == null) return; 
             vm.CloseApp += _CloseApp;
         }

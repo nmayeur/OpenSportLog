@@ -12,6 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+using GalaSoft.MvvmLight.Threading;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -27,5 +28,9 @@ namespace GeoSports.WPF
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            DispatcherHelper.Initialize();
+        }
     }
 }

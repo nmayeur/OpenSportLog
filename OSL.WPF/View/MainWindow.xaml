@@ -1,4 +1,5 @@
-﻿<NavigationWindow x:Class="GeoSports.WPF.View.CloseApp"
+﻿<Window x:Class="GeoSports.WPF.View.MainWindow"
+        xmlns:Views="clr-namespace:GeoSports.WPF.View"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,6 +7,29 @@
         xmlns:local="clr-namespace:GeoSports.WPF.View"
         mc:Ignorable="d"
         Title="OpenSportLog" Height="600" Width="800"
-        Source="OSLHome.xaml"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
-</NavigationWindow>
+        DataContext="{Binding MainWindow, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Row="0" Grid.Column="0">
+                <Menu Name="mnuMain" DockPanel.Dock="Top" IsMainMenu="True">
+                    <MenuItem Header="_File">
+                        <MenuItem Header="_Open" Command="{Binding OpenFileCommand}"/>
+                        <MenuItem Header="_New" Command="{Binding NewFileCommand}"/>
+                        <Separator/>
+                        <MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
+                    </MenuItem>
+                <ComboBox Width="200" Name="cboAthlete" 
+                          ItemsSource="{Binding Athletes}" 
+                          DisplayMemberPath="Name" 
+                          SelectedItem="{Binding SelectedAthlete}" />
+            </Menu>
+        </DockPanel>
+        <Views:ActivitiesList Grid.Column="0" Grid.Row="1"/>
+    </Grid>
+</Window>
