@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GeoSports.EF.Migrations
+namespace OSL.EF.Migrations
 {
     [DbContext(typeof(GeoSportsContext))]
-    [Migration("20200419091941_InitialCreate")]
+    [Migration("20200429155403_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace GeoSports.EF.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
 
-            modelBuilder.Entity("GeoSports.Common.model.AthleteEntity", b =>
+            modelBuilder.Entity("GeoSports.Common.Model.AthleteEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -34,9 +34,9 @@ namespace GeoSports.EF.Migrations
                     b.ToTable("Athletes");
                 });
 
-            modelBuilder.Entity("GeoSports.Common.model.AthleteEntity", b =>
+            modelBuilder.Entity("GeoSports.Common.Model.AthleteEntity", b =>
                 {
-                    b.OwnsMany("GeoSports.Common.model.ActivityVO", "Activities", b1 =>
+                    b.OwnsMany("GeoSports.Common.Model.ActivityEntity", "Activities", b1 =>
                         {
                             b1.Property<string>("Id")
                                 .HasColumnType("TEXT");
@@ -61,24 +61,24 @@ namespace GeoSports.EF.Migrations
 
                             b1.HasIndex("AthleteEntityId");
 
-                            b1.ToTable("ActivityVO");
+                            b1.ToTable("ActivityEntity");
 
                             b1.WithOwner()
                                 .HasForeignKey("AthleteEntityId");
 
-                            b1.OwnsOne("GeoSports.Common.model.TrackVO", "Track", b2 =>
+                            b1.OwnsOne("GeoSports.Common.Model.TrackEntity", "Track", b2 =>
                                 {
-                                    b2.Property<string>("ActivityVOId")
+                                    b2.Property<string>("ActivityEntityId")
                                         .HasColumnType("TEXT");
 
-                                    b2.HasKey("ActivityVOId");
+                                    b2.HasKey("ActivityEntityId");
 
-                                    b2.ToTable("ActivityVO");
+                                    b2.ToTable("ActivityEntity");
 
                                     b2.WithOwner()
-                                        .HasForeignKey("ActivityVOId");
+                                        .HasForeignKey("ActivityEntityId");
 
-                                    b2.OwnsMany("GeoSports.Common.model.TrackPointVO", "TrackPoints", b3 =>
+                                    b2.OwnsMany("GeoSports.Common.Model.TrackPointVO", "TrackPoints", b3 =>
                                         {
                                             b3.Property<int>("Id")
                                                 .ValueGeneratedOnAdd()
@@ -102,18 +102,18 @@ namespace GeoSports.EF.Migrations
                                             b3.Property<DateTimeOffset>("Time")
                                                 .HasColumnType("TEXT");
 
-                                            b3.Property<string>("TrackVOActivityVOId")
+                                            b3.Property<string>("TrackEntityActivityEntityId")
                                                 .IsRequired()
                                                 .HasColumnType("TEXT");
 
                                             b3.HasKey("Id");
 
-                                            b3.HasIndex("TrackVOActivityVOId");
+                                            b3.HasIndex("TrackEntityActivityEntityId");
 
                                             b3.ToTable("TrackPointVO");
 
                                             b3.WithOwner()
-                                                .HasForeignKey("TrackVOActivityVOId");
+                                                .HasForeignKey("TrackEntityActivityEntityId");
                                         });
                                 });
                         });

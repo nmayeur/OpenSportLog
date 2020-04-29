@@ -17,15 +17,11 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using GeoSports.Common.Model;
-using GeoSports.EF;
+using GeoSports.WPF.Service;
 using GeoSports.WPF.ViewModel.Scaffholding;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -55,12 +51,14 @@ namespace GeoSports.WPF.ViewModel
         }
 
         public event EventHandler<CloseNotificationEventArgs> CloseApp;
+        private IDataAccessService _DbAccess;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainWindowVM()
+        public MainWindowVM(IDataAccessService DbAccess)
         {
+            _DbAccess = DbAccess;
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -76,7 +74,7 @@ namespace GeoSports.WPF.ViewModel
         }
 
         #region Data
-        ObservableCollection<AthleteEntity> _Athletes = new ObservableCollection<AthleteEntity>() { new AthleteEntity() { } };
+        ObservableCollection<AthleteEntity> _Athletes = new ObservableCollection<AthleteEntity>() { };
 
         public ObservableCollection<AthleteEntity> Athletes
         {
@@ -91,7 +89,7 @@ namespace GeoSports.WPF.ViewModel
             set
             {
                 Set(() => SelectedAthlete, ref _SelectedAthlete, value);
-                Messenger.Default.Send(new NotificationMessage<AthleteEntity>(_SelectedAthlete,"Selected"));
+                Messenger.Default.Send(new NotificationMessage<AthleteEntity>(_SelectedAthlete, "Selected"));
             }
         }
         #endregion
@@ -118,16 +116,12 @@ namespace GeoSports.WPF.ViewModel
             if (openFileDialog.ShowDialog() == true)
             {
                 string path = openFileDialog.FileName;
-                var connectionString = string.Format("Data Source={0}", path);
-                var configuration = new ConfigurationBuilder()
-                    .AddInMemoryCollection(new Dictionary<string, string>()
-                    {
-                        { "ConnectionStrings:Default", connectionString }
-                    }).Build();
-
-                var database = new GeoSportsContext(configuration);
-                database.Database.Migrate();
-                foreach (var athlete in database.Athletes.ToList())
+                _DbAccess.OpenDatabase(path);
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                {
+                    Athletes.Clear();
+                });
+                foreach (var athlete in _DbAccess.GetAthletes())
                 {
                     DispatcherHelper.CheckBeginInvokeOnUI(() =>
                     {
@@ -162,16 +156,7 @@ namespace GeoSports.WPF.ViewModel
             if (openFileDialog.ShowDialog() == true)
             {
                 string path = openFileDialog.FileName;
-                var connectionString = string.Format("Data Source={0}", path);
-                var configuration = new ConfigurationBuilder()
-                    .AddInMemoryCollection(new Dictionary<string, string>()
-                    {
-                        { "ConnectionStrings:Default", connectionString }
-                    }).Build();
-
-                var database = new GeoSportsContext(configuration);
-                database.Database.EnsureDeleted();
-                database.Database.Migrate();
+                _DbAccess.OpenDatabase(path, true);
                 App.Current.Dispatcher.Invoke((Action)delegate
                 {
                     Athletes.Clear();

@@ -20,9 +20,9 @@ using GeoSports.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace GeoSports.WPF.Tests
 {
@@ -65,12 +65,12 @@ namespace GeoSports.WPF.Tests
             dbContext.Database.Migrate();
 
             string path = @"data\data_tiny.fitlog";
-            FitLogImporter importer = new FitLogImporter(_LoggerService, new Dictionary<string, ActivityVO.ACTIVITY_SPORT> {
-                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityVO.ACTIVITY_SPORT.BIKING},
-                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityVO.ACTIVITY_SPORT.RUNNING},
-                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityVO.ACTIVITY_SPORT.SWIMMING} });
+            FitLogImporter importer = new FitLogImporter(_LoggerService, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
+                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
+                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
+                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} });
 
-            List<ActivityVO> activities = new List<ActivityVO>();
+            List<ActivityEntity> activities = new List<ActivityEntity>();
             var athlete = new AthleteEntity(activities, "Sample", "1");
             dbContext.Athletes.Add(athlete);
 
@@ -78,12 +78,26 @@ namespace GeoSports.WPF.Tests
             {
                 foreach (var activity in importer.ImportActivitiesStream(fs))
                 {
-                    activities.Add(activity);
+                    athlete.Activities.Add(activity);
                 }
             }
             dbContext.SaveChanges();
-            var athletesCount = dbContext.Athletes.CountAsync().GetAwaiter().GetResult();
-            Assert.AreEqual(1, athletesCount);
+            var count = dbContext.Athletes.CountAsync().GetAwaiter().GetResult();
+            Assert.AreEqual(1, count);
+
+            count = dbContext.Athletes.Include(a => a.Activities).CountAsync().GetAwaiter().GetResult();
+            Assert.AreEqual(1, count);
+
+            var activitiesRead = dbContext.Athletes.Include(a => a.Activities).ToList()[0].Activities;
+            Assert.IsTrue(activitiesRead.Count > 0);
+
+            var tracksPointsRead = dbContext.Athletes
+                .FirstOrDefault()
+                .Activities
+                .FirstOrDefault()
+                .Track
+                .TrackPoints;
+            Assert.IsTrue(tracksPointsRead.Count > 0);
 
             //dbContext.Database.EnsureDeleted();
         }

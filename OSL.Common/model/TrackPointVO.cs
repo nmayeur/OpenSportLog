@@ -37,7 +37,7 @@ namespace GeoSports.Common.Model
             yield return Cadence;
         }
 
-        public sealed class Builder : ValueObjectBuilderBase<TrackPointVO>
+        public sealed class Builder : BuilderBase<TrackPointVO>
         {
             private TrackPointVO _instance = new TrackPointVO();
 

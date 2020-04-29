@@ -13,36 +13,86 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using GeoSports.Common.Model.Scaffholding;
-using System.Collections.Generic;
+using OSL.Common.Model.Scaffholding;
 
 namespace GeoSports.Common.Model
 {
-    public class ActivityVO : ValueObjectBase
+    public class ActivityEntity : ModelBase
     {
         // 0 OTHER by default
         public enum ACTIVITY_SPORT { OTHER = 0, RUNNING = 1, BIKING = 2, SWIMMING = 3, HIKING = 4 }
 
-        public string Id { get; private set; }
-        public string Name { get; private set; }
-        public string Location { get; private set; }
-        public int Calories { get; private set; }
-        public ACTIVITY_SPORT Sport { get; private set; }
-        public TrackVO Track { get; private set; }
-
-        protected override IEnumerable<object> GetAtomicValues()
+        private string _Id;
+        public string Id
         {
-            yield return Name;
-            yield return Location;
-            yield return Calories;
-            yield return Sport;
-            yield return Track;
+            get { return _Id; }
+            set
+            {
+                _Id = value;
+                NotifyPropertyChanged("Id");
+            }
         }
 
-        public sealed class Builder : ValueObjectBuilderBase<ActivityVO>
+        private string _Name;
+        public string Name
         {
-            private ActivityVO _instance = new ActivityVO();
+            get { return _Name; }
+            set
+            {
+                _Name = value;
+                NotifyPropertyChanged("Name");
+            }
+        }
 
-            protected override ActivityVO GetInstance()
+        private string _Location;
+        public string Location
+        {
+            get { return _Location; }
+            set
+            {
+                _Location = value;
+                NotifyPropertyChanged("Location");
+            }
+        }
+
+        private int _Calories;
+        public int Calories
+        {
+            get { return _Calories; }
+            set
+            {
+                _Calories = value;
+                NotifyPropertyChanged("Calories");
+            }
+        }
+
+        private ACTIVITY_SPORT _Sport;
+        public ACTIVITY_SPORT Sport
+        {
+            get { return _Sport; }
+            set
+            {
+                _Sport = value;
+                NotifyPropertyChanged("Sport");
+            }
+        }
+
+        private TrackEntity _Track;
+        public TrackEntity Track
+        {
+            get { return _Track; }
+            set
+            {
+                _Track = value;
+                NotifyPropertyChanged("Track");
+            }
+        }
+
+        public sealed class Builder : BuilderBase<ActivityEntity>
+        {
+            private ActivityEntity _instance = new ActivityEntity();
+
+            protected override ActivityEntity GetInstance()
             {
                 return _instance;
             }
@@ -52,27 +102,32 @@ namespace GeoSports.Common.Model
                 get { return _instance.Id; }
                 set { _instance.Id = value; }
             }
+
             public string Name
             {
                 get { return _instance.Name; }
                 set { _instance.Name = value; }
             }
+
             public string Location
             {
                 get { return _instance.Location; }
                 set { _instance.Location = value; }
             }
+
             public int Calories
             {
                 get { return _instance.Calories; }
                 set { _instance.Calories = value; }
             }
+
             public ACTIVITY_SPORT Sport
             {
                 get { return _instance.Sport; }
                 set { _instance.Sport = value; }
             }
-            public TrackVO Track
+
+            public TrackEntity Track
             {
                 get { return _instance.Track; }
                 set { _instance.Track = value; }

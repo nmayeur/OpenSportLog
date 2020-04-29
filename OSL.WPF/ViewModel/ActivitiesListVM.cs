@@ -15,6 +15,7 @@ limitations under the License.
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GeoSports.Common.Model;
+using GeoSports.WPF.Service;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -23,8 +24,10 @@ namespace GeoSports.WPF.ViewModel
     public class ActivitiesListVM : ViewModelBase
     {
 
-        public ActivitiesListVM()
+        private IDataAccessService _DbAccess;
+        public ActivitiesListVM(IDataAccessService DbAccess)
         {
+            _DbAccess = DbAccess;
             Messenger.Default.Register<NotificationMessage<AthleteEntity>>(this, message =>
             {
                 SelectedAthlete = message.Content;
@@ -40,13 +43,13 @@ namespace GeoSports.WPF.ViewModel
             set
             {
                 Set(() => SelectedAthlete, ref _SelectedAthlete, value);
-                SelectedAthlete.Activities.ToList<ActivityVO>().ForEach(a => Activities.Add(a));
+                Activities = _SelectedAthlete.Activities;
             }
         }
 
-        ObservableCollection<ActivityVO> _Activities = new ObservableCollection<ActivityVO>() { };
+        ObservableCollection<ActivityEntity> _Activities = new ObservableCollection<ActivityEntity>() { };
 
-        public ObservableCollection<ActivityVO> Activities
+        public ObservableCollection<ActivityEntity> Activities
         {
             get => _Activities;
             private set { Set(() => Activities, ref _Activities, value); }

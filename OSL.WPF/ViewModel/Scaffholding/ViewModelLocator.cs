@@ -29,6 +29,7 @@ limitations under the License.
 
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
+using GeoSports.WPF.Service;
 
 namespace GeoSports.WPF.ViewModel
 {
@@ -58,6 +59,7 @@ namespace GeoSports.WPF.ViewModel
 
             SimpleIoc.Default.Register<MainWindowVM>();
             SimpleIoc.Default.Register<ActivitiesListVM>();
+            SimpleIoc.Default.Register<IDataAccessService, DataAccessService>();
         }
 
         public MainWindowVM MainWindow

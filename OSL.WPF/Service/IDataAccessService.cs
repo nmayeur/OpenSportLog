@@ -14,12 +14,12 @@ limitations under the License.
 */
 using GeoSports.Common.Model;
 using System.Collections.Generic;
-using System.IO;
 
-namespace GeoSports.Common.Service.Importer
+namespace GeoSports.WPF.Service
 {
-    public interface IActivitiesImporter
+    public interface IDataAccessService
     {
-        IEnumerable<ActivityEntity> ImportActivitiesStream(Stream stream);
+        void OpenDatabase(string DatabasePath, bool ForceNew = false);
+        IList<AthleteEntity> GetAthletes();
     }
 }

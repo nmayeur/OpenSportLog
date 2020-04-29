@@ -1,21 +1,7 @@
-﻿/* Copyright 2020 Nicolas Mayeur
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    https://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace GeoSports.EF.Migrations
+namespace OSL.EF.Migrations
 {
     public partial class InitialCreate : Migration
     {
@@ -35,7 +21,7 @@ namespace GeoSports.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActivityVO",
+                name: "ActivityEntity",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -47,9 +33,9 @@ namespace GeoSports.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActivityVO", x => x.Id);
+                    table.PrimaryKey("PK_ActivityEntity", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ActivityVO_Athletes_AthleteEntityId",
+                        name: "FK_ActivityEntity_Athletes_AthleteEntityId",
                         column: x => x.AthleteEntityId,
                         principalTable: "Athletes",
                         principalColumn: "Id",
@@ -68,28 +54,28 @@ namespace GeoSports.EF.Migrations
                     Elevation = table.Column<float>(nullable: false),
                     HearRate = table.Column<int>(nullable: false),
                     Cadence = table.Column<int>(nullable: false),
-                    TrackVOActivityVOId = table.Column<string>(nullable: false)
+                    TrackEntityActivityEntityId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TrackPointVO", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TrackPointVO_ActivityVO_TrackVOActivityVOId",
-                        column: x => x.TrackVOActivityVOId,
-                        principalTable: "ActivityVO",
+                        name: "FK_TrackPointVO_ActivityEntity_TrackEntityActivityEntityId",
+                        column: x => x.TrackEntityActivityEntityId,
+                        principalTable: "ActivityEntity",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActivityVO_AthleteEntityId",
-                table: "ActivityVO",
+                name: "IX_ActivityEntity_AthleteEntityId",
+                table: "ActivityEntity",
                 column: "AthleteEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TrackPointVO_TrackVOActivityVOId",
+                name: "IX_TrackPointVO_TrackEntityActivityEntityId",
                 table: "TrackPointVO",
-                column: "TrackVOActivityVOId");
+                column: "TrackEntityActivityEntityId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -98,7 +84,7 @@ namespace GeoSports.EF.Migrations
                 name: "TrackPointVO");
 
             migrationBuilder.DropTable(
-                name: "ActivityVO");
+                name: "ActivityEntity");
 
             migrationBuilder.DropTable(
                 name: "Athletes");

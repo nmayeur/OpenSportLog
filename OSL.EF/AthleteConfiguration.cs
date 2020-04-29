@@ -26,7 +26,7 @@ namespace GeoSports.EF
             builder.Property(x => x.Name).IsRequired();
             builder.HasAlternateKey(x => x.Name); // Unique
 
-            var activity = builder.OwnsMany<ActivityVO>(a => a.Activities, a =>
+            var activity = builder.OwnsMany<ActivityEntity>(a => a.Activities, a =>
             {
                 a.OwnsOne(x => x.Track).OwnsMany(x => x.TrackPoints, tp =>
                 {

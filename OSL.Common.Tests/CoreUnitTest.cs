@@ -40,15 +40,15 @@ namespace GeoSports.Common.Tests
         public void TestImportFitlogData()
         {
             string path = @"data\data_mini.fitlog";
-            FitLogImporter importer = new FitLogImporter(_LoggerService, new Dictionary<string, ActivityVO.ACTIVITY_SPORT> {
-                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityVO.ACTIVITY_SPORT.BIKING},
-                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityVO.ACTIVITY_SPORT.RUNNING},
-                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityVO.ACTIVITY_SPORT.SWIMMING} });
+            FitLogImporter importer = new FitLogImporter(_LoggerService, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
+                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
+                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
+                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} });
 
-            IList<ActivityVO> activities;
+            IList<ActivityEntity> activities;
             using (FileStream fs = File.OpenRead(path))
             {
-                activities = new List<ActivityVO>(importer.ImportActivitiesStream(fs));
+                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs));
             }
             activities.Should().HaveCountGreaterOrEqualTo(1, "expected data_mini.fitlog to contain at least 1 activity");
         }
@@ -92,22 +92,22 @@ namespace GeoSports.Common.Tests
 </FitnessWorkbook>";
             byte[] byteArray = Encoding.UTF8.GetBytes(fitlog);
 
-            FitLogImporter importer = new FitLogImporter(_LoggerService, new Dictionary<string, ActivityVO.ACTIVITY_SPORT> {
-                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityVO.ACTIVITY_SPORT.BIKING},
-                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityVO.ACTIVITY_SPORT.RUNNING},
-                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityVO.ACTIVITY_SPORT.SWIMMING} });
+            FitLogImporter importer = new FitLogImporter(_LoggerService, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
+                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
+                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
+                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} });
 
-            List<ActivityVO> activities;
+            List<ActivityEntity> activities;
             using (Stream fs = new MemoryStream(byteArray))
             {
-                activities = new List<ActivityVO>(importer.ImportActivitiesStream(fs));
+                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs));
             }
 
             activities.Should().HaveCountLessOrEqualTo(1, "expected data_tiny.fitlog to contain at least 1 activity");
             var activity = activities[0];
             activity.Name.Should().Be("Lonchamp de Noël");
             activity.Location.Should().Be("Longchamps");
-            activity.Sport.Should().Be(ActivityVO.ACTIVITY_SPORT.BIKING);
+            activity.Sport.Should().Be(ActivityEntity.ACTIVITY_SPORT.BIKING);
             activity.Calories.Should().Be(2153);
             activity.Track.TrackPoints[0].Time.Should().Be(DateTimeOffset.Parse("2019-12-25T09:45:07Z"));
             var style = System.Globalization.NumberStyles.AllowDecimalPoint;
@@ -124,21 +124,21 @@ namespace GeoSports.Common.Tests
         public void TestLoadAthlete()
         {
             //setup mock persistence
-            var trackBuilder = new TrackVO.Builder();
+            var trackBuilder = new TrackEntity.Builder();
             trackBuilder.TrackPoints.Add(new TrackPointVO.Builder { Time = DateTimeOffset.Now, Cadence = 92, HeartRate = 140, Latitude = 40, Longitude = 8 });
             trackBuilder.TrackPoints.Add(new TrackPointVO.Builder { Time = DateTimeOffset.Now.AddSeconds(3), Cadence = 92, HeartRate = 140, Latitude = 40, Longitude = 8 });
             trackBuilder.TrackPoints.Add(new TrackPointVO.Builder { Time = DateTimeOffset.Now.AddSeconds(5), Cadence = 95, HeartRate = 140, Latitude = 40, Longitude = 8 });
 
-            var activities = new List<ActivityVO>();
-            var activityVO = new ActivityVO.Builder
+            var activities = new List<ActivityEntity>();
+            var activityVO = new ActivityEntity.Builder
             {
                 Name = "A bike training",
-                Sport = Model.ActivityVO.ACTIVITY_SPORT.BIKING,
+                Sport = Model.ActivityEntity.ACTIVITY_SPORT.BIKING,
                 Track = trackBuilder.Build()
             };
 
             var persistence = A.Fake<IPersistence>();
-            A.CallTo(() => persistence.GetAthlete("Test")).Returns(new AthleteEntity(new List<ActivityVO>() { activityVO }, "Test", "1"));
+            A.CallTo(() => persistence.GetAthlete("Test")).Returns(new AthleteEntity(new List<ActivityEntity>() { activityVO }, "Test", "1"));
 
             //test
             var athlete = persistence.GetAthlete("Test");

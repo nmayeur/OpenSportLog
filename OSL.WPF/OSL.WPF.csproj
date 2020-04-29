@@ -230,6 +230,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service\DataAccessService.cs" />
+    <Compile Include="Service\IDataAccessService.cs" />
     <Compile Include="Service\LoggerService.cs" />
     <Compile Include="ViewModel\ActivitiesListVM.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />

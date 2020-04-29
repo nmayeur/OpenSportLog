@@ -42,8 +42,8 @@ namespace GeoSports.Common.Model
             }
         }
 
-        private ObservableCollection<ActivityVO> _Activities;
-        public ObservableCollection<ActivityVO> Activities
+        private ObservableCollection<ActivityEntity> _Activities;
+        public ObservableCollection<ActivityEntity> Activities
         {
             get { return _Activities; }
             set { _Activities = value; }
@@ -54,9 +54,9 @@ namespace GeoSports.Common.Model
         /// </summary>
         public AthleteEntity() { }
 
-        public AthleteEntity(IList<ActivityVO> activities, string name, string id)
+        public AthleteEntity(IList<ActivityEntity> activities, string name, string id)
         {
-            _Activities = new ObservableCollection<ActivityVO>(activities);
+            _Activities = new ObservableCollection<ActivityEntity>(activities);
             Name = name;
             Id = id;
         }

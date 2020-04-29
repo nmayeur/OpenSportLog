@@ -16,9 +16,9 @@ using System;
 
 namespace GeoSports.Common.Model.Scaffholding
 {
-    public abstract class ValueObjectBuilderBase<T>
+    public abstract class BuilderBase<T>
     {
-        public static implicit operator T(ValueObjectBuilderBase<T> builder)
+        public static implicit operator T(BuilderBase<T> builder)
         {
             return builder.Build();
         }

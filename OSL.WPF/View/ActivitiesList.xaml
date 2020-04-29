@@ -5,11 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GeoSports.WPF.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="400"
              DataContext="{Binding ActivitiesList, Source={StaticResource Locator}}">
-    <Grid>
+    <Grid Width="390">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

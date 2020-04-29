@@ -23,10 +23,10 @@ namespace GeoSports.Common.Service.Importer
     public class FitLogImporter : IActivitiesImporter
     {
         private readonly ILoggerService _LoggerService;
-        private readonly Dictionary<string, ActivityVO.ACTIVITY_SPORT> _CategoryMapping;
+        private readonly Dictionary<string, ActivityEntity.ACTIVITY_SPORT> _CategoryMapping;
 
 
-        public FitLogImporter(ILoggerService loggerService, Dictionary<string, ActivityVO.ACTIVITY_SPORT> activityMapping)
+        public FitLogImporter(ILoggerService loggerService, Dictionary<string, ActivityEntity.ACTIVITY_SPORT> activityMapping)
         {
             _LoggerService = loggerService ?? throw new ArgumentNullException("logger service must not be null");
             _CategoryMapping = activityMapping ?? throw new ArgumentNullException("activity mapping must not be null");
@@ -40,12 +40,12 @@ namespace GeoSports.Common.Service.Importer
             ACTIVITY_LOCATION, ACTIVITY_EQUIPMENT_USED, ACTIVITY_EQUIPMENT_ITEM, ACTIVITY_TRACK, ACTIVITY_TRACK_PT
         }
         private PARSE_CONTEXT _CurrentContext = PARSE_CONTEXT.ROOT;
-        private ActivityVO.Builder _CurrentActivityBuilder = null;
-        private TrackVO.Builder _CurrentTrackBuilder = null;
+        private ActivityEntity.Builder _CurrentActivityBuilder = null;
+        private TrackEntity.Builder _CurrentTrackBuilder = null;
         //private AthleteEntity _CurrentAthlete = null;
         private DateTimeOffset _CurrentTrackStartTime;
 
-        public IEnumerable<ActivityVO> ImportActivitiesStream(Stream stream)
+        public IEnumerable<ActivityEntity> ImportActivitiesStream(Stream stream)
         {
             XmlReaderSettings settings = new XmlReaderSettings
             {
@@ -73,7 +73,7 @@ namespace GeoSports.Common.Service.Importer
                                     break;
                                 case "Activity":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY;
-                                    _CurrentActivityBuilder = new ActivityVO.Builder();
+                                    _CurrentActivityBuilder = new ActivityEntity.Builder();
                                     _CurrentActivityBuilder.Id = reader.GetAttribute("Id");
                                     break;
                                 case "Metadata":
@@ -94,8 +94,8 @@ namespace GeoSports.Common.Service.Importer
                                 case "Category":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY_CATEGORY;
                                     string category = reader.GetAttribute("Id");
-                                    ActivityVO.ACTIVITY_SPORT sport;
-                                    if (!_CategoryMapping.TryGetValue(category, out sport)) sport = ActivityVO.ACTIVITY_SPORT.OTHER;
+                                    ActivityEntity.ACTIVITY_SPORT sport;
+                                    if (!_CategoryMapping.TryGetValue(category, out sport)) sport = ActivityEntity.ACTIVITY_SPORT.OTHER;
                                     if (_CurrentActivityBuilder != null) _CurrentActivityBuilder.Sport = sport;
                                     _LoggerService.Debug(string.Format("Activity sport {0}", sport));
                                     break;
@@ -113,7 +113,7 @@ namespace GeoSports.Common.Service.Importer
                                     break;
                                 case "Track":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY_TRACK;
-                                    _CurrentTrackBuilder = new TrackVO.Builder();
+                                    _CurrentTrackBuilder = new TrackEntity.Builder();
                                     string startTimeAsString = reader.GetAttribute("StartTime");
                                     DateTimeOffset startTime;
                                     if (DateTimeOffset.TryParse(startTimeAsString, out startTime))
