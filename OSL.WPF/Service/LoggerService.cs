@@ -12,7 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using GeoSports.Common.Service;
+using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Threading.Tasks;
 
@@ -23,11 +23,17 @@ namespace GeoSports.Common.Service
 
         public enum LEVEL { DEBUG = 1, INFO = 2, WARN = 3, ERROR = 4, FATAL = 5 };
 
-        private LEVEL _Level;
+        private readonly LEVEL _Level;
 
         public LoggerService(LEVEL level)
         {
             _Level = level;
+        }
+
+        [PreferredConstructor]
+        public LoggerService()
+        {
+            _Level = LEVEL.DEBUG;
         }
 
         public void Debug(string message)

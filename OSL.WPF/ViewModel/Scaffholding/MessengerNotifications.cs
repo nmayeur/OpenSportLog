@@ -17,26 +17,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace GeoSports.WPF.View
+namespace GeoSports.WPF.ViewModel.Scaffholding
 {
-    /// <summary>
-    /// Interaction logic for ActivitiesList.xaml
-    /// </summary>
-    public partial class ActivitiesList : UserControl
+    public class MessengerNotifications
     {
-        public ActivitiesList()
-        {
-            InitializeComponent();
-        }
+        public readonly static string SELECTED = "Selected";
+        public readonly static string LOADED = "Loaded";
     }
 }

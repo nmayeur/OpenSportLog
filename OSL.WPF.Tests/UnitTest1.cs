@@ -65,10 +65,7 @@ namespace GeoSports.WPF.Tests
             dbContext.Database.Migrate();
 
             string path = @"data\data_tiny.fitlog";
-            FitLogImporter importer = new FitLogImporter(_LoggerService, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
-                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
-                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
-                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} });
+            FitLogImporter importer = new FitLogImporter(_LoggerService);
 
             List<ActivityEntity> activities = new List<ActivityEntity>();
             var athlete = new AthleteEntity(activities, "Sample", "1");
@@ -76,7 +73,10 @@ namespace GeoSports.WPF.Tests
 
             using (FileStream fs = File.OpenRead(path))
             {
-                foreach (var activity in importer.ImportActivitiesStream(fs))
+                foreach (var activity in importer.ImportActivitiesStream(fs, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
+                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
+                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
+                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} }))
                 {
                     athlete.Activities.Add(activity);
                 }

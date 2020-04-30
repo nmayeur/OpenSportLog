@@ -37,18 +37,32 @@ namespace GeoSports.Common.Tests
         }
 
         [Fact]
+        public void TestImportFitlogSports()
+        {
+            string path = @"data\data_mini.fitlog";
+            FitLogImporter importer = new FitLogImporter(_LoggerService);
+
+            IDictionary<string, string> sports;
+            using (FileStream fs = File.OpenRead(path))
+            {
+                sports = importer.GetSports(fs);
+            }
+            sports.Should().HaveCountGreaterOrEqualTo(1, "expected data_mini.fitlog to contain at least 1 sport");
+        }
+
+        [Fact]
         public void TestImportFitlogData()
         {
             string path = @"data\data_mini.fitlog";
-            FitLogImporter importer = new FitLogImporter(_LoggerService, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
-                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
-                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
-                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} });
+            FitLogImporter importer = new FitLogImporter(_LoggerService);
 
             IList<ActivityEntity> activities;
             using (FileStream fs = File.OpenRead(path))
             {
-                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs));
+                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
+                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
+                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
+                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} }));
             }
             activities.Should().HaveCountGreaterOrEqualTo(1, "expected data_mini.fitlog to contain at least 1 activity");
         }
@@ -92,15 +106,15 @@ namespace GeoSports.Common.Tests
 </FitnessWorkbook>";
             byte[] byteArray = Encoding.UTF8.GetBytes(fitlog);
 
-            FitLogImporter importer = new FitLogImporter(_LoggerService, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
-                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
-                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
-                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} });
+            FitLogImporter importer = new FitLogImporter(_LoggerService);
 
             List<ActivityEntity> activities;
             using (Stream fs = new MemoryStream(byteArray))
             {
-                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs));
+                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
+                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
+                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
+                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} }));
             }
 
             activities.Should().HaveCountLessOrEqualTo(1, "expected data_tiny.fitlog to contain at least 1 activity");

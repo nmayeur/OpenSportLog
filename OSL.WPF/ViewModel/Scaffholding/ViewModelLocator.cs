@@ -29,9 +29,11 @@ limitations under the License.
 
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
+using GeoSports.Common.Service;
+using GeoSports.Common.Service.Importer;
 using GeoSports.WPF.Service;
 
-namespace GeoSports.WPF.ViewModel
+namespace GeoSports.WPF.ViewModel.Scaffholding
 {
     /// <summary>
     /// This class contains static references to all the view models in the
@@ -57,9 +59,12 @@ namespace GeoSports.WPF.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
+            SimpleIoc.Default.Register<ILoggerService, LoggerService>();
             SimpleIoc.Default.Register<MainWindowVM>();
-            SimpleIoc.Default.Register<ActivitiesListVM>();
+            SimpleIoc.Default.Register<AthleteDetailsVM>();
+            SimpleIoc.Default.Register<ActivityDetailsVM>();
             SimpleIoc.Default.Register<IDataAccessService, DataAccessService>();
+            SimpleIoc.Default.Register<FitLogImporter>();
         }
 
         public MainWindowVM MainWindow
@@ -70,11 +75,19 @@ namespace GeoSports.WPF.ViewModel
             }
         }
 
-        public ActivitiesListVM ActivitiesList
+        public AthleteDetailsVM AthleteDetails
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<ActivitiesListVM>();
+                return ServiceLocator.Current.GetInstance<AthleteDetailsVM>();
+            }
+        }
+
+        public ActivityDetailsVM ActivityDetails
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ActivityDetailsVM>();
             }
         }
 

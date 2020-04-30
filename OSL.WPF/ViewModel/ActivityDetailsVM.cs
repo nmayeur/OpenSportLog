@@ -16,43 +16,34 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GeoSports.Common.Model;
 using GeoSports.WPF.Service;
-using System.Collections.ObjectModel;
-using System.Linq;
+using GeoSports.WPF.ViewModel.Scaffholding;
 
 namespace GeoSports.WPF.ViewModel
 {
-    public class ActivitiesListVM : ViewModelBase
+    public class ActivityDetailsVM : ViewModelBase
     {
-
         private IDataAccessService _DbAccess;
-        public ActivitiesListVM(IDataAccessService DbAccess)
+        public ActivityDetailsVM(IDataAccessService DbAccess)
         {
             _DbAccess = DbAccess;
-            Messenger.Default.Register<NotificationMessage<AthleteEntity>>(this, message =>
+            Messenger.Default.Register<NotificationMessage<ActivityEntity>>(this, message =>
             {
-                SelectedAthlete = message.Content;
+                if (message.Notification == MessengerNotifications.SELECTED)
+                {
+                    SelectedActivity = message.Content;
+                }
             });
-
         }
 
         #region Data
-        private AthleteEntity _SelectedAthlete;
-        public AthleteEntity SelectedAthlete
+        private ActivityEntity _SelectedActivity;
+        public ActivityEntity SelectedActivity
         {
-            get => _SelectedAthlete;
+            get => _SelectedActivity;
             set
             {
-                Set(() => SelectedAthlete, ref _SelectedAthlete, value);
-                Activities = _SelectedAthlete.Activities;
+                Set(() => SelectedActivity, ref _SelectedActivity, value);
             }
-        }
-
-        ObservableCollection<ActivityEntity> _Activities = new ObservableCollection<ActivityEntity>() { };
-
-        public ObservableCollection<ActivityEntity> Activities
-        {
-            get => _Activities;
-            private set { Set(() => Activities, ref _Activities, value); }
         }
         #endregion
     }

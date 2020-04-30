@@ -23,13 +23,11 @@ namespace GeoSports.Common.Service.Importer
     public class FitLogImporter : IActivitiesImporter
     {
         private readonly ILoggerService _LoggerService;
-        private readonly Dictionary<string, ActivityEntity.ACTIVITY_SPORT> _CategoryMapping;
 
 
-        public FitLogImporter(ILoggerService loggerService, Dictionary<string, ActivityEntity.ACTIVITY_SPORT> activityMapping)
+        public FitLogImporter(ILoggerService loggerService)
         {
             _LoggerService = loggerService ?? throw new ArgumentNullException("logger service must not be null");
-            _CategoryMapping = activityMapping ?? throw new ArgumentNullException("activity mapping must not be null");
         }
 
         private enum PARSE_CONTEXT
@@ -45,7 +43,7 @@ namespace GeoSports.Common.Service.Importer
         //private AthleteEntity _CurrentAthlete = null;
         private DateTimeOffset _CurrentTrackStartTime;
 
-        public IEnumerable<ActivityEntity> ImportActivitiesStream(Stream stream)
+        public IEnumerable<ActivityEntity> ImportActivitiesStream(Stream stream, IDictionary<string, ActivityEntity.ACTIVITY_SPORT> categoryMapping)
         {
             XmlReaderSettings settings = new XmlReaderSettings
             {
@@ -95,7 +93,7 @@ namespace GeoSports.Common.Service.Importer
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY_CATEGORY;
                                     string category = reader.GetAttribute("Id");
                                     ActivityEntity.ACTIVITY_SPORT sport;
-                                    if (!_CategoryMapping.TryGetValue(category, out sport)) sport = ActivityEntity.ACTIVITY_SPORT.OTHER;
+                                    if (!categoryMapping.TryGetValue(category, out sport)) sport = ActivityEntity.ACTIVITY_SPORT.OTHER;
                                     if (_CurrentActivityBuilder != null) _CurrentActivityBuilder.Sport = sport;
                                     _LoggerService.Debug(string.Format("Activity sport {0}", sport));
                                     break;
@@ -251,6 +249,43 @@ namespace GeoSports.Common.Service.Importer
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Get all sports present in the stream. This should be used to preprare a mapping between ActivityEntity.ACTIVITY_SPORT and sports defined in the stream.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
+        public IDictionary<string, string> GetSports(Stream stream)
+        {
+            IDictionary<string, string> sports = new Dictionary<string, string>();
+
+            XmlReaderSettings settings = new XmlReaderSettings
+            {
+                Async = false
+            };
+            using (XmlReader reader = XmlReader.Create(stream, settings))
+            {
+                // SAX parsing for performance
+                while (reader.Read())
+                {
+                    switch (reader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            switch (reader.Name)
+                            {
+                                case "Category":
+                                    string categoryId = reader.GetAttribute("Id");
+                                    string categoryName = reader.GetAttribute("Name");
+                                    if (!sports.ContainsKey(categoryId)) sports.Add(categoryId, categoryName);
+                                    _LoggerService.Debug($"Activity sport {categoryName} with Id {categoryId}");
+                                    break;
+                            }
+                            break;
+                    }
+                }
+            }
+            return sports;
         }
 
     }

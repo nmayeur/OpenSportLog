@@ -15,13 +15,14 @@ limitations under the License.
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Threading;
 using GeoSports.Common.Model;
+using GeoSports.Common.Service.Importer;
 using GeoSports.WPF.Service;
 using GeoSports.WPF.ViewModel.Scaffholding;
 using Microsoft.Win32;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -52,13 +53,13 @@ namespace GeoSports.WPF.ViewModel
 
         public event EventHandler<CloseNotificationEventArgs> CloseApp;
         private IDataAccessService _DbAccess;
+        private FitLogImporter _FitLogImporter;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainWindowVM(IDataAccessService DbAccess)
+        public MainWindowVM(IDataAccessService DbAccess, FitLogImporter FitLogImporter)
         {
-            _DbAccess = DbAccess;
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -67,32 +68,13 @@ namespace GeoSports.WPF.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
+            _DbAccess = DbAccess;
+            _FitLogImporter = FitLogImporter;
             Messenger.Default.Register<CloseDialogMessage>(this, nm =>
             {
                 CloseApp?.Invoke(this, new CloseNotificationEventArgs());
             });
         }
-
-        #region Data
-        ObservableCollection<AthleteEntity> _Athletes = new ObservableCollection<AthleteEntity>() { };
-
-        public ObservableCollection<AthleteEntity> Athletes
-        {
-            get => _Athletes;
-            private set { Set(() => Athletes, ref _Athletes, value); }
-        }
-
-        private AthleteEntity _SelectedAthlete;
-        public AthleteEntity SelectedAthlete
-        {
-            get => _SelectedAthlete;
-            set
-            {
-                Set(() => SelectedAthlete, ref _SelectedAthlete, value);
-                Messenger.Default.Send(new NotificationMessage<AthleteEntity>(_SelectedAthlete, "Selected"));
-            }
-        }
-        #endregion
 
         #region OpenFileCommand
         private RelayCommand _OpenFileCommand;
@@ -117,17 +99,7 @@ namespace GeoSports.WPF.ViewModel
             {
                 string path = openFileDialog.FileName;
                 _DbAccess.OpenDatabase(path);
-                DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                {
-                    Athletes.Clear();
-                });
-                foreach (var athlete in _DbAccess.GetAthletes())
-                {
-                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                    {
-                        Athletes.Add(athlete);
-                    });
-                }
+                Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(_DbAccess.GetAthletes(), MessengerNotifications.LOADED));
             }
 
         }
@@ -157,11 +129,7 @@ namespace GeoSports.WPF.ViewModel
             {
                 string path = openFileDialog.FileName;
                 _DbAccess.OpenDatabase(path, true);
-                App.Current.Dispatcher.Invoke((Action)delegate
-                {
-                    Athletes.Clear();
-                });
-                SelectedAthlete = null;
+                Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(null, MessengerNotifications.LOADED));
             }
 
         }
@@ -192,5 +160,40 @@ namespace GeoSports.WPF.ViewModel
             }
         }
         #endregion
+
+        #region ImportFirLogCommand
+        private RelayCommand _ImportFitLogCommand;
+        public RelayCommand ImportFitLogCommand
+        {
+            get
+            {
+                return _ImportFitLogCommand ??
+                    (_ImportFitLogCommand = new RelayCommand(
+                        () => { Task.Run(() => ImportFitLogDialogAsync()); }
+                        ));
+            }
+        }
+
+        private void ImportFitLogDialogAsync()
+        {
+            var openFileDialog = new OpenFileDialog()
+            {
+                Filter = "FitLog SportTracks (*.fitlog)|*.fitlog"
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string path = openFileDialog.FileName;
+                using (FileStream fs = File.OpenRead(path))
+                {
+                    _FitLogImporter.ImportActivitiesStream(fs, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
+                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
+                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
+                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} });
+                }
+            }
+
+        }
+        #endregion
+
     }
 }

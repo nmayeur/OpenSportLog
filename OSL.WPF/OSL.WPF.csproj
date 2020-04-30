@@ -197,6 +197,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -218,7 +219,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\ActivitiesList.xaml">
+    <Page Include="View\ActivityDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AthleteDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,12 +238,17 @@
     <Compile Include="Service\DataAccessService.cs" />
     <Compile Include="Service\IDataAccessService.cs" />
     <Compile Include="Service\LoggerService.cs" />
-    <Compile Include="ViewModel\ActivitiesListVM.cs" />
+    <Compile Include="ViewModel\ActivityDetailsVM.cs" />
+    <Compile Include="ViewModel\AthleteDetailsVM.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\Scaffholding\MessengerMessages.cs" />
+    <Compile Include="ViewModel\Scaffholding\MessengerNotifications.cs" />
     <Compile Include="ViewModel\Scaffholding\ViewModelLocator.cs" />
-    <Compile Include="View\ActivitiesList.xaml.cs">
-      <DependentUpon>ActivitiesList.xaml</DependentUpon>
+    <Compile Include="View\ActivityDetails.xaml.cs">
+      <DependentUpon>ActivityDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AthleteDetails.xaml.cs">
+      <DependentUpon>AthleteDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
