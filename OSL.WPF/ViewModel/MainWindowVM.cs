@@ -16,14 +16,17 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
+using Microsoft.Win32;
 using OSL.Common.Model;
 using OSL.Common.Service.Importer;
 using OSL.WPF.Service;
 using OSL.WPF.View;
 using OSL.WPF.ViewModel.Scaffholding;
-using Microsoft.Win32;
+using OSL.WPF.WPFUtils;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -188,17 +191,36 @@ namespace OSL.WPF.ViewModel
                 DispatcherHelper.CheckBeginInvokeOnUI(() =>
                 {
                     ImportSportsMatchingDialog dialog = new ImportSportsMatchingDialog();
-                    MessageBox.Show(dialog.ShowDialog()?.ToString());
+                    var dialogDataContext = (ImportSportsMatchingDialogVM)dialog.DataContext;
+                    using (FileStream fs = File.OpenRead(path))
+                    {
+                        dialogDataContext.ImportSportsMatchingEntries.Clear();
+                        foreach (var sport in _FitLogImporter.GetSports(fs))
+                        {
+                            dialogDataContext.ImportSportsMatchingEntries.Add(new ImportSportsMatchingEntryVM
+                            {
+                                ImportId = sport.Key,
+                                ImportLabel = sport.Value
+                            });
+                        }
+                    }
+                    if (dialog.ShowDialog() ?? false)
+                    {
+                        var ret = new Dictionary<string, ACTIVITY_SPORT>();
+                        foreach (var listItem in dialog.lstMatchings.Items)
+                        {
+                            var entry = (ImportSportsMatchingEntryVM)listItem;
+                            ret.Add(entry.ImportId, entry.OslSport);
+                        }
+                        ViewsHelper.ExecuteWithSpinner(() =>
+                        {
+                            using (FileStream fs = File.OpenRead(path))
+                            {
+                                _FitLogImporter.ImportActivitiesStream(fs, ret);
+                            }
+                        }, "Import is running...");
+                    }
                 });
-                //using (FileStream fs = File.OpenRead(path))
-                //{
-                //    _FitLogImporter.ImportActivitiesStream(fs, 
-                //        new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
-                //            { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
-                //            { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
-                //            { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} }
-                //        );
-                //}
             }
 
         }

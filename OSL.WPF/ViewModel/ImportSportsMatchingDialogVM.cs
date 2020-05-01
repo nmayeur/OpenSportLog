@@ -13,10 +13,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Command;
 using OSL.Common.Model;
-using OSL.WPF.Service;
-using OSL.WPF.ViewModel.Scaffholding;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace OSL.WPF.ViewModel
 {
@@ -24,19 +24,16 @@ namespace OSL.WPF.ViewModel
     {
         public ImportSportsMatchingDialogVM()
         {
-            
         }
 
         #region Data
-        private ActivityEntity _SelectedActivity;
-        public ActivityEntity SelectedActivity
+        private ObservableCollection<ImportSportsMatchingEntryVM> _ImportSportsMatchingEntries = new ObservableCollection<ImportSportsMatchingEntryVM> { };
+        public ObservableCollection<ImportSportsMatchingEntryVM> ImportSportsMatchingEntries
         {
-            get => _SelectedActivity;
-            set
-            {
-                Set(() => SelectedActivity, ref _SelectedActivity, value);
-            }
+            get => _ImportSportsMatchingEntries;
+            private set { Set(() => ImportSportsMatchingEntries, ref _ImportSportsMatchingEntries, value); }
         }
         #endregion
+
     }
 }

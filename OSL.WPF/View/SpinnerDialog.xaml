@@ -1,0 +1,24 @@
+﻿<Window x:Class="OSL.WPF.View.SpinnerDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OSL.WPF.View"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             mc:Ignorable="d" 
+             Title="Please Wait..."
+             Height="100" Width="400"
+             d:DesignHeight="100" d:DesignWidth="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <fa:ImageAwesome Icon="Spinner" Spin="True" SpinDuration="10" Margin="10 10 10 10"/>
+        <TextBlock Name="txtMessage" Grid.Column="1" Text="Waiting..." TextAlignment="Left" VerticalAlignment="Center" Margin="20 0 0 0"/>
+    </Grid>
+</Window>

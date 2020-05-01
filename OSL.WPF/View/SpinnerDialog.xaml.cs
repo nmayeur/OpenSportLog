@@ -13,25 +13,30 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Markup;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace OSL.WPF.WPFUtils
+namespace OSL.WPF.View
 {
-    public class EnumToItemsSource : MarkupExtension
+    /// <summary>
+    /// Interaction logic for Spinner.xaml
+    /// </summary>
+    public partial class SpinnerDialog : Window
     {
-        private readonly Type _type;
-
-        public EnumToItemsSource(Type type)
+        public SpinnerDialog()
         {
-            _type = type;
-        }
-
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return Enum.GetValues(_type)
-                .Cast<object>()
-                .Select(e => new { Value = (int)e, DisplayName = e.ToString() });
+            InitializeComponent();
         }
     }
 }

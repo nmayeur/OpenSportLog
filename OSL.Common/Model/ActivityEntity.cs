@@ -13,7 +13,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using OSL.Common.Model.Scaffholding;
-using OSL.Common.Model.Scaffholding;
 
 namespace OSL.Common.Model
 {

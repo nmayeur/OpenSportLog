@@ -59,13 +59,13 @@ namespace OSL.WPF.ViewModel.Scaffholding
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<ILoggerService, LoggerService>();
             SimpleIoc.Default.Register<MainWindowVM>();
             SimpleIoc.Default.Register<AthleteDetailsVM>();
             SimpleIoc.Default.Register<ActivityDetailsVM>();
             SimpleIoc.Default.Register<ImportSportsMatchingDialogVM>();
             SimpleIoc.Default.Register<IDataAccessService, DataAccessService>();
             SimpleIoc.Default.Register<FitLogImporter>();
+            SimpleIoc.Default.Register<ILoggerService, LoggerService>();
         }
 
         public MainWindowVM MainWindow
