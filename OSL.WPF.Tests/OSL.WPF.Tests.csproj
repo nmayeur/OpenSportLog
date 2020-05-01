@@ -9,8 +9,8 @@
     <ProjectGuid>{E3C9F574-8A02-4CAB-A368-66E762065DFC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GeoSports.WPF.Tests</RootNamespace>
-    <AssemblyName>GeoSports.WPF.Tests</AssemblyName>
+    <RootNamespace>OSL.WPF.Tests</RootNamespace>
+    <AssemblyName>OSL.WPF.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
