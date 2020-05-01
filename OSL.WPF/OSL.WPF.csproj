@@ -219,11 +219,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="WPFUtils\EnumToItemsSource.cs" />
     <Page Include="View\ActivityDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AthleteDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ImportSportsMatchingDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +243,7 @@
     <Compile Include="Service\DataAccessService.cs" />
     <Compile Include="Service\IDataAccessService.cs" />
     <Compile Include="Service\LoggerService.cs" />
+    <Compile Include="ViewModel\ImportSportsMatchingDialogVM.cs" />
     <Compile Include="ViewModel\ActivityDetailsVM.cs" />
     <Compile Include="ViewModel\AthleteDetailsVM.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
@@ -249,6 +255,9 @@
     </Compile>
     <Compile Include="View\AthleteDetails.xaml.cs">
       <DependentUpon>AthleteDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ImportSportsMatchingDialog.xaml.cs">
+      <DependentUpon>ImportSportsMatchingDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

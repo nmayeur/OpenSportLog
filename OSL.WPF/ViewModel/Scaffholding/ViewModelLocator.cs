@@ -63,6 +63,7 @@ namespace GeoSports.WPF.ViewModel.Scaffholding
             SimpleIoc.Default.Register<MainWindowVM>();
             SimpleIoc.Default.Register<AthleteDetailsVM>();
             SimpleIoc.Default.Register<ActivityDetailsVM>();
+            SimpleIoc.Default.Register<ImportSportsMatchingDialogVM>();
             SimpleIoc.Default.Register<IDataAccessService, DataAccessService>();
             SimpleIoc.Default.Register<FitLogImporter>();
         }
@@ -88,6 +89,14 @@ namespace GeoSports.WPF.ViewModel.Scaffholding
             get
             {
                 return ServiceLocator.Current.GetInstance<ActivityDetailsVM>();
+            }
+        }
+
+        public ImportSportsMatchingDialogVM ImportSportsMatchingDialog
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ImportSportsMatchingDialogVM>();
             }
         }
 

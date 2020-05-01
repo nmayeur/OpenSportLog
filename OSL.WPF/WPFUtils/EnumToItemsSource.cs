@@ -12,14 +12,26 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using GeoSports.Common.Model;
-using System.Collections.Generic;
-using System.IO;
+using System;
+using System.Linq;
+using System.Windows.Markup;
 
-namespace GeoSports.Common.Service.Importer
+namespace GeoSports.WPF.WPFUtils
 {
-    public interface IActivitiesImporter
+    public class EnumToItemsSource : MarkupExtension
     {
-        IEnumerable<ActivityEntity> ImportActivitiesStream(Stream stream, IDictionary<string, ACTIVITY_SPORT> categoryMapping);
+        private readonly Type _type;
+
+        public EnumToItemsSource(Type type)
+        {
+            _type = type;
+        }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return Enum.GetValues(_type)
+                .Cast<object>()
+                .Select(e => new { Value = (int)e, DisplayName = e.ToString() });
+        }
     }
 }

@@ -13,13 +13,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using GeoSports.Common.Model;
-using System.Collections.Generic;
-using System.IO;
+using System;
+using System.Linq;
+using System.Windows;
 
-namespace GeoSports.Common.Service.Importer
+namespace GeoSports.WPF.View
 {
-    public interface IActivitiesImporter
+    /// <summary>
+    /// Interaction logic for ImportSportsMatchingDialog.xaml
+    /// </summary>
+    public partial class ImportSportsMatchingDialog : Window
     {
-        IEnumerable<ActivityEntity> ImportActivitiesStream(Stream stream, IDictionary<string, ACTIVITY_SPORT> categoryMapping);
+        public ImportSportsMatchingDialog()
+        {
+            InitializeComponent();
+        }
     }
 }

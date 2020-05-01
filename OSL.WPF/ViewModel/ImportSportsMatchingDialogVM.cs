@@ -20,19 +20,11 @@ using GeoSports.WPF.ViewModel.Scaffholding;
 
 namespace GeoSports.WPF.ViewModel
 {
-    public class ActivityDetailsVM : ViewModelBase
+    public class ImportSportsMatchingDialogVM : ViewModelBase
     {
-        private readonly IDataAccessService _DbAccess;
-        public ActivityDetailsVM(IDataAccessService DbAccess)
+        public ImportSportsMatchingDialogVM()
         {
-            _DbAccess = DbAccess;
-            Messenger.Default.Register<NotificationMessage<ActivityEntity>>(this, message =>
-            {
-                if (message.Notification == MessengerNotifications.SELECTED)
-                {
-                    SelectedActivity = message.Content;
-                }
-            });
+            
         }
 
         #region Data

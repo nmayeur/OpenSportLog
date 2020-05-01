@@ -41,11 +41,6 @@ namespace GeoSports.WPF.ViewModel
                     {
                         Athletes = new ObservableCollection<AthleteEntity>(message.Content);
                     }
-                    //DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                    //{
-                    //    Athletes.Clear();
-                    //});
-
                 }
             });
 

@@ -15,14 +15,15 @@ limitations under the License.
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 using GeoSports.Common.Model;
 using GeoSports.Common.Service.Importer;
 using GeoSports.WPF.Service;
+using GeoSports.WPF.View;
 using GeoSports.WPF.ViewModel.Scaffholding;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -52,8 +53,8 @@ namespace GeoSports.WPF.ViewModel
         }
 
         public event EventHandler<CloseNotificationEventArgs> CloseApp;
-        private IDataAccessService _DbAccess;
-        private FitLogImporter _FitLogImporter;
+        private readonly IDataAccessService _DbAccess;
+        private readonly FitLogImporter _FitLogImporter;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -183,13 +184,21 @@ namespace GeoSports.WPF.ViewModel
             if (openFileDialog.ShowDialog() == true)
             {
                 string path = openFileDialog.FileName;
-                using (FileStream fs = File.OpenRead(path))
+
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
                 {
-                    _FitLogImporter.ImportActivitiesStream(fs, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
-                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
-                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
-                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} });
-                }
+                    ImportSportsMatchingDialog dialog = new ImportSportsMatchingDialog();
+                    MessageBox.Show(dialog.ShowDialog()?.ToString());
+                });
+                //using (FileStream fs = File.OpenRead(path))
+                //{
+                //    _FitLogImporter.ImportActivitiesStream(fs, 
+                //        new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
+                //            { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
+                //            { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
+                //            { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} }
+                //        );
+                //}
             }
 
         }

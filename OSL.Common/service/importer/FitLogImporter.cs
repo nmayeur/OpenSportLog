@@ -13,6 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using GeoSports.Common.Model;
+using OSL.Common.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,7 +44,7 @@ namespace GeoSports.Common.Service.Importer
         //private AthleteEntity _CurrentAthlete = null;
         private DateTimeOffset _CurrentTrackStartTime;
 
-        public IEnumerable<ActivityEntity> ImportActivitiesStream(Stream stream, IDictionary<string, ActivityEntity.ACTIVITY_SPORT> categoryMapping)
+        public IEnumerable<ActivityEntity> ImportActivitiesStream(Stream stream, IDictionary<string, ACTIVITY_SPORT> categoryMapping)
         {
             XmlReaderSettings settings = new XmlReaderSettings
             {
@@ -71,8 +72,10 @@ namespace GeoSports.Common.Service.Importer
                                     break;
                                 case "Activity":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY;
-                                    _CurrentActivityBuilder = new ActivityEntity.Builder();
-                                    _CurrentActivityBuilder.Id = reader.GetAttribute("Id");
+                                    _CurrentActivityBuilder = new ActivityEntity.Builder
+                                    {
+                                        Id = reader.GetAttribute("Id")
+                                    };
                                     break;
                                 case "Metadata":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY_METADATA;
@@ -92,8 +95,8 @@ namespace GeoSports.Common.Service.Importer
                                 case "Category":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY_CATEGORY;
                                     string category = reader.GetAttribute("Id");
-                                    ActivityEntity.ACTIVITY_SPORT sport;
-                                    if (!categoryMapping.TryGetValue(category, out sport)) sport = ActivityEntity.ACTIVITY_SPORT.OTHER;
+                                    ACTIVITY_SPORT sport;
+                                    if (!categoryMapping.TryGetValue(category, out sport)) sport = ACTIVITY_SPORT.OTHER;
                                     if (_CurrentActivityBuilder != null) _CurrentActivityBuilder.Sport = sport;
                                     _LoggerService.Debug(string.Format("Activity sport {0}", sport));
                                     break;

@@ -59,10 +59,10 @@ namespace GeoSports.Common.Tests
             IList<ActivityEntity> activities;
             using (FileStream fs = File.OpenRead(path))
             {
-                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
-                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
-                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
-                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} }));
+                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs, new Dictionary<string, ACTIVITY_SPORT> {
+                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ACTIVITY_SPORT.BIKING},
+                { "eca38408-cb82-42ed-b242-166b43b785a6",ACTIVITY_SPORT.RUNNING},
+                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ACTIVITY_SPORT.SWIMMING} }));
             }
             activities.Should().HaveCountGreaterOrEqualTo(1, "expected data_mini.fitlog to contain at least 1 activity");
         }
@@ -111,17 +111,17 @@ namespace GeoSports.Common.Tests
             List<ActivityEntity> activities;
             using (Stream fs = new MemoryStream(byteArray))
             {
-                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
-                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
-                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
-                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} }));
+                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs, new Dictionary<string, ACTIVITY_SPORT> {
+                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ACTIVITY_SPORT.BIKING},
+                { "eca38408-cb82-42ed-b242-166b43b785a6",ACTIVITY_SPORT.RUNNING},
+                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ACTIVITY_SPORT.SWIMMING} }));
             }
 
             activities.Should().HaveCountLessOrEqualTo(1, "expected data_tiny.fitlog to contain at least 1 activity");
             var activity = activities[0];
             activity.Name.Should().Be("Lonchamp de Noël");
             activity.Location.Should().Be("Longchamps");
-            activity.Sport.Should().Be(ActivityEntity.ACTIVITY_SPORT.BIKING);
+            activity.Sport.Should().Be(ACTIVITY_SPORT.BIKING);
             activity.Calories.Should().Be(2153);
             activity.Track.TrackPoints[0].Time.Should().Be(DateTimeOffset.Parse("2019-12-25T09:45:07Z"));
             var style = System.Globalization.NumberStyles.AllowDecimalPoint;
@@ -147,7 +147,7 @@ namespace GeoSports.Common.Tests
             var activityVO = new ActivityEntity.Builder
             {
                 Name = "A bike training",
-                Sport = Model.ActivityEntity.ACTIVITY_SPORT.BIKING,
+                Sport = Model.ACTIVITY_SPORT.BIKING,
                 Track = trackBuilder.Build()
             };
 

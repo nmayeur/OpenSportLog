@@ -29,7 +29,7 @@ namespace GeoSports.WPF.Tests
     [TestClass]
     public class UnitTest1
     {
-        private ILoggerService _LoggerService;
+        private readonly ILoggerService _LoggerService;
 
         public UnitTest1()
         {
@@ -73,10 +73,10 @@ namespace GeoSports.WPF.Tests
 
             using (FileStream fs = File.OpenRead(path))
             {
-                foreach (var activity in importer.ImportActivitiesStream(fs, new Dictionary<string, ActivityEntity.ACTIVITY_SPORT> {
-                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ActivityEntity.ACTIVITY_SPORT.BIKING},
-                { "eca38408-cb82-42ed-b242-166b43b785a6",ActivityEntity.ACTIVITY_SPORT.RUNNING},
-                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ActivityEntity.ACTIVITY_SPORT.SWIMMING} }))
+                foreach (var activity in importer.ImportActivitiesStream(fs, new Dictionary<string, ACTIVITY_SPORT> {
+                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ACTIVITY_SPORT.BIKING},
+                { "eca38408-cb82-42ed-b242-166b43b785a6",ACTIVITY_SPORT.RUNNING},
+                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ACTIVITY_SPORT.SWIMMING} }))
                 {
                     athlete.Activities.Add(activity);
                 }
