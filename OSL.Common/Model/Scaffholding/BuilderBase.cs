@@ -14,7 +14,7 @@ limitations under the License.
 */
 using System;
 
-namespace GeoSports.Common.Model.Scaffholding
+namespace OSL.Common.Model.Scaffholding
 {
     public abstract class BuilderBase<T>
     {

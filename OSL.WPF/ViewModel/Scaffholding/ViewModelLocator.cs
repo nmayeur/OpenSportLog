@@ -29,11 +29,11 @@ limitations under the License.
 
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
-using GeoSports.Common.Service;
-using GeoSports.Common.Service.Importer;
-using GeoSports.WPF.Service;
+using OSL.Common.Service;
+using OSL.Common.Service.Importer;
+using OSL.WPF.Service;
 
-namespace GeoSports.WPF.ViewModel.Scaffholding
+namespace OSL.WPF.ViewModel.Scaffholding
 {
     /// <summary>
     /// This class contains static references to all the view models in the

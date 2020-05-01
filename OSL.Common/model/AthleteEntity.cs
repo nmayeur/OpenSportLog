@@ -16,7 +16,7 @@ using OSL.Common.Model.Scaffholding;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace GeoSports.Common.Model
+namespace OSL.Common.Model
 {
     public class AthleteEntity : ModelBase
     {

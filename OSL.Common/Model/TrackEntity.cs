@@ -12,12 +12,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using GeoSports.Common.Model.Scaffholding;
+using OSL.Common.Model.Scaffholding;
 using OSL.Common.Model.Scaffholding;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace GeoSports.Common.Model
+namespace OSL.Common.Model
 {
     public class TrackEntity : ModelBase
     {

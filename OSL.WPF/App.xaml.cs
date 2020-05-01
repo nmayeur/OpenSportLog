@@ -21,7 +21,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace GeoSports.WPF
+namespace OSL.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml

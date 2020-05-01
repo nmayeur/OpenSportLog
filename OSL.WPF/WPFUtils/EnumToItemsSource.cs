@@ -16,7 +16,7 @@ using System;
 using System.Linq;
 using System.Windows.Markup;
 
-namespace GeoSports.WPF.WPFUtils
+namespace OSL.WPF.WPFUtils
 {
     public class EnumToItemsSource : MarkupExtension
     {

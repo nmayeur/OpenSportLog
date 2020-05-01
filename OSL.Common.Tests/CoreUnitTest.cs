@@ -14,10 +14,10 @@ limitations under the License.
 */
 using FakeItEasy;
 using FluentAssertions;
-using GeoSports.Common.Model;
-using GeoSports.Common.Service;
-using GeoSports.Common.Service.Importer;
-using GeoSports.Common.Tests.Service;
+using OSL.Common.Model;
+using OSL.Common.Service;
+using OSL.Common.Service.Importer;
+using OSL.Common.Tests.Service;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,7 +25,7 @@ using System.Text;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace GeoSports.Common.Tests
+namespace OSL.Common.Tests
 {
     public class CoreUnitTest
     {

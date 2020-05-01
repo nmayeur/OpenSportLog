@@ -16,7 +16,7 @@ using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Threading.Tasks;
 
-namespace GeoSports.Common.Service
+namespace OSL.Common.Service
 {
     public class LoggerService : ILoggerService
     {

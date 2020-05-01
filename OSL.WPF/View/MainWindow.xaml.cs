@@ -13,13 +13,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using GalaSoft.MvvmLight.Messaging;
-using GeoSports.WPF.ViewModel;
-using GeoSports.WPF.ViewModel.Scaffholding;
+using OSL.WPF.ViewModel;
+using OSL.WPF.ViewModel.Scaffholding;
 using System.Windows;
 using System.Windows.Navigation;
-using static GeoSports.WPF.ViewModel.MainWindowVM;
+using static OSL.WPF.ViewModel.MainWindowVM;
 
-namespace GeoSports.WPF.View
+namespace OSL.WPF.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

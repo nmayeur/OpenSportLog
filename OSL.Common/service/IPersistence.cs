@@ -12,9 +12,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using GeoSports.Common.Model;
+using OSL.Common.Model;
 
-namespace GeoSports.Common.Service
+namespace OSL.Common.Service
 {
     public interface IPersistence
     {

@@ -14,11 +14,11 @@ limitations under the License.
 */
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using GeoSports.Common.Model;
-using GeoSports.WPF.Service;
-using GeoSports.WPF.ViewModel.Scaffholding;
+using OSL.Common.Model;
+using OSL.WPF.Service;
+using OSL.WPF.ViewModel.Scaffholding;
 
-namespace GeoSports.WPF.ViewModel
+namespace OSL.WPF.ViewModel
 {
     public class ActivityDetailsVM : ViewModelBase
     {

@@ -12,11 +12,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using GeoSports.Common.Model;
-using GeoSports.Common.Service;
-using GeoSports.Common.Service.Importer;
-using GeoSports.Common.Tests.Service;
-using GeoSports.EF;
+using OSL.Common.Model;
+using OSL.Common.Service;
+using OSL.Common.Service.Importer;
+using OSL.Common.Tests.Service;
+using OSL.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -24,7 +24,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace GeoSports.WPF.Tests
+namespace OSL.WPF.Tests
 {
     [TestClass]
     public class UnitTest1

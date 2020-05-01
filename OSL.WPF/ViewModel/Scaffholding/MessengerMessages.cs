@@ -14,7 +14,7 @@ limitations under the License.
 */
 using GalaSoft.MvvmLight.Messaging;
 
-namespace GeoSports.WPF.ViewModel.Scaffholding
+namespace OSL.WPF.ViewModel.Scaffholding
 {
     public class CloseDialogMessage : NotificationMessage
     {

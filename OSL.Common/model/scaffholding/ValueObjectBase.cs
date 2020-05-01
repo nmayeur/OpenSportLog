@@ -15,7 +15,7 @@ limitations under the License.
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GeoSports.Common.Model.Scaffholding
+namespace OSL.Common.Model.Scaffholding
 {
     /// <summary>
     /// Base class for Value Objects. VO are immutable.

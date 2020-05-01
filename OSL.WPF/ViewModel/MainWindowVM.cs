@@ -16,18 +16,18 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
-using GeoSports.Common.Model;
-using GeoSports.Common.Service.Importer;
-using GeoSports.WPF.Service;
-using GeoSports.WPF.View;
-using GeoSports.WPF.ViewModel.Scaffholding;
+using OSL.Common.Model;
+using OSL.Common.Service.Importer;
+using OSL.WPF.Service;
+using OSL.WPF.View;
+using OSL.WPF.ViewModel.Scaffholding;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace GeoSports.WPF.ViewModel
+namespace OSL.WPF.ViewModel
 {
     /// <summary>
     /// This class contains properties that the main View can data bind to.

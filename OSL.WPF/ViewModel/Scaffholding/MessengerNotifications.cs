@@ -18,7 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeoSports.WPF.ViewModel.Scaffholding
+namespace OSL.WPF.ViewModel.Scaffholding
 {
     public class MessengerNotifications
     {

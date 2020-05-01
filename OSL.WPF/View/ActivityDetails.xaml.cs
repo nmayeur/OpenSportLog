@@ -27,7 +27,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GeoSports.WPF.View
+namespace OSL.WPF.View
 {
     /// <summary>
     /// Interaction logic for ActivityDetails.xaml

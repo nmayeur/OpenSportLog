@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GeoSports.WPF.Properties
+namespace OSL.WPF.Properties
 {
 
 

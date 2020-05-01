@@ -12,10 +12,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using GeoSports.Common.Model;
+using OSL.Common.Model;
 using System.Collections.Generic;
 
-namespace GeoSports.WPF.Service
+namespace OSL.WPF.Service
 {
     public interface IDataAccessService
     {

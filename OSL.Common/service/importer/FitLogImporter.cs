@@ -12,14 +12,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using GeoSports.Common.Model;
+using OSL.Common.Model;
 using OSL.Common.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
-namespace GeoSports.Common.Service.Importer
+namespace OSL.Common.Service.Importer
 {
     public class FitLogImporter : IActivitiesImporter
     {
