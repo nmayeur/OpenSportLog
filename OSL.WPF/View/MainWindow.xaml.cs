@@ -36,6 +36,7 @@ namespace OSL.WPF.View
 
         private void _CloseApp(object sender, CloseNotificationEventArgs args)
         {
+            NLog.LogManager.Shutdown();
             this.Close();
         }
     }

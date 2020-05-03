@@ -16,9 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OSL.Common.Model;
-using OSL.Common.Service;
 using OSL.Common.Service.Importer;
-using OSL.Common.Tests.Service;
 using OSL.EF;
 using System.Collections.Generic;
 using System.IO;
@@ -29,11 +27,10 @@ namespace OSL.WPF.Tests
     [TestClass]
     public class UnitTest1
     {
-        private readonly ILoggerService _LoggerService;
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public UnitTest1()
         {
-            _LoggerService = new TestLoggerService(TestLoggerService.LEVEL.DEBUG);
         }
 
         [TestMethod]
@@ -65,7 +62,7 @@ namespace OSL.WPF.Tests
             dbContext.Database.Migrate();
 
             string path = @"data\data_tiny.fitlog";
-            FitLogImporter importer = new FitLogImporter(_LoggerService);
+            FitLogImporter importer = new FitLogImporter();
 
             List<ActivityEntity> activities = new List<ActivityEntity>();
             var athlete = new AthleteEntity(activities, "Sample", 1);

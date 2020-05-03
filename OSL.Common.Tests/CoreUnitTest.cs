@@ -17,7 +17,6 @@ using FluentAssertions;
 using OSL.Common.Model;
 using OSL.Common.Service;
 using OSL.Common.Service.Importer;
-using OSL.Common.Tests.Service;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,18 +28,17 @@ namespace OSL.Common.Tests
 {
     public class CoreUnitTest
     {
-        private readonly ILoggerService _LoggerService;
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public CoreUnitTest(ITestOutputHelper output)
         {
-            _LoggerService = new TestLoggerService(output, TestLoggerService.LEVEL.DEBUG);
         }
 
         [Fact]
         public void TestImportFitlogSports()
         {
             string path = @"data\data_mini.fitlog";
-            FitLogImporter importer = new FitLogImporter(_LoggerService);
+            FitLogImporter importer = new FitLogImporter();
 
             IDictionary<string, string> sports;
             using (FileStream fs = File.OpenRead(path))
@@ -54,7 +52,7 @@ namespace OSL.Common.Tests
         public void TestImportFitlogData()
         {
             string path = @"data\data_mini.fitlog";
-            FitLogImporter importer = new FitLogImporter(_LoggerService);
+            FitLogImporter importer = new FitLogImporter();
 
             IList<ActivityEntity> activities;
             using (FileStream fs = File.OpenRead(path))
@@ -106,7 +104,7 @@ namespace OSL.Common.Tests
 </FitnessWorkbook>";
             byte[] byteArray = Encoding.UTF8.GetBytes(fitlog);
 
-            FitLogImporter importer = new FitLogImporter(_LoggerService);
+            FitLogImporter importer = new FitLogImporter();
 
             List<ActivityEntity> activities;
             using (Stream fs = new MemoryStream(byteArray))

@@ -258,7 +258,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Service\LoggerService.cs" />
     <Compile Include="ViewModel\ImportSportsMatchingDialogVM.cs" />
     <Compile Include="ViewModel\ActivityDetailsVM.cs" />
     <Compile Include="ViewModel\AthleteDetailsVM.cs" />

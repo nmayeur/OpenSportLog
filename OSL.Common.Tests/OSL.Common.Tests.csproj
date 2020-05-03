@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="data\" />
+    <Folder Include="Service\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="data\data_tiny.fitlog">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
