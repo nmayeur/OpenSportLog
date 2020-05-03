@@ -15,7 +15,6 @@ limitations under the License.
 using GalaSoft.MvvmLight.Ioc;
 using OSL.Common.Service;
 using System;
-using System.Threading.Tasks;
 
 namespace OSL.WPF.Service
 {
@@ -42,11 +41,6 @@ namespace OSL.WPF.Service
             if (_Level <= LEVEL.DEBUG) Console.WriteLine(message);
         }
 
-        public async Task DebugAsync(string message)
-        {
-            await Task.Run(() => Debug(message));
-        }
-
         public void Error(string message)
         {
             if (_Level <= LEVEL.ERROR) Console.WriteLine(message);
@@ -59,16 +53,6 @@ namespace OSL.WPF.Service
                 Console.WriteLine(message);
                 Console.WriteLine(exception.StackTrace);
             }
-        }
-
-        public async Task ErrorAsync(string message)
-        {
-            await Task.Run(() => Error(message));
-        }
-
-        public async Task ErrorAsync(string message, Exception exception)
-        {
-            await Task.Run(() => Error(message, exception));
         }
 
         public void Fatal(string message)
@@ -88,16 +72,6 @@ namespace OSL.WPF.Service
             }
         }
 
-        public async Task FatalAsync(string message)
-        {
-            await Task.Run(() => Fatal(message));
-        }
-
-        public async Task FatalAsync(string message, Exception exception)
-        {
-            await Task.Run(() => Fatal(message, exception));
-        }
-
         public void Info(string message)
         {
             if (_Level <= LEVEL.INFO)
@@ -107,22 +81,12 @@ namespace OSL.WPF.Service
             throw new NotImplementedException();
         }
 
-        public async Task InfoAsync(string message)
-        {
-            await Task.Run(() => Info(message));
-        }
-
         public void Warn(string message)
         {
             if (_Level <= LEVEL.WARN)
             {
                 Console.WriteLine(message);
             }
-        }
-
-        public async Task WarnAsync(string message)
-        {
-            await Task.Run(() => Warn(message));
         }
     }
 }
