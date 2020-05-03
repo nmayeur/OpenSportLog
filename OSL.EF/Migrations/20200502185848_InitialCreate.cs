@@ -11,7 +11,8 @@ namespace OSL.EF.Migrations
                 name: "Athletes",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -24,12 +25,15 @@ namespace OSL.EF.Migrations
                 name: "ActivityEntity",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    OriginId = table.Column<string>(nullable: true),
+                    OriginSystem = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Location = table.Column<string>(nullable: true),
                     Calories = table.Column<int>(nullable: false),
                     Sport = table.Column<int>(nullable: false),
-                    AthleteEntityId = table.Column<string>(nullable: false)
+                    AthleteEntityId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,9 +56,9 @@ namespace OSL.EF.Migrations
                     Latitude = table.Column<float>(nullable: false),
                     Longitude = table.Column<float>(nullable: false),
                     Elevation = table.Column<float>(nullable: false),
-                    HearRate = table.Column<int>(nullable: false),
+                    HeartRate = table.Column<int>(nullable: false),
                     Cadence = table.Column<int>(nullable: false),
-                    TrackEntityActivityEntityId = table.Column<string>(nullable: false)
+                    TrackEntityActivityEntityId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

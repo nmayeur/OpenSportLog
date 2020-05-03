@@ -12,15 +12,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using OSL.Common.Model;
-using OSL.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
+using OSL.Common.Model;
+using OSL.Common.Service;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OSL.WPF.Service
+namespace OSL.EF.Service
 {
     public class DataAccessService : IDataAccessService
     {
@@ -42,15 +41,24 @@ namespace OSL.WPF.Service
             _DbContext = new GeoSportsContext(configuration);
             if (ForceNew)
             {
-                _DbContext.Database.EnsureDeleted();
+                DbContext.Database.EnsureDeleted();
             }
-            _DbContext.Database.Migrate();
+            DbContext.Database.Migrate();
         }
 
         public IList<AthleteEntity> GetAthletes()
         {
-            return _DbContext.Athletes.ToList();
+            return DbContext.Athletes.ToList();
         }
 
+        public void SaveData()
+        {
+            DbContext.SaveChanges();
+        }
+
+        public void AddAthlete(AthleteEntity athlete)
+        {
+            _DbContext.Athletes.Add(athlete);
+        }
     }
 }

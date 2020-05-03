@@ -12,16 +12,16 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+using OSL.Common.Model;
+using System.Collections.Generic;
 
-namespace OSL.WPF.ViewModel.Scaffholding
+namespace OSL.Common.Service
 {
-    public class MessengerNotifications
+    public interface IDataAccessService
     {
-        public readonly static string SELECTED = "Selected";
-        public readonly static string LOADED = "Loaded";
-        public readonly static string NEW = "New";
-        public readonly static string IMPORT = "Import";
-
-        public enum IMPORT_TYPE { FITLOG }
+        void OpenDatabase(string DatabasePath, bool ForceNew = false);
+        IList<AthleteEntity> GetAthletes();
+        void SaveData();
+        void AddAthlete(AthleteEntity athlete);
     }
 }

@@ -16,6 +16,7 @@ using GalaSoft.MvvmLight.Threading;
 using OSL.WPF.View;
 using System;
 using System.ComponentModel;
+using System.Threading;
 
 namespace OSL.WPF.WPFUtils
 {
@@ -23,22 +24,36 @@ namespace OSL.WPF.WPFUtils
     {
         public static void ExecuteWithSpinner(Action work, string message)
         {
+            SpinnerDialog spinnerDialog = null;
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
-                SpinnerDialog spinnerDialog = new SpinnerDialog();
+                spinnerDialog = new SpinnerDialog();
                 spinnerDialog.txtMessage.Text = message;
                 spinnerDialog.Show();
-                BackgroundWorker worker = new BackgroundWorker();
-                worker.DoWork += (sender, args) =>
+            });
+
+            var doneEvent = new AutoResetEvent(false);
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += (sender, args) =>
+            {
+                try
                 {
                     work();
-                };
-                worker.RunWorkerCompleted += (sender, args) =>
+                }
+                finally
                 {
+                    doneEvent.Set();
+                }
+            };
+            worker.RunWorkerCompleted += (sender, args) =>
+            {
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                {
+                    doneEvent.WaitOne();
                     spinnerDialog.Close();
-                };
-                worker.RunWorkerAsync();
-            });
+                });
+            };
+            worker.RunWorkerAsync();
         }
     }
 }

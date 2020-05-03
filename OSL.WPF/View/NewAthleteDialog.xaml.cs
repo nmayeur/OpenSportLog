@@ -12,16 +12,28 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+using System.Windows;
 
-namespace OSL.WPF.ViewModel.Scaffholding
+namespace OSL.WPF.View
 {
-    public class MessengerNotifications
+    /// <summary>
+    /// Interaction logic for NewAthleteView.xaml
+    /// </summary>
+    public partial class NewAthleteDialog : Window
     {
-        public readonly static string SELECTED = "Selected";
-        public readonly static string LOADED = "Loaded";
-        public readonly static string NEW = "New";
-        public readonly static string IMPORT = "Import";
+        public NewAthleteDialog()
+        {
+            InitializeComponent();
+        }
 
-        public enum IMPORT_TYPE { FITLOG }
+        private void BtnOK_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+        }
     }
 }

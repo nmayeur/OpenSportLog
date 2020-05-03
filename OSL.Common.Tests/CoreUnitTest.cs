@@ -129,7 +129,7 @@ namespace OSL.Common.Tests
             activity.Track.TrackPoints[0].Latitude.Should().Be(float.Parse("48.8676490783691", style, culture));
             activity.Track.TrackPoints[0].Longitude.Should().Be(float.Parse("2.20366406440735", style, culture));
             activity.Track.TrackPoints[0].Elevation.Should().Be(float.Parse("91.4405212402344", style, culture));
-            activity.Track.TrackPoints[0].HearRate.Should().Be(71);
+            activity.Track.TrackPoints[0].HeartRate.Should().Be(71);
             activity.Track.TrackPoints[0].Cadence.Should().Be(0);
             activity.Track.TrackPoints[3].Cadence.Should().Be(27);
         }
@@ -152,7 +152,7 @@ namespace OSL.Common.Tests
             };
 
             var persistence = A.Fake<IPersistence>();
-            A.CallTo(() => persistence.GetAthlete("Test")).Returns(new AthleteEntity(new List<ActivityEntity>() { activityVO }, "Test", "1"));
+            A.CallTo(() => persistence.GetAthlete("Test")).Returns(new AthleteEntity(new List<ActivityEntity>() { activityVO }, "Test", 1));
 
             //test
             var athlete = persistence.GetAthlete("Test");

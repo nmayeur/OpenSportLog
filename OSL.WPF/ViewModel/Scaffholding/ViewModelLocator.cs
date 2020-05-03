@@ -31,6 +31,7 @@ using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using OSL.Common.Service;
 using OSL.Common.Service.Importer;
+using OSL.EF.Service;
 using OSL.WPF.Service;
 
 namespace OSL.WPF.ViewModel.Scaffholding
@@ -63,6 +64,7 @@ namespace OSL.WPF.ViewModel.Scaffholding
             SimpleIoc.Default.Register<AthleteDetailsVM>();
             SimpleIoc.Default.Register<ActivityDetailsVM>();
             SimpleIoc.Default.Register<ImportSportsMatchingDialogVM>();
+            SimpleIoc.Default.Register<NewAthleteVM>();
             SimpleIoc.Default.Register<IDataAccessService, DataAccessService>();
             SimpleIoc.Default.Register<FitLogImporter>();
             SimpleIoc.Default.Register<ILoggerService, LoggerService>();
@@ -97,6 +99,14 @@ namespace OSL.WPF.ViewModel.Scaffholding
             get
             {
                 return ServiceLocator.Current.GetInstance<ImportSportsMatchingDialogVM>();
+            }
+        }
+
+        public NewAthleteVM NewAthleteDialog
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<NewAthleteVM>();
             }
         }
 

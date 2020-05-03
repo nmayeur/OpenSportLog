@@ -19,14 +19,36 @@ namespace OSL.Common.Model
 
     public class ActivityEntity : ModelBase
     {
-        private string _Id;
-        public string Id
+        private int _Id;
+        public int Id
         {
             get { return _Id; }
             set
             {
                 _Id = value;
                 NotifyPropertyChanged("Id");
+            }
+        }
+
+        private string _OriginId;
+        public string OriginId
+        {
+            get { return _OriginId; }
+            set
+            {
+                _OriginId = value;
+                NotifyPropertyChanged("OriginId");
+            }
+        }
+
+        private string _OriginSystem;
+        public string OriginSystem
+        {
+            get { return _OriginSystem; }
+            set
+            {
+                _OriginSystem = value;
+                NotifyPropertyChanged("OriginSystem");
             }
         }
 
@@ -94,10 +116,22 @@ namespace OSL.Common.Model
                 return _instance;
             }
 
-            public string Id
+            public int Id
             {
                 get { return _instance.Id; }
                 set { _instance.Id = value; }
+            }
+
+            public string OriginId
+            {
+                get { return _instance.OriginId; }
+                set { _instance.OriginId = value; }
+            }
+
+            public string OriginSystem
+            {
+                get { return _instance.OriginSystem; }
+                set { _instance.OriginSystem = value; }
             }
 
             public string Name

@@ -223,6 +223,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\ImportSportsMatchingEntryVM.cs" />
+    <Compile Include="ViewModel\NewAthleteVM.cs" />
+    <Compile Include="View\NewAthleteDialog.xaml.cs">
+      <DependentUpon>NewAthleteDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SpinnerDialog.xaml.cs">
       <DependentUpon>SpinnerDialog.xaml</DependentUpon>
     </Compile>
@@ -248,8 +252,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Service\DataAccessService.cs" />
-    <Compile Include="Service\IDataAccessService.cs" />
     <Compile Include="Service\LoggerService.cs" />
     <Compile Include="ViewModel\ImportSportsMatchingDialogVM.cs" />
     <Compile Include="ViewModel\ActivityDetailsVM.cs" />
@@ -271,6 +273,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\NewAthleteDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SpinnerDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

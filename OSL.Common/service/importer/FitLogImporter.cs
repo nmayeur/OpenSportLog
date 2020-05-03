@@ -73,7 +73,8 @@ namespace OSL.Common.Service.Importer
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY;
                                     _CurrentActivityBuilder = new ActivityEntity.Builder
                                     {
-                                        Id = reader.GetAttribute("Id")
+                                        OriginId = reader.GetAttribute("Id"),
+                                        OriginSystem = "FITLOG"
                                     };
                                     break;
                                 case "Metadata":

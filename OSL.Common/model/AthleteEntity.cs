@@ -20,8 +20,8 @@ namespace OSL.Common.Model
 {
     public class AthleteEntity : ModelBase
     {
-        private string _Id;
-        public string Id
+        private int _Id;
+        public int Id
         {
             get { return _Id; }
             set
@@ -54,7 +54,7 @@ namespace OSL.Common.Model
         /// </summary>
         public AthleteEntity() { }
 
-        public AthleteEntity(IList<ActivityEntity> activities, string name, string id)
+        public AthleteEntity(IList<ActivityEntity> activities, string name, int id)
         {
             _Activities = new ObservableCollection<ActivityEntity>(activities);
             Name = name;

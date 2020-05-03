@@ -12,14 +12,22 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using OSL.Common.Model;
-using System.Collections.Generic;
+using GalaSoft.MvvmLight;
 
-namespace OSL.WPF.Service
+namespace OSL.WPF.ViewModel
 {
-    public interface IDataAccessService
+    public class NewAthleteVM : ViewModelBase
     {
-        void OpenDatabase(string DatabasePath, bool ForceNew = false);
-        IList<AthleteEntity> GetAthletes();
+        #region Data
+        private string _Name;
+        public string Name
+        {
+            get => _Name;
+            set
+            {
+                Set(() => Name, ref _Name, value);
+            }
+        }
+        #endregion
     }
 }

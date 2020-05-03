@@ -15,20 +15,16 @@ limitations under the License.
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Threading;
 using Microsoft.Win32;
 using OSL.Common.Model;
-using OSL.Common.Service.Importer;
-using OSL.WPF.Service;
+using OSL.Common.Service;
 using OSL.WPF.View;
 using OSL.WPF.ViewModel.Scaffholding;
-using OSL.WPF.WPFUtils;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using static OSL.WPF.ViewModel.Scaffholding.MessengerNotifications;
 
 namespace OSL.WPF.ViewModel
 {
@@ -57,12 +53,11 @@ namespace OSL.WPF.ViewModel
 
         public event EventHandler<CloseNotificationEventArgs> CloseApp;
         private readonly IDataAccessService _DbAccess;
-        private readonly FitLogImporter _FitLogImporter;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainWindowVM(IDataAccessService DbAccess, FitLogImporter FitLogImporter)
+        public MainWindowVM(IDataAccessService DbAccess)
         {
             ////if (IsInDesignMode)
             ////{
@@ -73,12 +68,43 @@ namespace OSL.WPF.ViewModel
             ////    // Code runs "for real"
             ////}
             _DbAccess = DbAccess;
-            _FitLogImporter = FitLogImporter;
-            Messenger.Default.Register<CloseDialogMessage>(this, nm =>
+            Messenger.Default.Register<CloseDialogMessage>(this, m =>
             {
                 CloseApp?.Invoke(this, new CloseNotificationEventArgs());
             });
+
+
+            // Menu items enable/disable
+            Messenger.Default.Register<NotificationMessage<AthleteEntity>>(this, message =>
+            {
+                if (message.Notification == MessengerNotifications.SELECTED)
+                {
+                    IsImportEnabled = message.Content != null;
+                }
+            });
         }
+
+        #region Data
+        private bool _IsOslFileOpened = false;
+        public bool IsOslFileOpened
+        {
+            get => _IsOslFileOpened;
+            set
+            {
+                Set(() => IsOslFileOpened, ref _IsOslFileOpened, value);
+            }
+        }
+
+        private bool _IsImportEnabled = false;
+        public bool IsImportEnabled
+        {
+            get => _IsOslFileOpened;
+            set
+            {
+                Set(() => IsImportEnabled, ref _IsImportEnabled, value);
+            }
+        }
+        #endregion
 
         #region OpenFileCommand
         private RelayCommand _OpenFileCommand;
@@ -104,6 +130,8 @@ namespace OSL.WPF.ViewModel
                 string path = openFileDialog.FileName;
                 _DbAccess.OpenDatabase(path);
                 Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(_DbAccess.GetAthletes(), MessengerNotifications.LOADED));
+                IsOslFileOpened = true;
+                IsImportEnabled = false;
             }
 
         }
@@ -134,8 +162,38 @@ namespace OSL.WPF.ViewModel
                 string path = openFileDialog.FileName;
                 _DbAccess.OpenDatabase(path, true);
                 Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(null, MessengerNotifications.LOADED));
+                IsOslFileOpened = true;
+                IsImportEnabled = false;
             }
 
+        }
+        #endregion
+
+        #region NewAthleteCommand
+        private RelayCommand _NewAthleteCommand;
+        public RelayCommand NewAthleteCommand
+        {
+            get
+            {
+                return _NewAthleteCommand ??
+                    (_NewAthleteCommand = new RelayCommand(
+                        () => { NewAthleteDialog(); }
+                        ));
+            }
+        }
+
+        private void NewAthleteDialog()
+        {
+
+            NewAthleteDialog dialog = new NewAthleteDialog();
+            var dialogDataContext = (NewAthleteVM)dialog.DataContext;
+            if (dialog.ShowDialog() ?? false)
+            {
+                string name = dialogDataContext.Name;
+                var athlete = new AthleteEntity { Name = name };
+                _DbAccess.AddAthlete(athlete);
+                Messenger.Default.Send(new NotificationMessage<AthleteEntity>(athlete, MessengerNotifications.NEW));
+            }
         }
         #endregion
 
@@ -165,7 +223,27 @@ namespace OSL.WPF.ViewModel
         }
         #endregion
 
-        #region ImportFirLogCommand
+        #region SaveCommand
+        private RelayCommand _SaveCommand;
+        public RelayCommand SaveCommand
+        {
+            get
+            {
+                return _SaveCommand ??
+                    (_SaveCommand = new RelayCommand(
+                        () => { Task.Run(() => Save()); }
+                        ));
+            }
+        }
+
+        private void Save()
+        {
+            _DbAccess.SaveData();
+            MessageBox.Show("Data saved", "Saving");
+        }
+        #endregion
+
+        #region ImportFitLogCommand
         private RelayCommand _ImportFitLogCommand;
         public RelayCommand ImportFitLogCommand
         {
@@ -180,49 +258,7 @@ namespace OSL.WPF.ViewModel
 
         private void ImportFitLogDialogAsync()
         {
-            var openFileDialog = new OpenFileDialog()
-            {
-                Filter = "FitLog SportTracks (*.fitlog)|*.fitlog"
-            };
-            if (openFileDialog.ShowDialog() == true)
-            {
-                string path = openFileDialog.FileName;
-
-                DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                {
-                    ImportSportsMatchingDialog dialog = new ImportSportsMatchingDialog();
-                    var dialogDataContext = (ImportSportsMatchingDialogVM)dialog.DataContext;
-                    using (FileStream fs = File.OpenRead(path))
-                    {
-                        dialogDataContext.ImportSportsMatchingEntries.Clear();
-                        foreach (var sport in _FitLogImporter.GetSports(fs))
-                        {
-                            dialogDataContext.ImportSportsMatchingEntries.Add(new ImportSportsMatchingEntryVM
-                            {
-                                ImportId = sport.Key,
-                                ImportLabel = sport.Value
-                            });
-                        }
-                    }
-                    if (dialog.ShowDialog() ?? false)
-                    {
-                        var ret = new Dictionary<string, ACTIVITY_SPORT>();
-                        foreach (var listItem in dialog.lstMatchings.Items)
-                        {
-                            var entry = (ImportSportsMatchingEntryVM)listItem;
-                            ret.Add(entry.ImportId, entry.OslSport);
-                        }
-                        ViewsHelper.ExecuteWithSpinner(() =>
-                        {
-                            using (FileStream fs = File.OpenRead(path))
-                            {
-                                _FitLogImporter.ImportActivitiesStream(fs, ret);
-                            }
-                        }, "Import is running...");
-                    }
-                });
-            }
-
+            Messenger.Default.Send(new NotificationMessage<IMPORT_TYPE>(IMPORT_TYPE.FITLOG, MessengerNotifications.IMPORT));
         }
         #endregion
 

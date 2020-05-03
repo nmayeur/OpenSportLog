@@ -12,14 +12,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OSL.Common.Model;
 using OSL.Common.Service;
 using OSL.Common.Service.Importer;
 using OSL.Common.Tests.Service;
 using OSL.EF;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -42,13 +42,13 @@ namespace OSL.WPF.Tests
             var configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string>()
                 {
-                    { "ConnectionStrings:Default", "Data Source=geosports1.db" }
+                    { "ConnectionStrings:Default", "Data Source=geosports.db" }
                 }).Build();
 
             var dbContext = new GeoSportsContext(configuration);
             dbContext.Database.EnsureDeleted();
             dbContext.Database.Migrate();
-            dbContext.Database.EnsureDeleted();
+            //dbContext.Database.EnsureDeleted();
         }
 
         [TestMethod]
@@ -68,7 +68,7 @@ namespace OSL.WPF.Tests
             FitLogImporter importer = new FitLogImporter(_LoggerService);
 
             List<ActivityEntity> activities = new List<ActivityEntity>();
-            var athlete = new AthleteEntity(activities, "Sample", "1");
+            var athlete = new AthleteEntity(activities, "Sample", 1);
             dbContext.Athletes.Add(athlete);
 
             using (FileStream fs = File.OpenRead(path))

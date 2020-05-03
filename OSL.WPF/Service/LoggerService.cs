@@ -13,10 +13,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using GalaSoft.MvvmLight.Ioc;
+using OSL.Common.Service;
 using System;
 using System.Threading.Tasks;
 
-namespace OSL.Common.Service
+namespace OSL.WPF.Service
 {
     public class LoggerService : ILoggerService
     {

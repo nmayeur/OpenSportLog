@@ -14,11 +14,19 @@ limitations under the License.
 */
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
+using Microsoft.Win32;
 using OSL.Common.Model;
-using OSL.WPF.Service;
+using OSL.Common.Service;
+using OSL.Common.Service.Importer;
+using OSL.WPF.View;
 using OSL.WPF.ViewModel.Scaffholding;
+using OSL.WPF.WPFUtils;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
+using static OSL.WPF.ViewModel.Scaffholding.MessengerNotifications;
 
 namespace OSL.WPF.ViewModel
 {
@@ -26,9 +34,11 @@ namespace OSL.WPF.ViewModel
     {
 
         private readonly IDataAccessService _DbAccess;
-        public AthleteDetailsVM(IDataAccessService DbAccess)
+        private readonly FitLogImporter _FitLogImporter;
+        public AthleteDetailsVM(IDataAccessService DbAccess, FitLogImporter FitLogImporter)
         {
             _DbAccess = DbAccess;
+            _FitLogImporter = FitLogImporter;
             Messenger.Default.Register<NotificationMessage<IList<AthleteEntity>>>(this, message =>
             {
                 if (message.Notification == MessengerNotifications.LOADED)
@@ -41,6 +51,26 @@ namespace OSL.WPF.ViewModel
                     {
                         Athletes = new ObservableCollection<AthleteEntity>(message.Content);
                     }
+                    SelectedAthlete = null;
+                }
+            });
+            Messenger.Default.Register<NotificationMessage<IMPORT_TYPE>>(this, message =>
+            {
+                if (message.Notification == MessengerNotifications.IMPORT)
+                {
+                    if (message.Content == IMPORT_TYPE.FITLOG)
+                    {
+                        ImportFitLogDialog();
+                    }
+                }
+            });
+            Messenger.Default.Register<NotificationMessage<AthleteEntity>>(this, message =>
+            {
+                if (message.Notification == MessengerNotifications.NEW)
+                {
+                    var athlete = message.Content;
+                    Athletes.Add(athlete);
+                    SelectedAthlete = athlete;
                 }
             });
 
@@ -62,7 +92,8 @@ namespace OSL.WPF.ViewModel
             set
             {
                 Set(() => SelectedAthlete, ref _SelectedAthlete, value);
-                Activities = _SelectedAthlete.Activities;
+                Activities = _SelectedAthlete?.Activities;
+                Messenger.Default.Send(new NotificationMessage<AthleteEntity>(_SelectedAthlete, MessengerNotifications.SELECTED));
             }
         }
 
@@ -83,6 +114,64 @@ namespace OSL.WPF.ViewModel
         {
             get => _Activities;
             private set { Set(() => Activities, ref _Activities, value); }
+        }
+        #endregion
+
+        #region Import Fitlog
+        private void ImportFitLogDialog()
+        {
+            var openFileDialog = new OpenFileDialog()
+            {
+                Filter = "FitLog SportTracks (*.fitlog)|*.fitlog"
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string path = openFileDialog.FileName;
+
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                {
+                    ImportSportsMatchingDialog dialog = new ImportSportsMatchingDialog();
+                    var dialogDataContext = (ImportSportsMatchingDialogVM)dialog.DataContext;
+                    dialogDataContext.ImportSportsMatchingEntries.Clear();
+                    using (FileStream fs = File.OpenRead(path))
+                    {
+                        foreach (var sport in _FitLogImporter.GetSports(fs))
+                        {
+                            dialogDataContext.ImportSportsMatchingEntries.Add(new ImportSportsMatchingEntryVM
+                            {
+                                ImportId = sport.Key,
+                                ImportLabel = sport.Value
+                            });
+                        }
+                    }
+                    if (dialog.ShowDialog() ?? false)
+                    {
+                        var config = new Dictionary<string, ACTIVITY_SPORT>();
+                        foreach (var listItem in dialog.lstMatchings.Items)
+                        {
+                            var entry = (ImportSportsMatchingEntryVM)listItem;
+                            config.Add(entry.ImportId, entry.OslSport);
+                        }
+                        ViewsHelper.ExecuteWithSpinner(() =>
+                        {
+                            int cnt = 0;
+                            using (FileStream fs = File.OpenRead(path))
+                            {
+                                foreach (var activity in _FitLogImporter.ImportActivitiesStream(fs, config))
+                                {
+                                    cnt++;
+                                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                                    {
+                                        _SelectedAthlete.Activities.Add(activity);
+                                    });
+                                }
+                            }
+                            MessageBox.Show($"Imported {cnt} activit{(cnt > 1 ? "ies" : "y")}");
+                        }, "Import is running...");
+                    }
+                });
+            }
+
         }
         #endregion
     }

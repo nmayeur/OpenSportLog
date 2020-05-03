@@ -11,26 +11,29 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0">
-                <Menu Name="mnuMain" DockPanel.Dock="Top" IsMainMenu="True">
+            <Menu Name="mnuMain" DockPanel.Dock="Top" IsMainMenu="True">
                 <MenuItem Header="_File">
                     <MenuItem Header="_Open" Command="{Binding OpenFileCommand}"/>
                     <MenuItem Header="_New" Command="{Binding NewFileCommand}"/>
+                    <MenuItem Header="_Save" Command="{Binding SaveCommand}" IsEnabled="{Binding Path=IsOslFileOpened}"/>
+                    <Separator/>
+                    <MenuItem Header="New _Athlete" Command="{Binding NewAthleteCommand}" IsEnabled="{Binding Path=IsOslFileOpened}"/>
                     <Separator/>
                     <MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
                 </MenuItem>
                 <MenuItem Header="_Import">
-                    <MenuItem Header="_FitLog (SportTracks)" Command="{Binding ImportFitLogCommand}"/>
+                    <MenuItem Header="_FitLog (SportTracks)" Command="{Binding ImportFitLogCommand}" IsEnabled="{Binding Path=IsImportEnabled}"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
         <Views:AthleteDetails Grid.Column="0" Grid.Row="1"/>
-        <Views:ActivityDetails Grid.Column="1" Grid.Row="1"/>
+        <Views:ActivityDetails Grid.Column="0" Grid.Row="2"/>
     </Grid>
 </Window>

@@ -24,7 +24,7 @@ namespace OSL.Common.Model
         public float Latitude { get; private set; }
         public float Longitude { get; private set; }
         public float Elevation { get; private set; }
-        public int HearRate { get; private set; }
+        public int HeartRate { get; private set; }
         public int Cadence { get; private set; }
 
         protected override IEnumerable<object> GetAtomicValues()
@@ -33,7 +33,7 @@ namespace OSL.Common.Model
             yield return Latitude;
             yield return Longitude;
             yield return Elevation;
-            yield return HearRate;
+            yield return HeartRate;
             yield return Cadence;
         }
 
@@ -68,8 +68,8 @@ namespace OSL.Common.Model
             }
             public int HeartRate
             {
-                get { return _instance.HearRate; }
-                set { _instance.HearRate = value; }
+                get { return _instance.HeartRate; }
+                set { _instance.HeartRate = value; }
             }
             public int Cadence
             {

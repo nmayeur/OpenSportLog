@@ -15,7 +15,7 @@ limitations under the License.
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using OSL.Common.Model;
-using OSL.WPF.Service;
+using OSL.Common.Service;
 using OSL.WPF.ViewModel.Scaffholding;
 
 namespace OSL.WPF.ViewModel
