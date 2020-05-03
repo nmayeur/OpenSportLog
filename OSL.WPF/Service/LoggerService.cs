@@ -20,6 +20,7 @@ namespace OSL.WPF.Service
 {
     public class LoggerService : ILoggerService
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public enum LEVEL { DEBUG = 1, INFO = 2, WARN = 3, ERROR = 4, FATAL = 5 };
 
@@ -38,55 +39,37 @@ namespace OSL.WPF.Service
 
         public void Debug(string message)
         {
-            if (_Level <= LEVEL.DEBUG) Console.WriteLine(message);
+            Logger.Debug(message);
         }
 
         public void Error(string message)
         {
-            if (_Level <= LEVEL.ERROR) Console.WriteLine(message);
+            Logger.Error(message);
         }
 
         public void Error(string message, Exception exception)
         {
-            if (_Level <= LEVEL.ERROR)
-            {
-                Console.WriteLine(message);
-                Console.WriteLine(exception.StackTrace);
-            }
+            Logger.Error(exception, message);
         }
 
         public void Fatal(string message)
         {
-            if (_Level <= LEVEL.FATAL)
-            {
-                Console.WriteLine(message);
-            }
+            Logger.Fatal(message);
         }
 
         public void Fatal(string message, Exception exception)
         {
-            if (_Level <= LEVEL.FATAL)
-            {
-                Console.WriteLine(message);
-                Console.WriteLine(exception.StackTrace);
-            }
+            Logger.Fatal(exception, message);
         }
 
         public void Info(string message)
         {
-            if (_Level <= LEVEL.INFO)
-            {
-                Console.WriteLine(message);
-            }
-            throw new NotImplementedException();
+            Logger.Info(message);
         }
 
         public void Warn(string message)
         {
-            if (_Level <= LEVEL.WARN)
-            {
-                Console.WriteLine(message);
-            }
+            Logger.Warn(message);
         }
     }
 }
