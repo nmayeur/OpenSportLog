@@ -12,11 +12,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using GalaSoft.MvvmLight.Messaging;
 using OSL.WPF.ViewModel;
-using OSL.WPF.ViewModel.Scaffholding;
+using System.Globalization;
 using System.Windows;
-using System.Windows.Navigation;
+using System.Windows.Markup;
 using static OSL.WPF.ViewModel.MainWindowVM;
 
 namespace OSL.WPF.View
@@ -29,8 +28,9 @@ namespace OSL.WPF.View
         public MainWindow()
         {
             InitializeComponent();
-            var vm = DataContext as MainWindowVM; 
-            if (vm == null) return; 
+            this.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
+            var vm = DataContext as MainWindowVM;
+            if (vm == null) return;
             vm.CloseApp += _CloseApp;
         }
 

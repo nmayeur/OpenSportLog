@@ -13,6 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using OSL.Common.Model.Scaffholding;
+using System;
 
 namespace OSL.Common.Model
 {
@@ -96,6 +97,17 @@ namespace OSL.Common.Model
             }
         }
 
+        private DateTimeOffset _Time;
+        public DateTimeOffset Time
+        {
+            get { return _Time; }
+            set
+            {
+                _Time = value;
+                NotifyPropertyChanged("Time");
+            }
+        }
+
         private TrackEntity _Track;
         public TrackEntity Track
         {
@@ -156,6 +168,12 @@ namespace OSL.Common.Model
             {
                 get { return _instance.Sport; }
                 set { _instance.Sport = value; }
+            }
+
+            public DateTimeOffset Time
+            {
+                get { return _instance.Time; }
+                set { _instance.Time = value; }
             }
 
             public TrackEntity Track

@@ -70,10 +70,21 @@ namespace OSL.Common.Service.Importer
                                     break;
                                 case "Activity":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY;
+                                    DateTimeOffset activityStartTime;
+                                    string activityStartTimeAsString = reader.GetAttribute("StartTime");
+                                    if (DateTimeOffset.TryParse(activityStartTimeAsString, out activityStartTime))
+                                    {
+                                        Logger.Debug(string.Format("Activity start time {0}", activityStartTime));
+                                    }
+                                    else
+                                    {
+                                        Logger.Error(string.Format("Error parsing date {0}", activityStartTimeAsString));
+                                    }
                                     _CurrentActivityBuilder = new ActivityEntity.Builder
                                     {
                                         OriginId = reader.GetAttribute("Id"),
-                                        OriginSystem = "FITLOG"
+                                        OriginSystem = "FITLOG",
+                                        Time = activityStartTime
                                     };
                                     break;
                                 case "Metadata":
@@ -119,11 +130,11 @@ namespace OSL.Common.Service.Importer
                                     if (DateTimeOffset.TryParse(startTimeAsString, out startTime))
                                     {
                                         _CurrentTrackStartTime = startTime;
-                                        Logger.Debug(string.Format("Activity start time {0}", startTime));
+                                        Logger.Debug(string.Format("Track start time {0}", startTime));
                                     }
                                     else
                                     {
-                                        Logger.Error(string.Format("Error parsing date {0}", startTimeAsString));
+                                        Logger.Error(string.Format("Track parsing date {0}", startTimeAsString));
                                     }
                                     break;
                                 case "pt":
