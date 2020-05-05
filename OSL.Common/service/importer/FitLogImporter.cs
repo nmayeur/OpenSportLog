@@ -37,7 +37,7 @@ namespace OSL.Common.Service.Importer
         }
         private PARSE_CONTEXT _CurrentContext = PARSE_CONTEXT.ROOT;
         private ActivityEntity.Builder _CurrentActivityBuilder = null;
-        private TrackEntity.Builder _CurrentTrackBuilder = null;
+        private TrackSegmentEntity.Builder _CurrentTrackSegmentBuilder = null;
         //private AthleteEntity _CurrentAthlete = null;
         private DateTimeOffset _CurrentTrackStartTime;
 
@@ -124,7 +124,7 @@ namespace OSL.Common.Service.Importer
                                     break;
                                 case "Track":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY_TRACK;
-                                    _CurrentTrackBuilder = new TrackEntity.Builder();
+                                    _CurrentTrackSegmentBuilder = new TrackSegmentEntity.Builder();
                                     string startTimeAsString = reader.GetAttribute("StartTime");
                                     DateTimeOffset startTime;
                                     if (DateTimeOffset.TryParse(startTimeAsString, out startTime))
@@ -138,7 +138,7 @@ namespace OSL.Common.Service.Importer
                                     }
                                     break;
                                 case "pt":
-                                    if (_CurrentTrackBuilder == null) break;
+                                    if (_CurrentTrackSegmentBuilder == null) break;
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY_TRACK_PT;
                                     int tm;
                                     var tmAsString = reader.GetAttribute("tm");
@@ -188,7 +188,7 @@ namespace OSL.Common.Service.Importer
                                         HeartRate = hr,
                                         Cadence = cadence
                                     };
-                                    _CurrentTrackBuilder.TrackPoints.Add(trackPoint);
+                                    _CurrentTrackSegmentBuilder.TrackPoints.Add(trackPoint);
                                     Logger.Debug(string.Format("Trackpoint time {0}, latitude {1}, longitude {2}, elevation {3}, heart-rate {4}, cadence {5}",
                                         tmTime, latitude, longitude, elevation, hr, cadence));
                                     break;
@@ -245,9 +245,11 @@ namespace OSL.Common.Service.Importer
                                     break;
                                 case "Track":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY;
-                                    var track = _CurrentTrackBuilder.Build();
-                                    if (_CurrentActivityBuilder != null) _CurrentActivityBuilder.Track = track;
-                                    _CurrentTrackBuilder = null;
+                                    var segment = _CurrentTrackSegmentBuilder.Build();
+                                    var trackBuilder = new TrackEntity.Builder();
+                                    trackBuilder.TrackSegments.Add(segment);
+                                    if (_CurrentActivityBuilder != null) _CurrentActivityBuilder.Tracks.Add(trackBuilder.Build());
+                                    _CurrentTrackSegmentBuilder = null;
                                     break;
                                 case "pt":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY_TRACK;

@@ -42,7 +42,7 @@ namespace OSL.WPF.Tests
                     { "ConnectionStrings:Default", "Data Source=geosports.db" }
                 }).Build();
 
-            var dbContext = new GeoSportsContext(configuration);
+            var dbContext = new OpenSportLogContext(configuration);
             dbContext.Database.EnsureDeleted();
             dbContext.Database.Migrate();
             //dbContext.Database.EnsureDeleted();
@@ -57,7 +57,7 @@ namespace OSL.WPF.Tests
                     { "ConnectionStrings:Default", "Data Source=geosports.db" }
                 }).Build();
 
-            var dbContext = new GeoSportsContext(configuration);
+            var dbContext = new OpenSportLogContext(configuration);
             dbContext.Database.EnsureDeleted();
             dbContext.Database.Migrate();
 
@@ -92,7 +92,10 @@ namespace OSL.WPF.Tests
                 .FirstOrDefault()
                 .Activities
                 .FirstOrDefault()
-                .Track
+                .Tracks
+                .FirstOrDefault()
+                .TrackSegments
+                .FirstOrDefault()
                 .TrackPoints;
             Assert.IsTrue(tracksPointsRead.Count > 0);
 

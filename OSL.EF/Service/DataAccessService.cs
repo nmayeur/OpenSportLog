@@ -23,8 +23,8 @@ namespace OSL.EF.Service
 {
     public class DataAccessService : IDataAccessService
     {
-        private GeoSportsContext _DbContext;
-        public GeoSportsContext DbContext
+        private OpenSportLogContext _DbContext;
+        public OpenSportLogContext DbContext
         {
             get => _DbContext;
         }
@@ -38,7 +38,7 @@ namespace OSL.EF.Service
                         { "ConnectionStrings:Default", connectionString }
                 }).Build();
 
-            _DbContext = new GeoSportsContext(configuration);
+            _DbContext = new OpenSportLogContext(configuration);
             if (ForceNew)
             {
                 DbContext.Database.EnsureDeleted();

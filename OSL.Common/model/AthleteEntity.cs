@@ -52,7 +52,10 @@ namespace OSL.Common.Model
         /// <summary>
         /// Entity Framework (proxy) constructor
         /// </summary>
-        public AthleteEntity() { }
+        public AthleteEntity()
+        {
+            _Activities = new ObservableCollection<ActivityEntity>();
+        }
 
         public AthleteEntity(IList<ActivityEntity> activities, string name, int id)
         {

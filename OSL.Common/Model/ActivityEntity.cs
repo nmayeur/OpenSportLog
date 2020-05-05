@@ -14,6 +14,8 @@ limitations under the License.
 */
 using OSL.Common.Model.Scaffholding;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace OSL.Common.Model
 {
@@ -108,23 +110,21 @@ namespace OSL.Common.Model
             }
         }
 
-        private TrackEntity _Track;
-        public TrackEntity Track
+        private ObservableCollection<TrackEntity> _Tracks;
+        public ObservableCollection<TrackEntity> Tracks
         {
-            get { return _Track; }
-            set
-            {
-                _Track = value;
-                NotifyPropertyChanged("Track");
-            }
+            get { return _Tracks; }
+            set { _Tracks = value; }
         }
 
         public sealed class Builder : BuilderBase<ActivityEntity>
         {
             private ActivityEntity _instance = new ActivityEntity();
+            private List<TrackEntity> _Tracks = new List<TrackEntity>();
 
             protected override ActivityEntity GetInstance()
             {
+                _instance.Tracks = new ObservableCollection<TrackEntity>(_Tracks);
                 return _instance;
             }
 
@@ -176,10 +176,10 @@ namespace OSL.Common.Model
                 set { _instance.Time = value; }
             }
 
-            public TrackEntity Track
+            public List<TrackEntity> Tracks
             {
-                get { return _instance.Track; }
-                set { _instance.Track = value; }
+                get { return _Tracks; }
+                set { _Tracks = value; }
             }
         }
     }

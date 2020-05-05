@@ -19,11 +19,11 @@ using System.Collections.Generic;
 
 namespace OSL.EF
 {
-    public class GeoSportsContext : DbContext
+    public class OpenSportLogContext : DbContext
     {
         IConfigurationRoot _Configuration;
 
-        public GeoSportsContext()
+        public OpenSportLogContext()
         {
             _Configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string>()
@@ -32,7 +32,7 @@ namespace OSL.EF
                 }).Build();
         }
 
-        public GeoSportsContext(IConfigurationRoot configuration)
+        public OpenSportLogContext(IConfigurationRoot configuration)
         {
             _Configuration = configuration;
         }

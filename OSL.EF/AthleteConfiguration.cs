@@ -12,9 +12,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using OSL.Common.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using OSL.Common.Model;
 
 namespace OSL.EF
 {
@@ -28,10 +28,20 @@ namespace OSL.EF
 
             var activity = builder.OwnsMany<ActivityEntity>(a => a.Activities, a =>
             {
-                a.OwnsOne(x => x.Track).OwnsMany(x => x.TrackPoints, tp =>
+                a.OwnsMany(x => x.Tracks, track =>
                 {
-                    tp.Property<int>("Id");
-                    tp.HasKey("Id");
+                    track.Property<int>("Id");
+                    track.HasKey("Id");
+                    track.OwnsMany(t => t.TrackSegments, segment =>
+                    {
+                        segment.Property<int>("Id");
+                        segment.HasKey("Id");
+                        segment.OwnsMany(s => s.TrackPoints, tp =>
+                        {
+                            tp.Property<int>("Id");
+                            tp.HasKey("Id");
+                        });
+                    });
                 });
                 a.HasKey("Id");
             });

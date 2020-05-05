@@ -2,17 +2,15 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OSL.EF;
 
 namespace OSL.EF.Migrations
 {
-    [DbContext(typeof(GeoSportsContext))]
-    [Migration("20200503150428_AddTimeToActivity")]
-    partial class AddTimeToActivity
+    [DbContext(typeof(OpenSportLogContext))]
+    partial class OpenSportLogContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,53 +74,78 @@ namespace OSL.EF.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("AthleteEntityId");
 
-                            b1.OwnsOne("OSL.Common.Model.TrackEntity", "Track", b2 =>
+                            b1.OwnsMany("OSL.Common.Model.TrackEntity", "Tracks", b2 =>
                                 {
+                                    b2.Property<int>("Id")
+                                        .ValueGeneratedOnAdd()
+                                        .HasColumnType("INTEGER");
+
                                     b2.Property<int>("ActivityEntityId")
                                         .HasColumnType("INTEGER");
 
-                                    b2.HasKey("ActivityEntityId");
+                                    b2.HasKey("Id");
 
-                                    b2.ToTable("ActivityEntity");
+                                    b2.HasIndex("ActivityEntityId");
+
+                                    b2.ToTable("TrackEntity");
 
                                     b2.WithOwner()
                                         .HasForeignKey("ActivityEntityId");
 
-                                    b2.OwnsMany("OSL.Common.Model.TrackPointVO", "TrackPoints", b3 =>
+                                    b2.OwnsMany("OSL.Common.Model.TrackSegmentEntity", "TrackSegments", b3 =>
                                         {
                                             b3.Property<int>("Id")
                                                 .ValueGeneratedOnAdd()
                                                 .HasColumnType("INTEGER");
 
-                                            b3.Property<int>("Cadence")
-                                                .HasColumnType("INTEGER");
-
-                                            b3.Property<float>("Elevation")
-                                                .HasColumnType("REAL");
-
-                                            b3.Property<int>("HeartRate")
-                                                .HasColumnType("INTEGER");
-
-                                            b3.Property<float>("Latitude")
-                                                .HasColumnType("REAL");
-
-                                            b3.Property<float>("Longitude")
-                                                .HasColumnType("REAL");
-
-                                            b3.Property<DateTimeOffset>("Time")
-                                                .HasColumnType("TEXT");
-
-                                            b3.Property<int>("TrackEntityActivityEntityId")
+                                            b3.Property<int>("TrackEntityId")
                                                 .HasColumnType("INTEGER");
 
                                             b3.HasKey("Id");
 
-                                            b3.HasIndex("TrackEntityActivityEntityId");
+                                            b3.HasIndex("TrackEntityId");
 
-                                            b3.ToTable("TrackPointVO");
+                                            b3.ToTable("TrackSegmentEntity");
 
                                             b3.WithOwner()
-                                                .HasForeignKey("TrackEntityActivityEntityId");
+                                                .HasForeignKey("TrackEntityId");
+
+                                            b3.OwnsMany("OSL.Common.Model.TrackPointVO", "TrackPoints", b4 =>
+                                                {
+                                                    b4.Property<int>("Id")
+                                                        .ValueGeneratedOnAdd()
+                                                        .HasColumnType("INTEGER");
+
+                                                    b4.Property<int>("Cadence")
+                                                        .HasColumnType("INTEGER");
+
+                                                    b4.Property<float>("Elevation")
+                                                        .HasColumnType("REAL");
+
+                                                    b4.Property<int>("HeartRate")
+                                                        .HasColumnType("INTEGER");
+
+                                                    b4.Property<float>("Latitude")
+                                                        .HasColumnType("REAL");
+
+                                                    b4.Property<float>("Longitude")
+                                                        .HasColumnType("REAL");
+
+                                                    b4.Property<DateTimeOffset>("Time")
+                                                        .HasColumnType("TEXT");
+
+                                                    b4.Property<int>("TrackSegmentEntityId")
+                                                        .HasColumnType("INTEGER");
+
+                                                    b4.HasKey("Id");
+
+                                                    b4.HasIndex("TrackSegmentEntityId");
+
+                                                    b4.ToTable("TrackPointVO");
+
+                                                    b4.WithOwner()
+                                                        .HasForeignKey("TrackSegmentEntityId");
+                                                });
                                         });
                                 });
                         });

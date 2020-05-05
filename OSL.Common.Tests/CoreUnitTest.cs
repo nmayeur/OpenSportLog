@@ -121,15 +121,15 @@ namespace OSL.Common.Tests
             activity.Location.Should().Be("Longchamps");
             activity.Sport.Should().Be(ACTIVITY_SPORT.BIKING);
             activity.Calories.Should().Be(2153);
-            activity.Track.TrackPoints[0].Time.Should().Be(DateTimeOffset.Parse("2019-12-25T09:45:07Z"));
+            activity.Tracks[0].TrackSegments[0].TrackPoints[0].Time.Should().Be(DateTimeOffset.Parse("2019-12-25T09:45:07Z"));
             var style = System.Globalization.NumberStyles.AllowDecimalPoint;
             var culture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
-            activity.Track.TrackPoints[0].Latitude.Should().Be(float.Parse("48.8676490783691", style, culture));
-            activity.Track.TrackPoints[0].Longitude.Should().Be(float.Parse("2.20366406440735", style, culture));
-            activity.Track.TrackPoints[0].Elevation.Should().Be(float.Parse("91.4405212402344", style, culture));
-            activity.Track.TrackPoints[0].HeartRate.Should().Be(71);
-            activity.Track.TrackPoints[0].Cadence.Should().Be(0);
-            activity.Track.TrackPoints[3].Cadence.Should().Be(27);
+            activity.Tracks[0].TrackSegments[0].TrackPoints[0].Latitude.Should().Be(float.Parse("48.8676490783691", style, culture));
+            activity.Tracks[0].TrackSegments[0].TrackPoints[0].Longitude.Should().Be(float.Parse("2.20366406440735", style, culture));
+            activity.Tracks[0].TrackSegments[0].TrackPoints[0].Elevation.Should().Be(float.Parse("91.4405212402344", style, culture));
+            activity.Tracks[0].TrackSegments[0].TrackPoints[0].HeartRate.Should().Be(71);
+            activity.Tracks[0].TrackSegments[0].TrackPoints[0].Cadence.Should().Be(0);
+            activity.Tracks[0].TrackSegments[0].TrackPoints[3].Cadence.Should().Be(27);
         }
 
         [Fact]
@@ -137,27 +137,31 @@ namespace OSL.Common.Tests
         {
             //setup mock persistence
             var trackBuilder = new TrackEntity.Builder();
-            trackBuilder.TrackPoints.Add(new TrackPointVO.Builder { Time = DateTimeOffset.Now, Cadence = 92, HeartRate = 140, Latitude = 40, Longitude = 8 });
-            trackBuilder.TrackPoints.Add(new TrackPointVO.Builder { Time = DateTimeOffset.Now.AddSeconds(3), Cadence = 92, HeartRate = 140, Latitude = 40, Longitude = 8 });
-            trackBuilder.TrackPoints.Add(new TrackPointVO.Builder { Time = DateTimeOffset.Now.AddSeconds(5), Cadence = 95, HeartRate = 140, Latitude = 40, Longitude = 8 });
+            var trackSegmentBuilder = new TrackSegmentEntity.Builder();
+
+            trackSegmentBuilder.TrackPoints.Add(new TrackPointVO.Builder { Time = DateTimeOffset.Now, Cadence = 92, HeartRate = 140, Latitude = 40, Longitude = 8 });
+            trackSegmentBuilder.TrackPoints.Add(new TrackPointVO.Builder { Time = DateTimeOffset.Now.AddSeconds(3), Cadence = 92, HeartRate = 140, Latitude = 40, Longitude = 8 });
+            trackSegmentBuilder.TrackPoints.Add(new TrackPointVO.Builder { Time = DateTimeOffset.Now.AddSeconds(5), Cadence = 95, HeartRate = 140, Latitude = 40, Longitude = 8 });
+
+            trackBuilder.TrackSegments.Add(trackSegmentBuilder.Build());
 
             var activities = new List<ActivityEntity>();
-            var activityVO = new ActivityEntity.Builder
+            var activityEntity = new ActivityEntity.Builder
             {
                 Name = "A bike training",
-                Sport = Model.ACTIVITY_SPORT.BIKING,
-                Track = trackBuilder.Build()
+                Sport = Model.ACTIVITY_SPORT.BIKING
             };
+            activityEntity.Tracks.Add(trackBuilder.Build());
 
             var persistence = A.Fake<IPersistence>();
-            A.CallTo(() => persistence.GetAthlete("Test")).Returns(new AthleteEntity(new List<ActivityEntity>() { activityVO }, "Test", 1));
+            A.CallTo(() => persistence.GetAthlete("Test")).Returns(new AthleteEntity(new List<ActivityEntity>() { activityEntity }, "Test", 1));
 
             //test
             var athlete = persistence.GetAthlete("Test");
             athlete.Name.Should().Be("Test");
             athlete.Activities.Should().HaveCount(1);
-            athlete.Activities[0].Track.TrackPoints.Should().HaveCount(3);
-            athlete.Activities[0].Track.TrackPoints[2].Cadence.Should().Be(95);
+            athlete.Activities[0].Tracks[0].TrackSegments[0].TrackPoints.Should().HaveCount(3);
+            athlete.Activities[0].Tracks[0].TrackSegments[0].TrackPoints[2].Cadence.Should().Be(95);
         }
     }
 }

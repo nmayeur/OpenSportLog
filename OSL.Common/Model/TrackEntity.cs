@@ -20,28 +20,28 @@ namespace OSL.Common.Model
 {
     public class TrackEntity : ModelBase
     {
-        private ObservableCollection<TrackPointVO> _TrackPoints;
-        public ObservableCollection<TrackPointVO> TrackPoints
+        private ObservableCollection<TrackSegmentEntity> _TrackSegments;
+        public ObservableCollection<TrackSegmentEntity> TrackSegments
         {
-            get { return _TrackPoints; }
-            set { _TrackPoints = value; }
+            get { return _TrackSegments; }
+            set { _TrackSegments = value; }
         }
 
         public sealed class Builder : BuilderBase<TrackEntity>
         {
             private TrackEntity _instance = new TrackEntity();
-            private List<TrackPointVO> _TrackPoints = new List<TrackPointVO>();
+            private List<TrackSegmentEntity> _TrackSegments = new List<TrackSegmentEntity>();
 
             protected override TrackEntity GetInstance()
             {
-                _instance.TrackPoints = new ObservableCollection<TrackPointVO>(_TrackPoints);
+                _instance.TrackSegments = new ObservableCollection<TrackSegmentEntity>(_TrackSegments);
                 return _instance;
             }
 
-            public List<TrackPointVO> TrackPoints
+            public List<TrackSegmentEntity> TrackSegments
             {
-                get { return _TrackPoints; }
-                set { _TrackPoints = value; }
+                get { return _TrackSegments; }
+                set { _TrackSegments = value; }
             }
         }
     }
