@@ -22,7 +22,7 @@ namespace OSL.Common.Service.Importer
 {
     public class FitLogImporter : IActivitiesImporter
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public FitLogImporter()
         {
@@ -43,7 +43,7 @@ namespace OSL.Common.Service.Importer
 
         public IEnumerable<ActivityEntity> ImportActivitiesStream(Stream stream, IDictionary<string, ACTIVITY_SPORT> categoryMapping)
         {
-            Logger.Info("Importing data stream");
+            _Logger.Info("Importing data stream");
             XmlReaderSettings settings = new XmlReaderSettings
             {
                 Async = false
@@ -74,11 +74,11 @@ namespace OSL.Common.Service.Importer
                                     string activityStartTimeAsString = reader.GetAttribute("StartTime");
                                     if (DateTimeOffset.TryParse(activityStartTimeAsString, out activityStartTime))
                                     {
-                                        Logger.Debug(string.Format("Activity start time {0}", activityStartTime));
+                                        _Logger.Debug(string.Format("Activity start time {0}", activityStartTime));
                                     }
                                     else
                                     {
-                                        Logger.Error(string.Format("Error parsing date {0}", activityStartTimeAsString));
+                                        _Logger.Error(string.Format("Error parsing date {0}", activityStartTimeAsString));
                                     }
                                     _CurrentActivityBuilder = new ActivityEntity.Builder
                                     {
@@ -96,7 +96,7 @@ namespace OSL.Common.Service.Importer
                                     if (int.TryParse(reader.GetAttribute("TotalCal"), out calories))
                                     {
                                         if (_CurrentActivityBuilder != null) _CurrentActivityBuilder.Calories = calories;
-                                        Logger.Debug(string.Format("Activity calories {0}", calories));
+                                        _Logger.Debug(string.Format("Activity calories {0}", calories));
                                     }
                                     break;
                                 case "Name":
@@ -108,13 +108,13 @@ namespace OSL.Common.Service.Importer
                                     ACTIVITY_SPORT sport;
                                     if (!categoryMapping.TryGetValue(category, out sport)) sport = ACTIVITY_SPORT.OTHER;
                                     if (_CurrentActivityBuilder != null) _CurrentActivityBuilder.Sport = sport;
-                                    Logger.Debug(string.Format("Activity sport {0}", sport));
+                                    _Logger.Debug(string.Format("Activity sport {0}", sport));
                                     break;
                                 case "Location":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY_LOCATION;
                                     string location = reader.GetAttribute("Name");
                                     if (_CurrentActivityBuilder != null) _CurrentActivityBuilder.Location = location;
-                                    Logger.Debug(string.Format("Activity location {0}", location));
+                                    _Logger.Debug(string.Format("Activity location {0}", location));
                                     break;
                                 case "EquipmentUsed":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY_EQUIPMENT_USED;
@@ -130,11 +130,11 @@ namespace OSL.Common.Service.Importer
                                     if (DateTimeOffset.TryParse(startTimeAsString, out startTime))
                                     {
                                         _CurrentTrackStartTime = startTime;
-                                        Logger.Debug(string.Format("Track start time {0}", startTime));
+                                        _Logger.Debug(string.Format("Track start time {0}", startTime));
                                     }
                                     else
                                     {
-                                        Logger.Error(string.Format("Track parsing date {0}", startTimeAsString));
+                                        _Logger.Error(string.Format("Track parsing date {0}", startTimeAsString));
                                     }
                                     break;
                                 case "pt":
@@ -149,7 +149,7 @@ namespace OSL.Common.Service.Importer
                                     }
                                     else
                                     {
-                                        Logger.Error(string.Format("Error parsing tm (number of seconds since start {0}", tmAsString));
+                                        _Logger.Error(string.Format("Error parsing tm (number of seconds since start {0}", tmAsString));
                                         break;
                                     }
                                     float latitude;
@@ -189,7 +189,7 @@ namespace OSL.Common.Service.Importer
                                         Cadence = cadence
                                     };
                                     _CurrentTrackSegmentBuilder.TrackPoints.Add(trackPoint);
-                                    Logger.Debug(string.Format("Trackpoint time {0}, latitude {1}, longitude {2}, elevation {3}, heart-rate {4}, cadence {5}",
+                                    _Logger.Debug(string.Format("Trackpoint time {0}, latitude {1}, longitude {2}, elevation {3}, heart-rate {4}, cadence {5}",
                                         tmTime, latitude, longitude, elevation, hr, cadence));
                                     break;
                             }
@@ -200,7 +200,7 @@ namespace OSL.Common.Service.Importer
                                 case PARSE_CONTEXT.ACTIVITY_NAME:
                                     var name = reader.Value;
                                     if (_CurrentActivityBuilder != null) _CurrentActivityBuilder.Name = name;
-                                    Logger.Debug(string.Format("Activity name {0}", name));
+                                    _Logger.Debug(string.Format("Activity name {0}", name));
                                     break;
                             }
                             break;
@@ -264,7 +264,7 @@ namespace OSL.Common.Service.Importer
                     }
                 }
             }
-            Logger.Info("Imported data stream");
+            _Logger.Info("Imported data stream");
         }
 
         /// <summary>
@@ -294,7 +294,7 @@ namespace OSL.Common.Service.Importer
                                     string categoryId = reader.GetAttribute("Id");
                                     string categoryName = reader.GetAttribute("Name");
                                     if (!sports.ContainsKey(categoryId)) sports.Add(categoryId, categoryName);
-                                    Logger.Debug($"Activity sport {categoryName} with Id {categoryId}");
+                                    _Logger.Debug($"Activity sport {categoryName} with Id {categoryId}");
                                     break;
                             }
                             break;

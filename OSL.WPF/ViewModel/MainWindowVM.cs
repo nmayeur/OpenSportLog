@@ -238,8 +238,15 @@ namespace OSL.WPF.ViewModel
 
         private void Save()
         {
-            _DbAccess.SaveData();
-            MessageBox.Show("Data saved", "Saving");
+            try
+            {
+                _DbAccess.SaveData();
+                MessageBox.Show("Data saved", "Saving");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
         #endregion
 

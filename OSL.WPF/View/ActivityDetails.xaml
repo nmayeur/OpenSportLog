@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OSL.WPF.View"
+             xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              DataContext="{Binding Path=ActivityDetails, Source={StaticResource Locator}}">
@@ -25,5 +26,9 @@
         <TextBox TextWrapping="Wrap" Text="{Binding SelectedActivity.Sport}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="260,49,10,0" Width="150"/>
         <Label Content="Time" HorizontalAlignment="Left" Margin="410,46,0,0" VerticalAlignment="Top"  HorizontalContentAlignment="Right" Width="98"/>
         <TextBox TextWrapping="Wrap" Text="{Binding SelectedActivity.Time, StringFormat=g}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="510,49,10,0" Width="150"/>
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1">
+            <wpf:ChromiumWebBrowser x:Name="Browser" Address="http://internal/index.html"
+                 WebBrowser="{Binding WebBrowser, Mode=OneWayToSource}"/>
+        </Border>
     </Grid>
 </UserControl>

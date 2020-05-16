@@ -1,0 +1,28 @@
+{
+  "name": "osl.map-web-app",
+  "version": "0.0.0",
+  "description": "OSL.MapWebApp",
+  "main": "server.js",
+  "author": {
+    "name": "Nicolas Mayeur"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "leaflet": "^1.6.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "cross-env": "^7.0.2",
+    "css-loader": "^3.5.3",
+    "cssnano": "^4.1.10",
+    "file-loader": "^6.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.14.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.7.0",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}

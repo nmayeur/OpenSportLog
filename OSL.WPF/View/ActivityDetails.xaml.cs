@@ -12,20 +12,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using CefSharp;
+using CefSharp.SchemeHandler;
+using CefSharp.Wpf;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace OSL.WPF.View
 {
@@ -36,6 +26,22 @@ namespace OSL.WPF.View
     {
         public ActivityDetails()
         {
+            var settings = new CefSettings();
+            settings.RegisterScheme(new CefCustomScheme
+            {
+                SchemeName = "http",
+                DomainName = "internal",
+                IsLocal = true,
+                SchemeHandlerFactory = new FolderSchemeHandlerFactory(
+                    rootFolder: @"WebResources",
+                    hostName: "internal",
+                    defaultPage: "index.html"
+                ),
+            });
+#if DEBUG
+            settings.RemoteDebuggingPort = 8088;
+#endif
+            Cef.Initialize(settings);
             InitializeComponent();
         }
     }

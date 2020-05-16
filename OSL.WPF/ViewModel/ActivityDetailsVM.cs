@@ -12,16 +12,24 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+using CefSharp;
+using CefSharp.Wpf;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using OSL.Common.Model;
 using OSL.Common.Service;
 using OSL.WPF.ViewModel.Scaffholding;
+using System;
+using System.Globalization;
+using System.Windows;
 
 namespace OSL.WPF.ViewModel
 {
     public class ActivityDetailsVM : ViewModelBase
     {
+        private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
+
         private readonly IDataAccessService _DbAccess;
         public ActivityDetailsVM(IDataAccessService DbAccess)
         {
@@ -33,6 +41,7 @@ namespace OSL.WPF.ViewModel
                     SelectedActivity = message.Content;
                 }
             });
+
         }
 
         #region Data
@@ -43,6 +52,47 @@ namespace OSL.WPF.ViewModel
             set
             {
                 Set(() => SelectedActivity, ref _SelectedActivity, value);
+                var latitude = _SelectedActivity?.Tracks[0]?.TrackSegments[0]?.TrackPoints[0]?.Latitude;
+                var longitude = _SelectedActivity?.Tracks[0]?.TrackSegments[0]?.TrackPoints[0]?.Longitude;
+                if (latitude != null && longitude != null)
+                {
+                    FormattableString command = $"OSL.goToCoordinates({latitude:N2},{longitude:N2})";
+                    var enCulture = CultureInfo.GetCultureInfo("en-US");
+                    _ExecuteJavaScript(command.ToString(enCulture));
+                }
+            }
+        }
+
+        private IWpfWebBrowser _WebBrowser;
+        public IWpfWebBrowser WebBrowser
+        {
+            get { return _WebBrowser; }
+            set { Set(ref _WebBrowser, value); }
+        }
+        #endregion
+
+        #region ExecuteJavaScriptCommand
+        public RelayCommand<string> _ExecuteJavaScriptCommand { get; private set; }
+        public RelayCommand<string> ExecuteJavaScriptCommand
+        {
+            get
+            {
+                return _ExecuteJavaScriptCommand ??
+                    (_ExecuteJavaScriptCommand = new RelayCommand<string>(
+                        _ExecuteJavaScript, s => !String.IsNullOrWhiteSpace(s)
+                        ));
+            }
+        }
+        private void _ExecuteJavaScript(string s)
+        {
+            try
+            {
+                _Logger.Debug($"Execute Javascript {s}");
+                _WebBrowser.ExecuteScriptAsync(s);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error while executing Javascript: " + e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion

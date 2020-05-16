@@ -26,6 +26,16 @@ namespace OSL.Common.Model
             get { return _TrackSegments; }
             set { _TrackSegments = value; }
         }
+        private string _Name;
+        public string Name
+        {
+            get { return _Name; }
+            set
+            {
+                _Name = value;
+                NotifyPropertyChanged("Name");
+            }
+        }
 
         public sealed class Builder : BuilderBase<TrackEntity>
         {
@@ -42,6 +52,12 @@ namespace OSL.Common.Model
             {
                 get { return _TrackSegments; }
                 set { _TrackSegments = value; }
+            }
+
+            public string Name
+            {
+                get { return _instance.Name; }
+                set { _instance.Name = value; }
             }
         }
     }
