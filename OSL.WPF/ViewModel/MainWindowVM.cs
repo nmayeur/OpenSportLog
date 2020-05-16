@@ -42,16 +42,24 @@ namespace OSL.WPF.ViewModel
     /// </summary>
     public class MainWindowVM : ViewModelBase
     {
+        private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
         public class CloseNotificationEventArgs : EventArgs
         {
             public CloseNotificationEventArgs()
             {
-
             }
-            public string Message { get; protected set; }
+        }
+        public class SavingNotificationEventArgs : EventArgs
+        {
+            public SavingNotificationEventArgs(bool IsSaving)
+            {
+                this.IsSaving = IsSaving;
+            }
+            public bool IsSaving { get; protected set; }
         }
 
         public event EventHandler<CloseNotificationEventArgs> CloseApp;
+        public event EventHandler<SavingNotificationEventArgs> SavingApp;
         private readonly IDataAccessService _DbAccess;
 
         /// <summary>
@@ -79,30 +87,109 @@ namespace OSL.WPF.ViewModel
             {
                 if (message.Notification == MessengerNotifications.SELECTED)
                 {
+                    IsAthleteSelected = message.Content != null;
                     IsImportEnabled = message.Content != null;
                 }
             });
+
+            SavingApp += _SavingApp;
         }
 
         #region Data
-        private bool _IsOslFileOpened = false;
-        public bool IsOslFileOpened
+        private bool _IsAthleteSelected = false;
+        public bool IsAthleteSelected
         {
-            get => _IsOslFileOpened;
+            get => _IsAthleteSelected;
             set
             {
-                Set(() => IsOslFileOpened, ref _IsOslFileOpened, value);
+                Set(() => IsAthleteSelected, ref _IsAthleteSelected, value);
+            }
+        }
+
+        private bool _IsFileOpened = false;
+        public bool IsFileOpened
+        {
+            get => _IsFileOpened;
+            set
+            {
+                Set(() => IsFileOpened, ref _IsFileOpened, value);
+            }
+        }
+
+        private bool _IsSaveFileEnabled = false;
+        public bool IsSaveFileEnabled
+        {
+            get => _IsSaveFileEnabled;
+            set
+            {
+                Set(() => IsSaveFileEnabled, ref _IsSaveFileEnabled, value && IsFileOpened);
+            }
+        }
+
+        private bool _IsNewAthleteEnabled = false;
+        public bool IsNewAthleteEnabled
+        {
+            get => _IsNewAthleteEnabled;
+            set
+            {
+                Set(() => IsNewAthleteEnabled, ref _IsNewAthleteEnabled, value && IsFileOpened);
             }
         }
 
         private bool _IsImportEnabled = false;
         public bool IsImportEnabled
         {
-            get => _IsOslFileOpened;
+            get => _IsImportEnabled;
             set
             {
-                Set(() => IsImportEnabled, ref _IsImportEnabled, value);
+                Set(() => IsImportEnabled, ref _IsImportEnabled, value && IsAthleteSelected);
             }
+        }
+
+        private bool _IsNewFileEnabled = true;
+        public bool IsNewFileEnabled
+        {
+            get => _IsNewFileEnabled;
+            set
+            {
+                Set(() => IsNewFileEnabled, ref _IsNewFileEnabled, value);
+            }
+        }
+
+        private bool _IsOpenFileEnabled = true;
+        public bool IsOpenFileEnabled
+        {
+            get => _IsOpenFileEnabled;
+            set
+            {
+                Set(() => IsOpenFileEnabled, ref _IsOpenFileEnabled, value);
+            }
+        }
+
+        private bool _IsExitEnabled = true;
+        public bool IsExitEnabled
+        {
+            get => _IsExitEnabled;
+            set
+            {
+                Set(() => IsExitEnabled, ref _IsExitEnabled, value);
+            }
+        }
+        #endregion
+
+        #region Saving mode management
+        private void _SavingApp(object sender, SavingNotificationEventArgs args)
+        {
+            if (args.IsSaving)
+            {
+                _Logger.Debug("Application enters saving mode");
+            }
+            else
+            {
+                _Logger.Debug("Application exits saving mode");
+            }
+
+            IsNewAthleteEnabled = IsImportEnabled = IsExitEnabled = IsSaveFileEnabled = IsOpenFileEnabled = IsNewFileEnabled = !args.IsSaving;
         }
         #endregion
 
@@ -130,7 +217,9 @@ namespace OSL.WPF.ViewModel
                 string path = openFileDialog.FileName;
                 _DbAccess.OpenDatabase(path);
                 Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(_DbAccess.GetAthletes(), MessengerNotifications.LOADED));
-                IsOslFileOpened = true;
+                IsFileOpened = true;
+                IsSaveFileEnabled = true;
+                IsNewAthleteEnabled = true;
                 IsImportEnabled = false;
             }
 
@@ -162,7 +251,9 @@ namespace OSL.WPF.ViewModel
                 string path = openFileDialog.FileName;
                 _DbAccess.OpenDatabase(path, true);
                 Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(null, MessengerNotifications.LOADED));
-                IsOslFileOpened = true;
+                IsFileOpened = true;
+                IsSaveFileEnabled = true;
+                IsNewAthleteEnabled = true;
                 IsImportEnabled = false;
             }
 
@@ -231,21 +322,26 @@ namespace OSL.WPF.ViewModel
             {
                 return _SaveCommand ??
                     (_SaveCommand = new RelayCommand(
-                        () => { Task.Run(() => Save()); }
+                        () => { Task.Run(() => _Save()); }
                         ));
             }
         }
 
-        private void Save()
+        private void _Save()
         {
             try
             {
+                SavingApp?.Invoke(this, new SavingNotificationEventArgs(IsSaving: true));
                 _DbAccess.SaveData();
                 MessageBox.Show("Data saved", "Saving");
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                SavingApp?.Invoke(this, new SavingNotificationEventArgs(IsSaving: false));
             }
         }
         #endregion

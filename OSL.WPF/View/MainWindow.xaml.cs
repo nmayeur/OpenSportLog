@@ -25,6 +25,7 @@ namespace OSL.WPF.View
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -39,5 +40,6 @@ namespace OSL.WPF.View
             NLog.LogManager.Shutdown();
             this.Close();
         }
+
     }
 }
