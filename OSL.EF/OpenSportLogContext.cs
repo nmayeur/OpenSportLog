@@ -28,7 +28,7 @@ namespace OSL.EF
             _Configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string>()
                 {
-                    { "ConnectionStrings:Default", "Data Source=geosports.db" }
+                    { "ConnectionStrings:Default", "Data Source=OSL.db" }
                 }).Build();
         }
 

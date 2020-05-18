@@ -56,7 +56,7 @@ namespace OSL.WPF.ViewModel
                 var longitude = _SelectedActivity?.Tracks[0]?.TrackSegments[0]?.TrackPoints[0]?.Longitude;
                 if (latitude != null && longitude != null)
                 {
-                    FormattableString command = $"OSL.goToCoordinates({latitude:N2},{longitude:N2})";
+                    FormattableString command = $"OSL.goToCoordinates({latitude:N3},{longitude:N3})";
                     var enCulture = CultureInfo.GetCultureInfo("en-US");
                     _ExecuteJavaScript(command.ToString(enCulture));
                 }

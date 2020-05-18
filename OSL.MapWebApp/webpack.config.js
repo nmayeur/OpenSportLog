@@ -1,4 +1,5 @@
 ﻿/// <binding ProjectOpened='Watch - Development' />
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const postcssPresetEnv = require("postcss-preset-env");
@@ -6,11 +7,10 @@ const devMode = process.env.NODE_ENV !== "production";
 module.exports = {
     mode: devMode ? "development" : "production",
     entry: {
-        map: ["./src/index.js", "./Styles/site.scss"]
+        map: ["./src/index.js", "./src/styles/site.scss"]
     },
     output: {
-        path: path.resolve(__dirname, "dist"),
-        publicPath: "/css",
+        path: path.resolve(__dirname, "./dist"),
         filename: "js/bundle.js"
     },
     module: {
@@ -39,9 +39,7 @@ module.exports = {
                                     postcssPresetEnv({
                                         // Compile our CSS code to support browsers
                                         // that are used in more than 1% of the
-                                        // global market browser share. You can modify
-                                        // the target browsers according to your needs
-                                        // by using supported queries.
+                                        // global market browser share.
                                         // https://github.com/browserslist/browserslist#queries
                                         browsers: [">1%"]
                                     }),
@@ -55,33 +53,9 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpe?g|gif)$/,
-                use: [
-                    {
-                        loader: "file-loader",
-                        options: {
-                            // The image will be named with the original name and
-                            // extension
-                            name: "[name].[ext]",
-                            // Indicates where the images are stored and will use
-                            // this path when generating the CSS files.
-                            // Example, in site.scss I have
-                            // url('../wwwroot/images/pattern.png') and when generating
-                            // the CSS file, file-loader will output as
-                            // url(../images/pattern.png), which is relative
-                            // to '/css/site.css'
-                            publicPath: "../images",
-                            // When this option is 'true', the loader will emit the
-                            // image to output.path
-                            emitFile: false
-                        }
-                    }
-                ]
-            },
-            {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
                     {
                         loader: "postcss-loader",
@@ -91,12 +65,6 @@ module.exports = {
                                 ? () => []
                                 : () => [
                                     postcssPresetEnv({
-                                        // Compile our CSS code to support browsers
-                                        // that are used in more than 1% of the
-                                        // global market browser share. You can modify
-                                        // the target browsers according to your needs
-                                        // by using supported queries.
-                                        // https://github.com/browserslist/browserslist#queries
                                         browsers: [">1%"]
                                     }),
                                     require("cssnano")()
@@ -104,15 +72,34 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            outputPath: 'images',
+                            name() {
+                                if (process.env.NODE_ENV === 'development') {
+                                    return '[name].[ext]';
+                                }
+
+                                return '[contenthash].[ext]';
+                            },
+                        }
+                    }
+                ]
             }
         ]
     },
     plugins: [
-        // Configuration options for MiniCssExtractPlugin. Here I'm only
-        // indicating what the CSS output file name should be and
-        // the location
         new MiniCssExtractPlugin({
-            filename: devMode ? "css/site.css" : "css/site.min.css"
+            filename: devMode ? "css/[name].css" : "css/[name].min.css",
+            chunkFilename: '[id].css'
+        }),
+        new HtmlWebpackPlugin({
+            template: 'src/index.html'
         })
     ]
 };
