@@ -13,14 +13,43 @@ let OSL = window.OSL || {};
 
     let _map = null;
     let _startMarker = null;
+    let _endMarker = null;
+    const START_MARKER = 1;
+    const END_MARKER = 2;
+    let _polyline = null;
 
     this.goToCoordinates = function (latitude, longitude) {
         if (!_map) throw "OSL map is not initialized";
         _map.setView([latitude, longitude], 13);
-        if (_startMarker != null) _startMarker.remove();
-        _startMarker = L.marker([48.87, 2.22]);
-        _startMarker.addTo(_map);
     }
+    this.setMarker = function (latitude, longitude, type) {
+        if (!_map) throw "OSL map is not initialized";
+        let marker = type == START_MARKER ? _startMarker : _endMarker;
+        if (marker) _map.removeLayer(marker);
+        marker = L.marker([latitude, longitude]);
+        marker.addTo(_map);
+        if (type == START_MARKER) {
+            _startMarker = marker;
+        } else {
+            _endMarker = marker;
+        }
+    }
+    this.drawRoute = function (latlngs) {
+        if (!_map) throw "OSL map is not initialized";
+
+        if (_polyline) _map.removeLayer(_polyline);
+        _polyline = L.polyline(latlngs).addTo(_map);
+        _map.fitBounds(_polyline.getBounds());
+    }
+    this.cleanMap = function () {
+        if (_polyline) _map.removeLayer(_polyline);
+        if (_startMarker) _map.removeLayer(_startMarker);
+        if (_endMarker) _map.removeLayer(_endMarker);
+        _polyline = null;
+        _startMarker = null;
+        _endMarker = null;
+    }
+
     this.init = function (map) {
         _map = map;
     }
@@ -51,6 +80,7 @@ let OSL = window.OSL || {};
         window.OSL = OSL;
 
         OSL.init(map);
-        OSL.goToCoordinates(48.875, 2.22);
+        //OSL.goToCoordinates(48.875, 2.22);
+        //OSL.drawRoute([[48.875, 2.22], [48.8, 2.0]]);
     }, false)
 }())

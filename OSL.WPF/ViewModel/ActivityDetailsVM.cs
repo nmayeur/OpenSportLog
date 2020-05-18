@@ -21,6 +21,7 @@ using OSL.Common.Model;
 using OSL.Common.Service;
 using OSL.WPF.ViewModel.Scaffholding;
 using System;
+using System.Linq;
 using System.Globalization;
 using System.Windows;
 
@@ -52,13 +53,31 @@ namespace OSL.WPF.ViewModel
             set
             {
                 Set(() => SelectedActivity, ref _SelectedActivity, value);
-                var latitude = _SelectedActivity?.Tracks[0]?.TrackSegments[0]?.TrackPoints[0]?.Latitude;
-                var longitude = _SelectedActivity?.Tracks[0]?.TrackSegments[0]?.TrackPoints[0]?.Longitude;
-                if (latitude != null && longitude != null)
+                var trackPoints = _SelectedActivity?.Tracks.ElementAtOrDefault(0)?.TrackSegments.ElementAtOrDefault(0)?.TrackPoints?.OrderBy(tp => tp.Time);
+                var trackPoint = trackPoints?.ElementAtOrDefault(0);
+                var latitude = trackPoint?.Latitude ?? 48.8534;
+                var longitude = trackPoint?.Longitude ?? 2.3488;
+                FormattableString command = $"OSL.goToCoordinates({latitude:N6},{longitude:N6})";
+                var enCulture = CultureInfo.GetCultureInfo("en-US");
+                _ExecuteJavaScript(command.ToString(enCulture));
+
+                command = $"OSL.setMarker({latitude:N6},{longitude:N6},OSL.START_MARKER)";
+                _ExecuteJavaScript(command.ToString(enCulture));
+
+                if (trackPoints != null)
                 {
-                    FormattableString command = $"OSL.goToCoordinates({latitude:N3},{longitude:N3})";
-                    var enCulture = CultureInfo.GetCultureInfo("en-US");
+                    var latlngs = "[";
+                    foreach (var tp in trackPoints)
+                    {
+                        command = $"[{tp.Latitude:N6},{tp.Longitude:N6}],";
+                        latlngs += command.ToString(enCulture);
+                    }
+                    command = $"OSL.drawRoute({latlngs}])";
                     _ExecuteJavaScript(command.ToString(enCulture));
+                }
+                else
+                {
+                    _ExecuteJavaScript("OSL.cleanMap()");
                 }
             }
         }

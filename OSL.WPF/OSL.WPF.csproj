@@ -357,10 +357,22 @@
     <Folder Include="CefSharp\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WebResources\css\site.css">
+    <Content Include="WebResources\css\map.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="WebResources\css\site.min.css">
+    <Content Include="WebResources\images\layers-2x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebResources\images\layers.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebResources\images\marker-icon-2x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebResources\images\marker-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebResources\images\marker-shadow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="WebResources\index.html">
@@ -386,4 +398,7 @@
   </Target>
   <Import Project="..\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\CefSharp.Wpf.79.1.360\build\CefSharp.Wpf.targets" Condition="Exists('..\packages\CefSharp.Wpf.79.1.360\build\CefSharp.Wpf.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>xcopy "$(SolutionDir)OSL.MapWebApp\dist\*.*" "$(ProjectDir)WebResources" /S /Y</PreBuildEvent>
+  </PropertyGroup>
 </Project>
