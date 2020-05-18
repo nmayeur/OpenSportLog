@@ -386,4 +386,7 @@
   </Target>
   <Import Project="..\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\CefSharp.Wpf.79.1.360\build\CefSharp.Wpf.targets" Condition="Exists('..\packages\CefSharp.Wpf.79.1.360\build\CefSharp.Wpf.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>xcopy "$(SolutionDir)\OSL.MapWebApp\dist\*.*" "$(ProjectDir)WebResources" /S /Y</PreBuildEvent>
+  </PropertyGroup>
 </Project>
