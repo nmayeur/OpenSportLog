@@ -175,6 +175,26 @@ namespace OSL.WPF.ViewModel
                 Set(() => IsExitEnabled, ref _IsExitEnabled, value);
             }
         }
+
+        private bool _IsProgressbarVisible = false;
+        public bool IsProgressbarVisible
+        {
+            get => _IsProgressbarVisible;
+            set
+            {
+                Set(() => IsProgressbarVisible, ref _IsProgressbarVisible, value);
+            }
+        }
+
+        private string _ProgressbarText = "Work in progress...";
+        public string ProgressbarText
+        {
+            get => _ProgressbarText;
+            set
+            {
+                Set(() => ProgressbarText, ref _ProgressbarText, value);
+            }
+        }
         #endregion
 
         #region Saving mode management
@@ -215,12 +235,15 @@ namespace OSL.WPF.ViewModel
             if (openFileDialog.ShowDialog() == true)
             {
                 string path = openFileDialog.FileName;
+                ProgressbarText = "Loading file...";
+                IsProgressbarVisible = true;
                 _DbAccess.OpenDatabase(path);
                 Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(_DbAccess.GetAthletes(), MessengerNotifications.LOADED));
                 IsFileOpened = true;
                 IsSaveFileEnabled = true;
                 IsNewAthleteEnabled = true;
                 IsImportEnabled = false;
+                IsProgressbarVisible = false;
             }
 
         }
@@ -331,9 +354,12 @@ namespace OSL.WPF.ViewModel
         {
             try
             {
+                ProgressbarText = "Saving file...";
+                IsProgressbarVisible = true;
                 SavingApp?.Invoke(this, new SavingNotificationEventArgs(IsSaving: true));
                 _DbAccess.SaveData();
                 MessageBox.Show("Data saved", "Saving");
+                IsProgressbarVisible = false;
             }
             catch (Exception e)
             {

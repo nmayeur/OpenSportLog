@@ -11,6 +11,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0" Name="rowProgressbar"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="5"/>
             <RowDefinition Height="2*"/>
@@ -34,8 +35,10 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <Views:AthleteDetails Grid.Column="0" Grid.Row="1"/>
-        <GridSplitter Grid.Column="0" Grid.Row="2" Height="5" HorizontalAlignment="Stretch" />
-        <Views:ActivityDetails Grid.Column="0" Grid.Row="3" IsEnabled="{Binding Path=IsAthleteSelected}"/>
+        <ProgressBar HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Stretch" IsIndeterminate="True"/>
+        <TextBlock Grid.Row="1" Text="{Binding Path=ProgressbarText}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Views:AthleteDetails Grid.Column="0" Grid.Row="2"/>
+        <GridSplitter Grid.Column="0" Grid.Row="3" Height="5" HorizontalAlignment="Stretch" />
+        <Views:ActivityDetails Grid.Column="0" Grid.Row="4" IsEnabled="{Binding Path=IsAthleteSelected}"/>
     </Grid>
 </Window>

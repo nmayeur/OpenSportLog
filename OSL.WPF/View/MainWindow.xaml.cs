@@ -12,7 +12,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+using GalaSoft.MvvmLight.Threading;
 using OSL.WPF.ViewModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
@@ -25,14 +27,16 @@ namespace OSL.WPF.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MainWindowVM _VM;
 
         public MainWindow()
         {
             InitializeComponent();
             this.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
-            var vm = DataContext as MainWindowVM;
-            if (vm == null) return;
-            vm.CloseApp += _CloseApp;
+            _VM = DataContext as MainWindowVM;
+            if (_VM == null) return;
+            _VM.CloseApp += _CloseApp;
+            _VM.PropertyChanged += _OnPropertyChanged;
         }
 
         private void _CloseApp(object sender, CloseNotificationEventArgs args)
@@ -41,5 +45,15 @@ namespace OSL.WPF.View
             this.Close();
         }
 
+        private void _OnPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == nameof(_VM.IsProgressbarVisible))
+            {
+                DispatcherHelper.CheckBeginInvokeOnUI(
+                    () => { rowProgressbar.Height = _VM.IsProgressbarVisible ? new GridLength(20) : new GridLength(0); }
+                );
+
+            }
+        }
     }
 }
