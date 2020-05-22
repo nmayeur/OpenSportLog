@@ -21,6 +21,8 @@ namespace OSL.Common.Service
     {
         void OpenDatabase(string DatabasePath, bool ForceNew = false);
         IList<AthleteEntity> GetAthletes();
+        IList<ActivityEntity> GetActivitiesForAthlete(int athleteId);
+        IList<TrackEntity> GetActivityTracks(ActivityEntity activity);
         void SaveData();
         void AddAthlete(AthleteEntity athlete);
     }

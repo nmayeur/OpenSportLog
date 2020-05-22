@@ -53,6 +53,7 @@ namespace OSL.WPF.ViewModel
             set
             {
                 Set(() => SelectedActivity, ref _SelectedActivity, value);
+                _DbAccess.GetActivityTracks(SelectedActivity);
                 var trackPoints = _SelectedActivity?.Tracks.ElementAtOrDefault(0)?.TrackSegments.ElementAtOrDefault(0)?.TrackPoints?.OrderBy(tp => tp.Time);
                 var trackPoint = trackPoints?.ElementAtOrDefault(0);
                 var latitude = trackPoint?.Latitude ?? 48.8534;

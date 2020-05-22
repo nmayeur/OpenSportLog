@@ -25,6 +25,7 @@ using OSL.WPF.WPFUtils;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using static OSL.WPF.ViewModel.Scaffholding.MessengerNotifications;
 
@@ -92,8 +93,15 @@ namespace OSL.WPF.ViewModel
             set
             {
                 Set(() => SelectedAthlete, ref _SelectedAthlete, value);
-                Activities = _SelectedAthlete?.Activities;
                 Messenger.Default.Send(new NotificationMessage<AthleteEntity>(_SelectedAthlete, MessengerNotifications.SELECTED));
+                if (_SelectedAthlete != null)
+                {
+                    Activities.Clear();
+                    foreach (var activity in _DbAccess.GetActivitiesForAthlete(_SelectedAthlete.Id))
+                    {
+                        Activities.Add(activity);
+                    }
+                }
             }
         }
 

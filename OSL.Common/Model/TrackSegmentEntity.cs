@@ -7,7 +7,7 @@ namespace OSL.Common.Model
     public class TrackSegmentEntity : ModelBase
     {
         private ObservableCollection<TrackPointVO> _TrackPoints;
-        public ObservableCollection<TrackPointVO> TrackPoints
+        public virtual ObservableCollection<TrackPointVO> TrackPoints
         {
             get { return _TrackPoints; }
             set { _TrackPoints = value; }
