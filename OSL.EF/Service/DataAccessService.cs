@@ -67,7 +67,7 @@ namespace OSL.EF.Service
             var athlete = DbContext.Athletes.Single(a => a.Id == athleteId);
             DbContext.Entry(athlete).Collection(a => a.Activities).Load();
 
-            return athlete.Activities.ToList();
+            return athlete.Activities.OrderByDescending(x => x.Time).ToList();
         }
 
         public IList<TrackEntity> GetActivityTracks(ActivityEntity activity)
