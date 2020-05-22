@@ -83,7 +83,17 @@ namespace OSL.WPF.ViewModel
         public ObservableCollection<AthleteEntity> Athletes
         {
             get => _Athletes;
-            private set { Set(() => Athletes, ref _Athletes, value); }
+            private set
+            {
+                Set(() => Athletes, ref _Athletes, value);
+                if (Athletes.Count == 1)
+                {
+                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                    {
+                        SelectedAthlete = Athletes[0];
+                    });
+                }
+            }
         }
 
         private AthleteEntity _SelectedAthlete;
@@ -94,14 +104,17 @@ namespace OSL.WPF.ViewModel
             {
                 Set(() => SelectedAthlete, ref _SelectedAthlete, value);
                 Messenger.Default.Send(new NotificationMessage<AthleteEntity>(_SelectedAthlete, MessengerNotifications.SELECTED));
-                if (_SelectedAthlete != null)
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
                 {
                     Activities.Clear();
-                    foreach (var activity in _DbAccess.GetActivitiesForAthlete(_SelectedAthlete.Id))
+                    if (_SelectedAthlete != null)
                     {
-                        Activities.Add(activity);
+                        foreach (var activity in _DbAccess.GetActivitiesForAthlete(_SelectedAthlete.Id))
+                        {
+                            Activities.Add(activity);
+                        }
                     }
-                }
+                });
             }
         }
 

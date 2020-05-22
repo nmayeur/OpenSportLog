@@ -22,6 +22,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5F0AB957-415D-4190-A58C-690245827C2F}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "OSL.MapWebApp", "OSL.MapWebApp\OSL.MapWebApp.njsproj", "{C81C7E81-5642-44AC-8FD1-488E300A3A1E}"
