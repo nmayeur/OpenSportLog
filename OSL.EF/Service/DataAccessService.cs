@@ -18,6 +18,7 @@ using OSL.Common.Model;
 using OSL.Common.Service;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace OSL.EF.Service
 {
@@ -59,6 +60,21 @@ namespace OSL.EF.Service
         public void AddAthlete(AthleteEntity athlete)
         {
             _DbContext.Athletes.Add(athlete);
+        }
+
+        public IList<ActivityEntity> GetActivitiesForAthlete(int athleteId)
+        {
+            var athlete = DbContext.Athletes.Single(a => a.Id == athleteId);
+            DbContext.Entry(athlete).Collection(a => a.Activities).Load();
+
+            return athlete.Activities.ToList();
+        }
+
+        public IList<TrackEntity> GetActivityTracks(ActivityEntity activity)
+        {
+            DbContext.Entry(activity).Collection(a => a.Tracks).Query().Include(t => t.TrackSegments).Load();
+
+            return activity.Tracks.ToList();
         }
     }
 }

@@ -111,7 +111,7 @@ namespace OSL.Common.Model
         }
 
         private ObservableCollection<TrackEntity> _Tracks;
-        public ObservableCollection<TrackEntity> Tracks
+        public virtual ObservableCollection<TrackEntity> Tracks
         {
             get { return _Tracks; }
             set { _Tracks = value; }

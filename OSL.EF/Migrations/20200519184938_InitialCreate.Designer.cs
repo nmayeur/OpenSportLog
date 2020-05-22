@@ -9,8 +9,8 @@ using OSL.EF;
 namespace OSL.EF.Migrations
 {
     [DbContext(typeof(OpenSportLogContext))]
-    [Migration("20200516085557_Fixes")]
-    partial class Fixes
+    [Migration("20200519184938_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

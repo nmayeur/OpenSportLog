@@ -21,7 +21,7 @@ namespace OSL.Common.Model
     public class TrackEntity : ModelBase
     {
         private ObservableCollection<TrackSegmentEntity> _TrackSegments;
-        public ObservableCollection<TrackSegmentEntity> TrackSegments
+        public virtual ObservableCollection<TrackSegmentEntity> TrackSegments
         {
             get { return _TrackSegments; }
             set { _TrackSegments = value; }

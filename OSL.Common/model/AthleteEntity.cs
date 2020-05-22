@@ -43,7 +43,7 @@ namespace OSL.Common.Model
         }
 
         private ObservableCollection<ActivityEntity> _Activities;
-        public ObservableCollection<ActivityEntity> Activities
+        public virtual ObservableCollection<ActivityEntity> Activities
         {
             get { return _Activities; }
             set { _Activities = value; }
