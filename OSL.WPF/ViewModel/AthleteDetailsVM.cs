@@ -74,7 +74,6 @@ namespace OSL.WPF.ViewModel
                     SelectedAthlete = athlete;
                 }
             });
-
         }
 
         #region Data

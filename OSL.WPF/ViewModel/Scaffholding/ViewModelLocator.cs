@@ -29,9 +29,14 @@ limitations under the License.
 
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using OSL.Common.Service;
 using OSL.Common.Service.Importer;
 using OSL.EF.Service;
+using System;
+using System.Threading;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace OSL.WPF.ViewModel.Scaffholding
 {

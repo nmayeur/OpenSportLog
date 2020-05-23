@@ -1,4 +1,4 @@
-﻿/// <binding ProjectOpened='Watch - Development' />
+/// <binding />
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");

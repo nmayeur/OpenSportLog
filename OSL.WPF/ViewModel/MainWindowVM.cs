@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using static OSL.WPF.ViewModel.Scaffholding.MessengerNotifications;
 
 namespace OSL.WPF.ViewModel
@@ -213,6 +214,29 @@ namespace OSL.WPF.ViewModel
         }
         #endregion
 
+        #region LoadInitialDataCommand
+        private RelayCommand _LoadInitialDataCommand;
+        public RelayCommand LoadInitialDataCommand
+        {
+            get
+            {
+                return _LoadInitialDataCommand ??
+                    (_LoadInitialDataCommand = new RelayCommand(
+                        () => { Task.Run(() => _LoadInitialData()); }
+                        ));
+            }
+        }
+
+        private void _LoadInitialData()
+        {
+            var lastOpenedFile = Settings.Default.LastOpenedFile;
+            if (!string.IsNullOrEmpty(lastOpenedFile))
+            {
+                _OpenFile(lastOpenedFile);
+            }
+        }
+        #endregion
+
         #region OpenFileCommand
         private RelayCommand _OpenFileCommand;
         public RelayCommand OpenFileCommand
@@ -221,12 +245,12 @@ namespace OSL.WPF.ViewModel
             {
                 return _OpenFileCommand ??
                     (_OpenFileCommand = new RelayCommand(
-                        () => { Task.Run(() => OpenFileDialogAsync()); }
+                        () => { Task.Run(() => _OpenFileDialog()); }
                         ));
             }
         }
 
-        private void OpenFileDialogAsync()
+        private void _OpenFileDialog()
         {
             var openFileDialog = new OpenFileDialog()
             {
@@ -235,17 +259,23 @@ namespace OSL.WPF.ViewModel
             if (openFileDialog.ShowDialog() == true)
             {
                 string path = openFileDialog.FileName;
-                ProgressbarText = "Loading file...";
-                IsProgressbarVisible = true;
-                _DbAccess.OpenDatabase(path);
-                Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(_DbAccess.GetAthletes(), MessengerNotifications.LOADED));
-                IsFileOpened = true;
-                IsSaveFileEnabled = true;
-                IsNewAthleteEnabled = true;
-                IsImportEnabled = false;
-                IsProgressbarVisible = false;
+                _OpenFile(path);
             }
 
+        }
+
+        private void _OpenFile(string path)
+        {
+            ProgressbarText = "Loading file...";
+            IsProgressbarVisible = true;
+            _DbAccess.OpenDatabase(path);
+            Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(_DbAccess.GetAthletes(), MessengerNotifications.LOADED));
+            IsFileOpened = true;
+            IsSaveFileEnabled = true;
+            IsNewAthleteEnabled = true;
+            IsImportEnabled = false;
+            IsProgressbarVisible = false;
+            Settings.Default.LastOpenedFile = path;
         }
         #endregion
 
@@ -257,12 +287,12 @@ namespace OSL.WPF.ViewModel
             {
                 return _NewFileCommand ??
                     (_NewFileCommand = new RelayCommand(
-                        () => { NewFileDialog(); }
+                        () => { _NewFileDialog(); }
                         ));
             }
         }
 
-        private void NewFileDialog()
+        private void _NewFileDialog()
         {
             var openFileDialog = new SaveFileDialog()
             {
@@ -278,6 +308,7 @@ namespace OSL.WPF.ViewModel
                 IsSaveFileEnabled = true;
                 IsNewAthleteEnabled = true;
                 IsImportEnabled = false;
+                Settings.Default.LastOpenedFile = path;
             }
 
         }
@@ -291,12 +322,12 @@ namespace OSL.WPF.ViewModel
             {
                 return _NewAthleteCommand ??
                     (_NewAthleteCommand = new RelayCommand(
-                        () => { NewAthleteDialog(); }
+                        () => { _NewAthleteDialog(); }
                         ));
             }
         }
 
-        private void NewAthleteDialog()
+        private void _NewAthleteDialog()
         {
 
             NewAthleteDialog dialog = new NewAthleteDialog();
@@ -321,17 +352,18 @@ namespace OSL.WPF.ViewModel
                     (_ExitCommand = new RelayCommand(
                         () =>
                         {
-                            ExitDialog();
+                            _ExitDialog();
                         }
                         ));
             }
         }
 
-        private void ExitDialog()
+        private void _ExitDialog()
         {
             var response = MessageBox.Show("Do you want to quit application?", "Quit confirmation", MessageBoxButton.YesNo);
             if (response == MessageBoxResult.Yes)
             {
+                Settings.Default.Save();
                 MessengerInstance.Send(new CloseDialogMessage(this));
             }
         }
@@ -380,12 +412,12 @@ namespace OSL.WPF.ViewModel
             {
                 return _ImportFitLogCommand ??
                     (_ImportFitLogCommand = new RelayCommand(
-                        () => { Task.Run(() => ImportFitLogDialogAsync()); }
+                        () => { Task.Run(() => _ImportFitLogDialogAsync()); }
                         ));
             }
         }
 
-        private void ImportFitLogDialogAsync()
+        private void _ImportFitLogDialogAsync()
         {
             Messenger.Default.Send(new NotificationMessage<IMPORT_TYPE>(IMPORT_TYPE.FITLOG, MessengerNotifications.IMPORT));
         }

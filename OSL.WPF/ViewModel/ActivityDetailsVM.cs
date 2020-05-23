@@ -42,7 +42,6 @@ namespace OSL.WPF.ViewModel
                     SelectedActivity = message.Content;
                 }
             });
-
         }
 
         #region Data
