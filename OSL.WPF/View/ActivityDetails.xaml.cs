@@ -26,22 +26,6 @@ namespace OSL.WPF.View
     {
         public ActivityDetails()
         {
-            var settings = new CefSettings();
-            settings.RegisterScheme(new CefCustomScheme
-            {
-                SchemeName = "http",
-                DomainName = "internal",
-                IsLocal = true,
-                SchemeHandlerFactory = new FolderSchemeHandlerFactory(
-                    rootFolder: @"WebResources",
-                    hostName: "internal",
-                    defaultPage: "index.html"
-                ),
-            });
-#if DEBUG
-            settings.RemoteDebuggingPort = 8088;
-#endif
-            Cef.Initialize(settings);
             InitializeComponent();
         }
     }
