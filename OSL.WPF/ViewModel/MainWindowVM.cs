@@ -23,6 +23,7 @@ using OSL.WPF.View;
 using OSL.WPF.ViewModel.Scaffholding;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -45,12 +46,6 @@ namespace OSL.WPF.ViewModel
     public class MainWindowVM : ViewModelBase
     {
         private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
-        public class CloseNotificationEventArgs : EventArgs
-        {
-            public CloseNotificationEventArgs()
-            {
-            }
-        }
         public class SavingNotificationEventArgs : EventArgs
         {
             public SavingNotificationEventArgs(bool IsSaving)
@@ -60,7 +55,6 @@ namespace OSL.WPF.ViewModel
             public bool IsSaving { get; protected set; }
         }
 
-        public event EventHandler<CloseNotificationEventArgs> CloseApp;
         public event EventHandler<SavingNotificationEventArgs> SavingApp;
         private readonly IDataAccessService _DbAccess;
 
@@ -78,10 +72,6 @@ namespace OSL.WPF.ViewModel
             ////    // Code runs "for real"
             ////}
             _DbAccess = DbAccess;
-            Messenger.Default.Register<CloseDialogMessage>(this, m =>
-            {
-                CloseApp?.Invoke(this, new CloseNotificationEventArgs());
-            });
 
 
             // Menu items enable/disable
@@ -359,15 +349,25 @@ namespace OSL.WPF.ViewModel
             }
         }
 
-        private void _ExitDialog()
+        private bool _IsClosing = false;
+        public void _ExitDialog()
         {
+            if (_IsClosing) return;
             var response = MessageBox.Show(Resources.MainWindow_QuitConfirm, Resources.MainWindow_QuitConfirmHeader, MessageBoxButton.YesNo);
             if (response == MessageBoxResult.Yes)
             {
+                _IsClosing = true;
+                NLog.LogManager.Shutdown();
                 Settings.Default.Save();
                 MessengerInstance.Send(new CloseDialogMessage(this));
             }
         }
+
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            _ExitDialog();
+        }
+
         #endregion
 
         #region SaveCommand

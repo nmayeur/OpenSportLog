@@ -12,8 +12,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using OSL.WPF.ViewModel;
+using OSL.WPF.ViewModel.Scaffholding;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
@@ -28,6 +30,7 @@ namespace OSL.WPF.View
     public partial class MainWindow : Window
     {
         private readonly MainWindowVM _VM;
+        private bool _IsClosing = false;
 
         public MainWindow()
         {
@@ -35,14 +38,18 @@ namespace OSL.WPF.View
             this.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
             _VM = DataContext as MainWindowVM;
             if (_VM == null) return;
-            _VM.CloseApp += _CloseApp;
             _VM.PropertyChanged += _OnPropertyChanged;
+            Closing += _OnWindowClosing;
+            Messenger.Default.Register<CloseDialogMessage>(this, m =>
+            {
+                if(!_IsClosing) this.Close();
+            });
         }
 
-        private void _CloseApp(object sender, CloseNotificationEventArgs args)
+        private void _OnWindowClosing(object sender, CancelEventArgs e)
         {
-            NLog.LogManager.Shutdown();
-            this.Close();
+            _IsClosing = true;
+            _VM.OnWindowClosing(sender, e);
         }
 
         private void _OnPropertyChanged(object sender, PropertyChangedEventArgs args)
