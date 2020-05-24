@@ -52,7 +52,6 @@ namespace OSL.WPF.ViewModel
                     {
                         Athletes = new ObservableCollection<AthleteEntity>(message.Content);
                     }
-                    SelectedAthlete = null;
                 }
             });
             Messenger.Default.Register<NotificationMessage<IMPORT_TYPE>>(this, message =>
@@ -92,6 +91,15 @@ namespace OSL.WPF.ViewModel
                         SelectedAthlete = Athletes[0];
                     });
                 }
+                else if (Settings.Default.LastOpenedAthleteId >= 0)
+                {
+                    var defaultAthlete = _Athletes.FirstOrDefault(a => a.Id == Settings.Default.LastOpenedAthleteId);
+                    if (defaultAthlete != null) SelectedAthlete = defaultAthlete;
+                }
+                else
+                {
+                    SelectedAthlete = null;
+                }
             }
         }
 
@@ -102,13 +110,14 @@ namespace OSL.WPF.ViewModel
             set
             {
                 Set(() => SelectedAthlete, ref _SelectedAthlete, value);
+                Settings.Default.LastOpenedAthleteId = _SelectedAthlete?.Id ?? -1;
                 Messenger.Default.Send(new NotificationMessage<AthleteEntity>(_SelectedAthlete, MessengerNotifications.SELECTED));
                 DispatcherHelper.CheckBeginInvokeOnUI(() =>
                 {
                     Activities.Clear();
                     if (_SelectedAthlete != null)
                     {
-                        foreach (var activity in _DbAccess.GetActivitiesForAthlete(_SelectedAthlete.Id))
+                        foreach (var activity in _DbAccess.GetActivitiesForAthlete(_SelectedAthlete))
                         {
                             Activities.Add(activity);
                         }

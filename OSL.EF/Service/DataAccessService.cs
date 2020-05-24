@@ -59,12 +59,13 @@ namespace OSL.EF.Service
 
         public void AddAthlete(AthleteEntity athlete)
         {
-            _DbContext.Athletes.Add(athlete);
+            DbContext.Athletes.Add(athlete);
         }
 
-        public IList<ActivityEntity> GetActivitiesForAthlete(int athleteId)
+        public IList<ActivityEntity> GetActivitiesForAthlete(AthleteEntity athlete)
         {
-            var athlete = DbContext.Athletes.Single(a => a.Id == athleteId);
+            if (athlete == null || DbContext.Entry(athlete).State == EntityState.Added) return new List<ActivityEntity>();
+
             DbContext.Entry(athlete).Collection(a => a.Activities).Load();
 
             return athlete.Activities.OrderByDescending(x => x.Time).ToList();
@@ -72,6 +73,8 @@ namespace OSL.EF.Service
 
         public IList<TrackEntity> GetActivityTracks(ActivityEntity activity)
         {
+            if (activity == null || DbContext.Entry(activity).State == EntityState.Added) return new List<TrackEntity>();
+
             DbContext.Entry(activity).Collection(a => a.Tracks).Query().Include(t => t.TrackSegments).Load();
 
             return activity.Tracks.ToList();

@@ -34,5 +34,16 @@ namespace OSL.WPF {
                 this["LastOpenedFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public int LastOpenedAthleteId {
+            get {
+                return ((int)(this["LastOpenedAthleteId"]));
+            }
+            set {
+                this["LastOpenedAthleteId"] = value;
+            }
+        }
     }
 }

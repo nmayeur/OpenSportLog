@@ -261,6 +261,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Utils\InitSettings.cs" />
     <Compile Include="ViewModel\ImportSportsMatchingEntryVM.cs" />
     <Compile Include="ViewModel\NewAthleteVM.cs" />
     <Compile Include="View\NewAthleteDialog.xaml.cs">

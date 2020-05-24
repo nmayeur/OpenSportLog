@@ -13,6 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using GalaSoft.MvvmLight.Threading;
+using OSL.WPF.Utils;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -30,6 +31,7 @@ namespace OSL.WPF
     {
         public App()
         {
+            InitSettings.Init();
             DispatcherHelper.Initialize();
         }
     }
