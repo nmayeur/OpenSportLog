@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OSL.WPF.View"
+        xmlns:p="clr-namespace:OSL.WPF.Properties"
         mc:Ignorable="d"
-        Title="New Athlete" Height="110" Width="380"
+        Title="{x:Static p:Resources.NewAthleteDialog_Title}" Height="110" Width="380"
         DataContext="{Binding Path=NewAthleteDialog, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
@@ -15,7 +16,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="New athlete name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.NewAthleteDialog_Title}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Right" Height="23" Margin="150,10,10,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="200"/>
         <Button Content="_OK" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"
                 IsDefault="True" Name="btnOK" Click="BtnOK_Click"/>

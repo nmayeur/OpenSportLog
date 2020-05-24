@@ -152,7 +152,7 @@ namespace OSL.WPF.ViewModel
         {
             var openFileDialog = new OpenFileDialog()
             {
-                Filter = "FitLog SportTracks (*.fitlog)|*.fitlog"
+                Filter = Resources.AthleteDetails_FitlogFilter
             };
             if (openFileDialog.ShowDialog() == true)
             {
@@ -196,8 +196,15 @@ namespace OSL.WPF.ViewModel
                                     });
                                 }
                             }
-                            MessageBox.Show($"Imported {cnt} activit{(cnt > 1 ? "ies" : "y")}");
-                        }, "Import is running...");
+                            if (cnt > 0)
+                            {
+                                MessageBox.Show(string.Format(Resources.AthleteDetails_ImportDoneSingular, cnt));
+                            }
+                            else
+                            {
+                                MessageBox.Show(string.Format(Resources.AthleteDetails_ImportDonePlural, cnt));
+                            }
+                        }, Resources.AthleteDetails_ImportIsRunning);
                     }
                 });
             }

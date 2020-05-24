@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:OSL.WPF.View"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+        xmlns:p="clr-namespace:OSL.WPF.Properties"
         mc:Ignorable="d"
         Title="OpenSportLog" Height="600" Width="800"
         DataContext="{Binding MainWindow, Source={StaticResource Locator}}">
@@ -28,17 +29,17 @@
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0">
             <Menu Name="mnuMain" DockPanel.Dock="Top" IsMainMenu="True">
-                <MenuItem Header="_File">
-                    <MenuItem Header="_Open" Command="{Binding OpenFileCommand}" IsEnabled="{Binding Path=IsOpenFileEnabled}"/>
-                    <MenuItem Header="_New" Command="{Binding NewFileCommand}" IsEnabled="{Binding Path=IsNewFileEnabled}"/>
-                    <MenuItem Header="_Save" Command="{Binding SaveCommand}" IsEnabled="{Binding Path=IsSaveFileEnabled}"/>
+                <MenuItem Header="{x:Static p:Resources.Menu_File}">
+                    <MenuItem Header="{x:Static p:Resources.Menu_File_Open}" Command="{Binding OpenFileCommand}" IsEnabled="{Binding Path=IsOpenFileEnabled}"/>
+                    <MenuItem Header="{x:Static p:Resources.Menu_File_New}" Command="{Binding NewFileCommand}" IsEnabled="{Binding Path=IsNewFileEnabled}"/>
+                    <MenuItem Header="{x:Static p:Resources.Menu_File_Save}" Command="{Binding SaveCommand}" IsEnabled="{Binding Path=IsSaveFileEnabled}"/>
                     <Separator/>
-                    <MenuItem Header="New _Athlete" Command="{Binding NewAthleteCommand}" IsEnabled="{Binding Path=IsNewAthleteEnabled}"/>
+                    <MenuItem Header="{x:Static p:Resources.Menu_File_NewAthlete}" Command="{Binding NewAthleteCommand}" IsEnabled="{Binding Path=IsNewAthleteEnabled}"/>
                     <Separator/>
-                    <MenuItem Header="_Exit" Command="{Binding ExitCommand}" IsEnabled="{Binding Path=IsExitEnabled}"/>
+                    <MenuItem Header="{x:Static p:Resources.Menu_File_Exit}" Command="{Binding ExitCommand}" IsEnabled="{Binding Path=IsExitEnabled}"/>
                 </MenuItem>
-                <MenuItem Header="_Import">
-                    <MenuItem Header="_FitLog (SportTracks)" Command="{Binding ImportFitLogCommand}" IsEnabled="{Binding Path=IsImportEnabled}"/>
+                <MenuItem Header="{x:Static p:Resources.Menu_Import}">
+                    <MenuItem Header="{x:Static p:Resources.Menu_Import_Fitlog}" Command="{Binding ImportFitLogCommand}" IsEnabled="{Binding Path=IsImportEnabled}"/>
                 </MenuItem>
             </Menu>
         </DockPanel>

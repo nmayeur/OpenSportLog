@@ -188,7 +188,7 @@ namespace OSL.WPF.ViewModel
             }
         }
 
-        private string _ProgressbarText = "Work in progress...";
+        private string _ProgressbarText = Resources.MainWindow_WorkInProgress;
         public string ProgressbarText
         {
             get => _ProgressbarText;
@@ -255,7 +255,7 @@ namespace OSL.WPF.ViewModel
         {
             var openFileDialog = new OpenFileDialog()
             {
-                Filter = "SQLite (*.db,*.sqlite,*.sqlite3)|*.db;*.sqlite;*.sqlite3"
+                Filter = Resources.MainWindow_SQLiteFilter
             };
             if (openFileDialog.ShowDialog() == true)
             {
@@ -267,7 +267,7 @@ namespace OSL.WPF.ViewModel
 
         private void _OpenFile(string path)
         {
-            ProgressbarText = "Loading file...";
+            ProgressbarText = Resources.MainWindow_LoadingFile;
             IsProgressbarVisible = true;
             _DbAccess.OpenDatabase(path);
             Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(_DbAccess.GetAthletes(), MessengerNotifications.LOADED));
@@ -297,7 +297,7 @@ namespace OSL.WPF.ViewModel
         {
             var openFileDialog = new SaveFileDialog()
             {
-                Filter = "SQLite (*.db,*.sqlite,*.sqlite3)|*.db;*.sqlite;*.sqlite3",
+                Filter = Resources.MainWindow_SQLiteFilter,
                 AddExtension = true
             };
             if (openFileDialog.ShowDialog() == true)
@@ -361,7 +361,7 @@ namespace OSL.WPF.ViewModel
 
         private void _ExitDialog()
         {
-            var response = MessageBox.Show("Do you want to quit application?", "Quit confirmation", MessageBoxButton.YesNo);
+            var response = MessageBox.Show(Resources.MainWindow_QuitConfirm, Resources.MainWindow_QuitConfirmHeader, MessageBoxButton.YesNo);
             if (response == MessageBoxResult.Yes)
             {
                 Settings.Default.Save();
@@ -387,11 +387,11 @@ namespace OSL.WPF.ViewModel
         {
             try
             {
-                ProgressbarText = "Saving file...";
+                ProgressbarText = Resources.MainWindow_SavingFileProgressMessage;
                 IsProgressbarVisible = true;
                 SavingApp?.Invoke(this, new SavingNotificationEventArgs(IsSaving: true));
                 _DbAccess.SaveData();
-                MessageBox.Show("Data saved", "Saving");
+                MessageBox.Show(Resources.MainWindow_DataSaved, Resources.MainWindow_DataSavedHeader);
                 IsProgressbarVisible = false;
             }
             catch (Exception e)

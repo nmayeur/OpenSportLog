@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,28 +112,28 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Menu_File" xml:space="preserve">
-    <value>_File</value>
+    <value>_Fichier</value>
   </data>
   <data name="Menu_File_Open" xml:space="preserve">
-    <value>_Open</value>
+    <value>_Ouvrir</value>
   </data>
   <data name="Menu_File_Save" xml:space="preserve">
-    <value>_Save</value>
+    <value>_Enregistrer</value>
   </data>
   <data name="Menu_File_New" xml:space="preserve">
-    <value>_New</value>
+    <value>_Nouveau</value>
   </data>
   <data name="Menu_File_NewAthlete" xml:space="preserve">
-    <value>New _Athlete</value>
+    <value>Nouvel _athlète</value>
   </data>
   <data name="Menu_File_Exit" xml:space="preserve">
-    <value>_Exit</value>
+    <value>_Quitter</value>
   </data>
   <data name="Menu_Import" xml:space="preserve">
     <value>_Import</value>
@@ -139,13 +142,13 @@
     <value>_FitLog (SportTracks)</value>
   </data>
   <data name="AthleteDetails_Athlete" xml:space="preserve">
-    <value>Athlete</value>
+    <value>Athlète</value>
   </data>
   <data name="AthleteDetails_Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom</value>
   </data>
   <data name="AthleteDetails_Location" xml:space="preserve">
-    <value>Location</value>
+    <value>Lieu</value>
   </data>
   <data name="AthleteDetails_Date" xml:space="preserve">
     <value>Date</value>
@@ -157,34 +160,34 @@
     <value>Sport</value>
   </data>
   <data name="MainWindow_LoadingFile" xml:space="preserve">
-    <value>Loading file...</value>
+    <value>Chargement du fichier...</value>
   </data>
   <data name="MainWindow_WorkInProgress" xml:space="preserve">
-    <value>Work in progress...</value>
+    <value>Travail en cours...</value>
   </data>
   <data name="MainWindow_SQLiteFilter" xml:space="preserve">
     <value>SQLite (*.db,*.sqlite,*.sqlite3)|*.db;*.sqlite;*.sqlite3</value>
   </data>
   <data name="MainWindow_QuitConfirmHeader" xml:space="preserve">
-    <value>Quit confirmation</value>
+    <value>Confirmation de sortie</value>
   </data>
   <data name="MainWindow_QuitConfirm" xml:space="preserve">
-    <value>Do you want to quit application?</value>
+    <value>Souhaitez-vous quitter l'application?</value>
   </data>
   <data name="MainWindow.SavingFileProgressMessage" xml:space="preserve">
-    <value>Saving file...</value>
+    <value>Enregistrement du fichier en cours...</value>
   </data>
   <data name="MainWindow.DataSavedHeader" xml:space="preserve">
-    <value>Saving</value>
+    <value>Enregistrement</value>
   </data>
   <data name="MainWindow.DataSaved" xml:space="preserve">
-    <value>Data saved</value>
+    <value>Les données ont été enregistrées.</value>
   </data>
   <data name="ActivityDetails_Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom</value>
   </data>
   <data name="ActivityDetails_Location" xml:space="preserve">
-    <value>Location</value>
+    <value>Lieu</value>
   </data>
   <data name="ActivityDetails_Calories" xml:space="preserve">
     <value>Calories</value>
@@ -193,39 +196,39 @@
     <value>Sport</value>
   </data>
   <data name="ActivityDetails_Time" xml:space="preserve">
-    <value>Date/Time</value>
+    <value>Date/Heure</value>
   </data>
   <data name="NewAthleteDialog_Title" xml:space="preserve">
-    <value>New Athlete</value>
+    <value>Nouvel athlète</value>
   </data>
   <data name="NewAthleteDialog_Name" xml:space="preserve">
-    <value>New athlete name</value>
+    <value>Nom du nouvel athlète</value>
   </data>
   <data name="SpinnerDialog_Title" xml:space="preserve">
-    <value>Please Wait...</value>
+    <value>Veuillez patienter...</value>
   </data>
   <data name="SpinnerDialog_Waiting" xml:space="preserve">
-    <value>Waiting...</value>
+    <value>Attente...</value>
   </data>
   <data name="AthleteDetails_FitlogFilter" xml:space="preserve">
     <value>FitLog SportTracks (*.fitlog)|*.fitlog</value>
   </data>
   <data name="AthleteDetails_ImportIsRunning" xml:space="preserve">
-    <value>Import is running...</value>
+    <value>L'import est en cours...</value>
   </data>
   <data name="AthleteDetails_ImportDoneSingular" xml:space="preserve">
-    <value>Imported {0} activity</value>
+    <value>{0} activité importée</value>
   </data>
   <data name="AthleteDetails_ImportDonePlural" xml:space="preserve">
-    <value>Imported {0} activities</value>
+    <value>{0} activités importées</value>
   </data>
   <data name="Import_PleaseMatchSports" xml:space="preserve">
-    <value>Please match sports label from imported file with OpenSportsLog sports</value>
+    <value>Veuillez mettre en correspondance les libellés de sports importés avec ceux d'OpenSportLogs</value>
   </data>
   <data name="General_OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="General_Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Annuler</value>
   </data>
 </root>
