@@ -18,6 +18,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
 using OSL.Common.Model;
 using OSL.Common.Service;
+using OSL.WPF.Properties;
 using OSL.WPF.View;
 using OSL.WPF.ViewModel.Scaffholding;
 using System;

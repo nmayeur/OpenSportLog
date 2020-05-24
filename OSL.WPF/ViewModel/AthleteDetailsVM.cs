@@ -19,6 +19,7 @@ using Microsoft.Win32;
 using OSL.Common.Model;
 using OSL.Common.Service;
 using OSL.Common.Service.Importer;
+using OSL.WPF.Properties;
 using OSL.WPF.View;
 using OSL.WPF.ViewModel.Scaffholding;
 using OSL.WPF.WPFUtils;
