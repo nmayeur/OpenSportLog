@@ -237,4 +237,19 @@
   <data name="MainWindow_DeletingActivitiesProgressMessage" xml:space="preserve">
     <value>Deleting activities...</value>
   </data>
+  <data name="Toolbar_New" xml:space="preserve">
+    <value>New File</value>
+  </data>
+  <data name="Toolbar_Open" xml:space="preserve">
+    <value>Open File</value>
+  </data>
+  <data name="Toolbar_Save" xml:space="preserve">
+    <value>Save File</value>
+  </data>
+  <data name="Toolbar_DeleteSelectedActivities" xml:space="preserve">
+    <value>Delete selected activities</value>
+  </data>
+  <data name="Toolbar_Exit" xml:space="preserve">
+    <value>Exit OSL</value>
+  </data>
 </root>

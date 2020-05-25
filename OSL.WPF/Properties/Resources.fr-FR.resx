@@ -240,4 +240,19 @@
   <data name="MainWindow_DeletingActivitiesProgressMessage" xml:space="preserve">
     <value>Suppression des activités en cours...</value>
   </data>
+  <data name="Toolbar_New" xml:space="preserve">
+    <value>Nouveau fichier</value>
+  </data>
+  <data name="Toolbar_Open" xml:space="preserve">
+    <value>Ouvrir un fichier</value>
+  </data>
+  <data name="Toolbar_Save" xml:space="preserve">
+    <value>Enregistrer le fichier</value>
+  </data>
+  <data name="Toolbar_DeleteSelectedActivities" xml:space="preserve">
+    <value>Supprimer les activités sélectionnées</value>
+  </data>
+  <data name="Toolbar_Exit" xml:space="preserve">
+    <value>Sortir d'OSL</value>
+  </data>
 </root>

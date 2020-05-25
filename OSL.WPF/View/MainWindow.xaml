@@ -8,6 +8,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:cmd="http://www.galasoft.ch/mvvmlight"
         xmlns:p="clr-namespace:OSL.WPF.Properties"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="OpenSportLog" Height="600" Width="800"
         DataContext="{Binding MainWindow, Source={StaticResource Locator}}">
@@ -46,6 +47,104 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
+            <ToolBarTray DockPanel.Dock="Top">
+                <ToolBar>
+                    <Button Command="{Binding NewFileCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel.ToolTip>
+                                <ToolTip Content="{x:Static p:Resources.Toolbar_New}"/>
+                            </StackPanel.ToolTip>
+                            <fa:ImageAwesome Icon="FileOutline" Height="20">
+                                <fa:ImageAwesome.Style>
+                                    <Style TargetType="fa:ImageAwesome">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Opacity" Value="0.5" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </fa:ImageAwesome.Style>
+                            </fa:ImageAwesome>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding OpenFileCommand}" >
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel.ToolTip>
+                                <ToolTip Content="{x:Static p:Resources.Toolbar_Open}"/>
+                            </StackPanel.ToolTip>
+                            <fa:ImageAwesome Icon="FolderOutlinepenOutline" Height="20">
+                                <fa:ImageAwesome.Style>
+                                    <Style TargetType="fa:ImageAwesome">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Opacity" Value="0.5" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </fa:ImageAwesome.Style>
+                            </fa:ImageAwesome>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding SaveCommand}" >
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel.ToolTip>
+                                <ToolTip Content="{x:Static p:Resources.Toolbar_Save}"/>
+                            </StackPanel.ToolTip>
+                            <fa:ImageAwesome Icon="Save" Height="20">
+                                <fa:ImageAwesome.Style>
+                                    <Style TargetType="fa:ImageAwesome">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Opacity" Value="0.5" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </fa:ImageAwesome.Style>
+                            </fa:ImageAwesome>
+                        </StackPanel>
+                    </Button>
+                </ToolBar>
+                <ToolBar>
+                    <Button Command="{Binding DeleteActivitiesCommand}" >
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel.ToolTip>
+                                <ToolTip Content="{x:Static p:Resources.Toolbar_DeleteSelectedActivities}"/>
+                            </StackPanel.ToolTip>
+                            <fa:ImageAwesome Icon="Remove" Height="20" >
+                                <fa:ImageAwesome.Style>
+                                    <Style TargetType="fa:ImageAwesome">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Opacity" Value="0.5" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </fa:ImageAwesome.Style>
+                            </fa:ImageAwesome>
+                        </StackPanel>
+                    </Button>
+                </ToolBar>
+                <ToolBar>
+                    <Button Command="{Binding ExitCommand}" >
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel.ToolTip>
+                                <ToolTip Content="{x:Static p:Resources.Toolbar_Exit}"/>
+                            </StackPanel.ToolTip>
+                            <fa:ImageAwesome Icon="SignOut" Height="20" >
+                                <fa:ImageAwesome.Style>
+                                    <Style TargetType="fa:ImageAwesome">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Opacity" Value="0.5" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </fa:ImageAwesome.Style>
+                            </fa:ImageAwesome>
+                        </StackPanel>
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
         </DockPanel>
         <ProgressBar HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Stretch" IsIndeterminate="True"/>
         <TextBlock Grid.Row="1" Text="{Binding Path=ProgressbarText}" HorizontalAlignment="Center" VerticalAlignment="Center" />

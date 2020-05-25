@@ -428,5 +428,50 @@ namespace OSL.WPF.Properties {
                 return ResourceManager.GetString("SpinnerDialog_Waiting", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected activities.
+        /// </summary>
+        public static string Toolbar_DeleteSelectedActivities {
+            get {
+                return ResourceManager.GetString("Toolbar_DeleteSelectedActivities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit OSL.
+        /// </summary>
+        public static string Toolbar_Exit {
+            get {
+                return ResourceManager.GetString("Toolbar_Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New File.
+        /// </summary>
+        public static string Toolbar_New {
+            get {
+                return ResourceManager.GetString("Toolbar_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open File.
+        /// </summary>
+        public static string Toolbar_Open {
+            get {
+                return ResourceManager.GetString("Toolbar_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save File.
+        /// </summary>
+        public static string Toolbar_Save {
+            get {
+                return ResourceManager.GetString("Toolbar_Save", resourceCulture);
+            }
+        }
     }
 }
