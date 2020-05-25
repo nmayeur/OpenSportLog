@@ -71,7 +71,7 @@ namespace OSL.EF
             builder.Entity<AthleteEntity>().HasKey(x => x.Id);
             builder.Entity<AthleteEntity>().Property(x => x.Name).IsRequired();
             builder.Entity<AthleteEntity>().HasAlternateKey(x => x.Name); // Unique
-            builder.Entity<AthleteEntity>().HasMany<ActivityEntity>(a => a.Activities);
+            builder.Entity<AthleteEntity>().HasMany<ActivityEntity>(a => a.Activities).WithOne(a => a.Athlete);
 
             builder.Entity<ActivityEntity>().HasKey("Id");
             builder.Entity<ActivityEntity>().HasMany<TrackEntity>(x => x.Tracks);

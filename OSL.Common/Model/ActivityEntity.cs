@@ -33,6 +33,17 @@ namespace OSL.Common.Model
             }
         }
 
+        private AthleteEntity _Athlete;
+        public AthleteEntity Athlete
+        {
+            get { return _Athlete; }
+            set
+            {
+                _Athlete = value;
+                NotifyPropertyChanged("Athlete");
+            }
+        }
+
         private string _OriginId;
         public string OriginId
         {
@@ -132,6 +143,12 @@ namespace OSL.Common.Model
             {
                 get { return _instance.Id; }
                 set { _instance.Id = value; }
+            }
+
+            public AthleteEntity Athlete
+            {
+                get { return _instance.Athlete; }
+                set { _instance.Athlete = value; }
             }
 
             public string OriginId

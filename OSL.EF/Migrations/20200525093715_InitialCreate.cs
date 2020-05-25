@@ -27,24 +27,24 @@ namespace OSL.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    AthleteId = table.Column<int>(nullable: true),
                     OriginId = table.Column<string>(nullable: true),
                     OriginSystem = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Location = table.Column<string>(nullable: true),
                     Calories = table.Column<int>(nullable: false),
                     Sport = table.Column<int>(nullable: false),
-                    Time = table.Column<DateTimeOffset>(nullable: false),
-                    AthleteEntityId = table.Column<int>(nullable: false)
+                    Time = table.Column<DateTimeOffset>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ActivityEntity", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ActivityEntity_Athletes_AthleteEntityId",
-                        column: x => x.AthleteEntityId,
+                        name: "FK_ActivityEntity_Athletes_AthleteId",
+                        column: x => x.AthleteId,
                         principalTable: "Athletes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -54,7 +54,7 @@ namespace OSL.EF.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
-                    ActivityEntityId = table.Column<int>(nullable: false)
+                    ActivityEntityId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -64,7 +64,7 @@ namespace OSL.EF.Migrations
                         column: x => x.ActivityEntityId,
                         principalTable: "ActivityEntity",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,7 +73,7 @@ namespace OSL.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    TrackEntityId = table.Column<int>(nullable: false)
+                    TrackEntityId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,7 +83,7 @@ namespace OSL.EF.Migrations
                         column: x => x.TrackEntityId,
                         principalTable: "TrackEntity",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,9 +112,9 @@ namespace OSL.EF.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActivityEntity_AthleteEntityId",
+                name: "IX_ActivityEntity_AthleteId",
                 table: "ActivityEntity",
-                column: "AthleteEntityId");
+                column: "AthleteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TrackEntity_ActivityEntityId",

@@ -30,16 +30,20 @@
         <DockPanel Grid.Row="0" Grid.Column="0">
             <Menu Name="mnuMain" DockPanel.Dock="Top" IsMainMenu="True">
                 <MenuItem Header="{x:Static p:Resources.Menu_File}">
-                    <MenuItem Header="{x:Static p:Resources.Menu_File_Open}" Command="{Binding OpenFileCommand}" IsEnabled="{Binding Path=IsOpenFileEnabled}"/>
-                    <MenuItem Header="{x:Static p:Resources.Menu_File_New}" Command="{Binding NewFileCommand}" IsEnabled="{Binding Path=IsNewFileEnabled}"/>
-                    <MenuItem Header="{x:Static p:Resources.Menu_File_Save}" Command="{Binding SaveCommand}" IsEnabled="{Binding Path=IsSaveFileEnabled}"/>
+                    <MenuItem Header="{x:Static p:Resources.Menu_File_Open}" Command="{Binding OpenFileCommand}"/>
+                    <MenuItem Header="{x:Static p:Resources.Menu_File_New}" Command="{Binding NewFileCommand}"/>
+                    <MenuItem Header="{x:Static p:Resources.Menu_File_Save}" Command="{Binding SaveCommand}"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.Menu_File_NewAthlete}" Command="{Binding NewAthleteCommand}" IsEnabled="{Binding Path=IsNewAthleteEnabled}"/>
+                    <MenuItem Header="{x:Static p:Resources.Menu_File_NewAthlete}" Command="{Binding NewAthleteCommand}"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.Menu_File_Exit}" Command="{Binding ExitCommand}" IsEnabled="{Binding Path=IsExitEnabled}"/>
+                    <MenuItem Header="{x:Static p:Resources.Menu_File_Exit}" Command="{Binding ExitCommand}"/>
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.Menu_Import}">
-                    <MenuItem Header="{x:Static p:Resources.Menu_Import_Fitlog}" Command="{Binding ImportFitLogCommand}" IsEnabled="{Binding Path=IsImportEnabled}"/>
+                <MenuItem Header="{x:Static p:Resources.Menu_Activity}" IsEnabled="{Binding Path=IsActivitiesEnabled}">
+                    <MenuItem Header="{x:Static p:Resources.Menu_Activities_Delete}" Command="{Binding DeleteActivitiesCommand}"/>
+                    <Separator/>
+                    <MenuItem Header="{x:Static p:Resources.Menu_Import}">
+                        <MenuItem Header="{x:Static p:Resources.Menu_Import_Fitlog}" Command="{Binding ImportFitLogCommand}"/>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
         </DockPanel>

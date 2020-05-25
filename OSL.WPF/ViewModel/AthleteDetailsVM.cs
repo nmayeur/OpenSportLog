@@ -23,6 +23,7 @@ using OSL.WPF.Properties;
 using OSL.WPF.View;
 using OSL.WPF.ViewModel.Scaffholding;
 using OSL.WPF.WPFUtils;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -72,6 +73,18 @@ namespace OSL.WPF.ViewModel
                     var athlete = message.Content;
                     Athletes.Add(athlete);
                     SelectedAthlete = athlete;
+                }
+            });
+            Messenger.Default.Register<NotificationMessage<ACTION_TYPE>>(this, message =>
+            {
+                if (message.Notification == MessengerNotifications.ASK_FOR_ACTION && message.Content == ACTION_TYPE.DELETE_SELECTED_ACTIVITIES)
+                {
+                    _DbAccess.DeleteActivities(SelectedActivities);
+                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                    {
+                        var toRemove = new List<ActivityEntity>(SelectedActivities);
+                        foreach (var activity in toRemove) Activities.Remove(activity);
+                    });
                 }
             });
         }
@@ -127,6 +140,9 @@ namespace OSL.WPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// Last selected activity in the datagrid (which is multi-selectable)
+        /// </summary>
         private ActivityEntity _SelectedActivity;
         public ActivityEntity SelectedActivity
         {
@@ -136,6 +152,17 @@ namespace OSL.WPF.ViewModel
                 Set(() => SelectedActivity, ref _SelectedActivity, value);
                 Messenger.Default.Send(new NotificationMessage<ActivityEntity>(_SelectedActivity, MessengerNotifications.SELECTED));
             }
+        }
+
+        /// <summary>
+        /// All selected activities in the datagrid
+        /// </summary>
+        ObservableCollection<ActivityEntity> _SelectedActivities = new ObservableCollection<ActivityEntity>() { };
+
+        public ObservableCollection<ActivityEntity> SelectedActivities
+        {
+            get => _SelectedActivities;
+            set { Set(() => SelectedActivities, ref _SelectedActivities, value); }
         }
 
         ObservableCollection<ActivityEntity> _Activities = new ObservableCollection<ActivityEntity>() { };

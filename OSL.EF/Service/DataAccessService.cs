@@ -79,5 +79,10 @@ namespace OSL.EF.Service
 
             return activity.Tracks.ToList();
         }
+
+        public void DeleteActivities(IList<ActivityEntity> activities)
+        {
+            DbContext.RemoveRange(activities);
+        }
     }
 }

@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
 using OSL.Common.Model;
@@ -80,11 +80,20 @@ namespace OSL.WPF.ViewModel
                 if (message.Notification == MessengerNotifications.SELECTED)
                 {
                     IsAthleteSelected = message.Content != null;
-                    IsImportEnabled = message.Content != null;
+                    IsActivitiesEnabled = message.Content != null;
                 }
             });
 
             SavingApp += _SavingApp;
+
+            Messenger.Default.Register<NotificationMessage<ActivityEntity>>(this, message =>
+            {
+                if (message.Notification == MessengerNotifications.SELECTED)
+                {
+                    IsActivitySelected = message.Content != null;
+                }
+            });
+
         }
 
         #region Data
@@ -95,6 +104,16 @@ namespace OSL.WPF.ViewModel
             set
             {
                 Set(() => IsAthleteSelected, ref _IsAthleteSelected, value);
+            }
+        }
+
+        private bool _IsActivitySelected = false;
+        public bool IsActivitySelected
+        {
+            get => _IsActivitySelected;
+            set
+            {
+                Set(() => IsActivitySelected, ref _IsActivitySelected, value);
             }
         }
 
@@ -128,13 +147,13 @@ namespace OSL.WPF.ViewModel
             }
         }
 
-        private bool _IsImportEnabled = false;
-        public bool IsImportEnabled
+        private bool _IsActivitiesEnabled = false;
+        public bool IsActivitiesEnabled
         {
-            get => _IsImportEnabled;
+            get => _IsActivitiesEnabled;
             set
             {
-                Set(() => IsImportEnabled, ref _IsImportEnabled, value && IsAthleteSelected);
+                Set(() => IsActivitiesEnabled, ref _IsActivitiesEnabled, value && IsAthleteSelected);
             }
         }
 
@@ -201,7 +220,7 @@ namespace OSL.WPF.ViewModel
                 _Logger.Debug("Application exits saving mode");
             }
 
-            IsNewAthleteEnabled = IsImportEnabled = IsExitEnabled = IsSaveFileEnabled = IsOpenFileEnabled = IsNewFileEnabled = !args.IsSaving;
+            IsNewAthleteEnabled = IsActivitiesEnabled = IsExitEnabled = IsSaveFileEnabled = IsOpenFileEnabled = IsNewFileEnabled = !args.IsSaving;
         }
         #endregion
 
@@ -236,7 +255,8 @@ namespace OSL.WPF.ViewModel
             {
                 return _OpenFileCommand ??
                     (_OpenFileCommand = new RelayCommand(
-                        () => { Task.Run(() => _OpenFileDialog()); }
+                        () => { Task.Run(() => _OpenFileDialog()); },
+                        () => { return IsOpenFileEnabled; }
                         ));
             }
         }
@@ -260,13 +280,13 @@ namespace OSL.WPF.ViewModel
             ProgressbarText = Resources.MainWindow_LoadingFile;
             IsProgressbarVisible = true;
             _DbAccess.OpenDatabase(path);
-            Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(_DbAccess.GetAthletes(), MessengerNotifications.LOADED));
             IsFileOpened = true;
             IsSaveFileEnabled = true;
             IsNewAthleteEnabled = true;
-            IsImportEnabled = false;
+            IsActivitiesEnabled = false;
             IsProgressbarVisible = false;
             Settings.Default.LastOpenedFile = path;
+            Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(_DbAccess.GetAthletes(), MessengerNotifications.LOADED));
         }
         #endregion
 
@@ -278,7 +298,8 @@ namespace OSL.WPF.ViewModel
             {
                 return _NewFileCommand ??
                     (_NewFileCommand = new RelayCommand(
-                        () => { _NewFileDialog(); }
+                        () => { _NewFileDialog(); },
+                        () => { return IsNewFileEnabled; }
                         ));
             }
         }
@@ -298,7 +319,7 @@ namespace OSL.WPF.ViewModel
                 IsFileOpened = true;
                 IsSaveFileEnabled = true;
                 IsNewAthleteEnabled = true;
-                IsImportEnabled = false;
+                IsActivitiesEnabled = false;
                 Settings.Default.LastOpenedFile = path;
             }
 
@@ -313,7 +334,8 @@ namespace OSL.WPF.ViewModel
             {
                 return _NewAthleteCommand ??
                     (_NewAthleteCommand = new RelayCommand(
-                        () => { _NewAthleteDialog(); }
+                        () => { _NewAthleteDialog(); },
+                        () => { return IsNewAthleteEnabled; }
                         ));
             }
         }
@@ -344,8 +366,10 @@ namespace OSL.WPF.ViewModel
                         () =>
                         {
                             _ExitDialog();
-                        }
-                        ));
+                        },
+                        () => { return IsExitEnabled; }
+                        )
+                );
             }
         }
 
@@ -378,7 +402,8 @@ namespace OSL.WPF.ViewModel
             {
                 return _SaveCommand ??
                     (_SaveCommand = new RelayCommand(
-                        () => { Task.Run(() => _Save()); }
+                        () => { Task.Run(() => _Save()); },
+                        () => { return IsSaveFileEnabled; }
                         ));
             }
         }
@@ -402,6 +427,29 @@ namespace OSL.WPF.ViewModel
             {
                 SavingApp?.Invoke(this, new SavingNotificationEventArgs(IsSaving: false));
             }
+        }
+        #endregion
+
+        #region DeleteActivitiesCommand
+        private RelayCommand _DeleteActivitiesCommand;
+        public RelayCommand DeleteActivitiesCommand
+        {
+            get
+            {
+                return _DeleteActivitiesCommand ??
+                    (_DeleteActivitiesCommand = new RelayCommand(
+                        () => { Task.Run(() => _DeleteActivities()); },
+                        () => { return IsActivitySelected; }
+                        ));
+            }
+        }
+
+        private void _DeleteActivities()
+        {
+            ProgressbarText = Resources.MainWindow_DeletingActivitiesProgressMessage;
+            IsProgressbarVisible = true;
+            Messenger.Default.Send(new NotificationMessage<ACTION_TYPE>(ACTION_TYPE.DELETE_SELECTED_ACTIVITIES, ASK_FOR_ACTION));
+            IsProgressbarVisible = false;
         }
         #endregion
 

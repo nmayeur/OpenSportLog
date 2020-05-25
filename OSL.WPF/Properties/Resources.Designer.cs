@@ -241,6 +241,15 @@ namespace OSL.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deleting activities....
+        /// </summary>
+        public static string MainWindow_DeletingActivitiesProgressMessage {
+            get {
+                return ResourceManager.GetString("MainWindow_DeletingActivitiesProgressMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading file....
         /// </summary>
         public static string MainWindow_LoadingFile {
@@ -291,6 +300,24 @@ namespace OSL.WPF.Properties {
         public static string MainWindow_WorkInProgress {
             get {
                 return ResourceManager.GetString("MainWindow_WorkInProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Delete selected activities.
+        /// </summary>
+        public static string Menu_Activities_Delete {
+            get {
+                return ResourceManager.GetString("Menu_Activities_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Activities.
+        /// </summary>
+        public static string Menu_Activity {
+            get {
+                return ResourceManager.GetString("Menu_Activity", resourceCulture);
             }
         }
         

@@ -231,4 +231,13 @@
   <data name="General_Cancel" xml:space="preserve">
     <value>Annuler</value>
   </data>
+  <data name="Menu_Activity" xml:space="preserve">
+    <value>_Activités</value>
+  </data>
+  <data name="Menu_Activities_Delete" xml:space="preserve">
+    <value>_Supprimer les activités sélectionnées</value>
+  </data>
+  <data name="MainWindow_DeletingActivitiesProgressMessage" xml:space="preserve">
+    <value>Suppression des activités en cours...</value>
+  </data>
 </root>

@@ -23,7 +23,10 @@ namespace OSL.Common.Service
         IList<AthleteEntity> GetAthletes();
         IList<ActivityEntity> GetActivitiesForAthlete(AthleteEntity athlete);
         IList<TrackEntity> GetActivityTracks(ActivityEntity activity);
-        void SaveData();
         void AddAthlete(AthleteEntity athlete);
+
+        void DeleteActivities(IList<ActivityEntity> activities);
+
+        void SaveData();
     }
 }
