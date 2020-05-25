@@ -27,9 +27,19 @@
         <TextBox TextWrapping="Wrap" Text="{Binding SelectedActivity.Sport}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="260,49,10,0" Width="150"/>
         <Label Content="{x:Static p:Resources.ActivityDetails_Time}" HorizontalAlignment="Left" Margin="410,46,0,0" VerticalAlignment="Top"  HorizontalContentAlignment="Right" Width="98"/>
         <TextBox TextWrapping="Wrap" Text="{Binding SelectedActivity.Time, StringFormat=g}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="510,49,10,0" Width="150"/>
-        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1">
-            <wpf:ChromiumWebBrowser x:Name="Browser" Address="http://internal/index.html"
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <DockPanel></DockPanel>
+            <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" />
+            <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="0,1">
+                <wpf:ChromiumWebBrowser x:Name="Browser" Address="http://internal/index.html"
                  WebBrowser="{Binding WebBrowser, Mode=OneWayToSource}"/>
-        </Border>
+            </Border>
+
+        </Grid>
     </Grid>
 </UserControl>
