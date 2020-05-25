@@ -35,7 +35,7 @@
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,1">
                 <wpf:ChromiumWebBrowser x:Name="BrowserActivityCharts" Address="http://internal/activityChart.html"
-                 WebBrowser="{Binding WebBrowser, Mode=OneWayToSource}"/>
+                 WebBrowser="{Binding WebBrowserActivityCharts, Mode=OneWayToSource}"/>
             </Border>
             <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext"/>
             <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="0,1">

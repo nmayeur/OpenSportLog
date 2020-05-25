@@ -32,9 +32,11 @@ namespace OSL.WPF.ViewModel
         private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
 
         private readonly IDataAccessService _DbAccess;
-        public ActivityDetailsVM(IDataAccessService DbAccess)
+        private readonly ID3jsService _D3jsService;
+        public ActivityDetailsVM(IDataAccessService DbAccess, ID3jsService D3jsService)
         {
             _DbAccess = DbAccess;
+            _D3jsService = D3jsService;
             Messenger.Default.Register<NotificationMessage<ActivityEntity>>(this, message =>
             {
                 if (message.Notification == MessengerNotifications.SELECTED)
@@ -59,10 +61,10 @@ namespace OSL.WPF.ViewModel
                 var longitude = trackPoint?.Longitude ?? 2.3488;
                 FormattableString command = $"OSL.goToCoordinates({latitude:N6},{longitude:N6})";
                 var enCulture = CultureInfo.GetCultureInfo("en-US");
-                _ExecuteJavaScript(command.ToString(enCulture));
+                _ExecuteJavaScript(_WebBrowser, command.ToString(enCulture));
 
                 command = $"OSL.setMarker({latitude:N6},{longitude:N6},OSL.START_MARKER)";
-                _ExecuteJavaScript(command.ToString(enCulture));
+                _ExecuteJavaScript(_WebBrowser, command.ToString(enCulture));
 
                 if (trackPoints != null)
                 {
@@ -73,11 +75,16 @@ namespace OSL.WPF.ViewModel
                         latlngs += command.ToString(enCulture);
                     }
                     command = $"OSL.drawRoute({latlngs}])";
-                    _ExecuteJavaScript(command.ToString(enCulture));
+                    _ExecuteJavaScript(_WebBrowser, command.ToString(enCulture));
+
+                    var serializedPoints = _D3jsService.SerializeTrackDatas(trackPoints);
+                    _ExecuteJavaScript(_WebBrowserActivityCharts, $"OSL.loadData({serializedPoints})");
+                    _ExecuteJavaScript(_WebBrowserActivityCharts, $"OSL.drawHeartRate()");
+
                 }
                 else
                 {
-                    _ExecuteJavaScript("OSL.cleanMap()");
+                    _ExecuteJavaScript(_WebBrowser, "OSL.cleanMap()");
                 }
             }
         }
@@ -88,32 +95,26 @@ namespace OSL.WPF.ViewModel
             get { return _WebBrowser; }
             set { Set(ref _WebBrowser, value); }
         }
+
+        private IWpfWebBrowser _WebBrowserActivityCharts;
+        public IWpfWebBrowser WebBrowserActivityCharts
+        {
+            get { return _WebBrowserActivityCharts; }
+            set { Set(ref _WebBrowserActivityCharts, value); }
+        }
         #endregion
 
-        #region ExecuteJavaScriptCommand
-        public RelayCommand<string> _ExecuteJavaScriptCommand { get; private set; }
-        public RelayCommand<string> ExecuteJavaScriptCommand
-        {
-            get
-            {
-                return _ExecuteJavaScriptCommand ??
-                    (_ExecuteJavaScriptCommand = new RelayCommand<string>(
-                        _ExecuteJavaScript, s => !String.IsNullOrWhiteSpace(s)
-                        ));
-            }
-        }
-        private void _ExecuteJavaScript(string s)
+        private void _ExecuteJavaScript(IWpfWebBrowser browser, string s)
         {
             try
             {
                 _Logger.Debug($"Execute Javascript {s}");
-                _WebBrowser.ExecuteScriptAsync(s);
+                browser.ExecuteScriptAsync(s);
             }
             catch (Exception e)
             {
                 MessageBox.Show("Error while executing Javascript: " + e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        #endregion
     }
 }
