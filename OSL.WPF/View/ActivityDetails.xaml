@@ -30,16 +30,18 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <DockPanel></DockPanel>
-            <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" />
-            <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="0,1">
-                <wpf:ChromiumWebBrowser x:Name="Browser" Address="http://internal/index.html"
+            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,1">
+                <wpf:ChromiumWebBrowser x:Name="BrowserActivityCharts" Address="http://internal/activityChart.html"
                  WebBrowser="{Binding WebBrowser, Mode=OneWayToSource}"/>
             </Border>
-
+            <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext"/>
+            <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="0,1">
+                <wpf:ChromiumWebBrowser x:Name="Browser" Address="http://internal/map.html"
+                 WebBrowser="{Binding WebBrowser, Mode=OneWayToSource}"/>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

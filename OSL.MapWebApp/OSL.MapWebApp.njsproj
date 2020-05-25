@@ -29,12 +29,17 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="src\index.html" />
+    <Content Include="src\activityChart.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\activityChart.html" />
+    <Content Include="src\map.html" />
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <Content Include="src\index.js" />
-    <Content Include="src\styles\site.scss" />
+    <Content Include="src\map.js" />
+    <Content Include="src\styles\activityChart.scss" />
+    <Content Include="src\styles\map.scss" />
     <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>

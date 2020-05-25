@@ -7,11 +7,12 @@ const devMode = process.env.NODE_ENV !== "production";
 module.exports = {
     mode: devMode ? "development" : "production",
     entry: {
-        map: ["./src/index.js", "./src/styles/site.scss"]
+        map: ["./src/map.js", "./src/styles/map.scss"],
+        activityChart: ["./src/activityChart.js", "./src/styles/activityChart.scss"]
     },
     output: {
         path: path.resolve(__dirname, "./dist"),
-        filename: "js/bundle.js"
+        filename: "js/[name].js"
     },
     module: {
         // Array of rules that tells Webpack how the modules (output)
@@ -99,7 +100,14 @@ module.exports = {
             chunkFilename: '[id].css'
         }),
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            chunks: ['map'],
+            template: 'src/map.html',
+            filename: 'map.html'
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['activityChart'],
+            template: 'src/activityChart.html',
+            filename: 'activityChart.html'
         })
     ]
 };

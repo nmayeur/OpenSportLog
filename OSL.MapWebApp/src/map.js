@@ -1,6 +1,6 @@
 ﻿import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import './styles/site.scss';
+import './styles/map.scss';
 
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
