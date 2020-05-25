@@ -17,6 +17,17 @@
             <cmd:EventToCommand Command="{Binding LoadInitialDataCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    <Window.Resources>
+        <Style TargetType="fa:ImageAwesome">
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Foreground" Value="DodgerBlue"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -54,17 +65,7 @@
                             <StackPanel.ToolTip>
                                 <ToolTip Content="{x:Static p:Resources.Toolbar_New}"/>
                             </StackPanel.ToolTip>
-                            <fa:ImageAwesome Icon="FileOutline" Height="20">
-                                <fa:ImageAwesome.Style>
-                                    <Style TargetType="fa:ImageAwesome">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter Property="Opacity" Value="0.5" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </fa:ImageAwesome.Style>
-                            </fa:ImageAwesome>
+                            <fa:ImageAwesome Icon="FileOutline"/>
                         </StackPanel>
                     </Button>
                     <Button Command="{Binding OpenFileCommand}" >
@@ -72,17 +73,7 @@
                             <StackPanel.ToolTip>
                                 <ToolTip Content="{x:Static p:Resources.Toolbar_Open}"/>
                             </StackPanel.ToolTip>
-                            <fa:ImageAwesome Icon="FolderOutlinepenOutline" Height="20">
-                                <fa:ImageAwesome.Style>
-                                    <Style TargetType="fa:ImageAwesome">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter Property="Opacity" Value="0.5" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </fa:ImageAwesome.Style>
-                            </fa:ImageAwesome>
+                            <fa:ImageAwesome Icon="FolderOutlinepenOutline" />
                         </StackPanel>
                     </Button>
                     <Button Command="{Binding SaveCommand}" >
@@ -90,17 +81,7 @@
                             <StackPanel.ToolTip>
                                 <ToolTip Content="{x:Static p:Resources.Toolbar_Save}"/>
                             </StackPanel.ToolTip>
-                            <fa:ImageAwesome Icon="Save" Height="20">
-                                <fa:ImageAwesome.Style>
-                                    <Style TargetType="fa:ImageAwesome">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter Property="Opacity" Value="0.5" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </fa:ImageAwesome.Style>
-                            </fa:ImageAwesome>
+                            <fa:ImageAwesome Icon="Save"/>
                         </StackPanel>
                     </Button>
                 </ToolBar>
@@ -110,17 +91,7 @@
                             <StackPanel.ToolTip>
                                 <ToolTip Content="{x:Static p:Resources.Toolbar_DeleteSelectedActivities}"/>
                             </StackPanel.ToolTip>
-                            <fa:ImageAwesome Icon="Remove" Height="20" >
-                                <fa:ImageAwesome.Style>
-                                    <Style TargetType="fa:ImageAwesome">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter Property="Opacity" Value="0.5" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </fa:ImageAwesome.Style>
-                            </fa:ImageAwesome>
+                            <fa:ImageAwesome Icon="Remove" />
                         </StackPanel>
                     </Button>
                 </ToolBar>
@@ -130,17 +101,7 @@
                             <StackPanel.ToolTip>
                                 <ToolTip Content="{x:Static p:Resources.Toolbar_Exit}"/>
                             </StackPanel.ToolTip>
-                            <fa:ImageAwesome Icon="SignOut" Height="20" >
-                                <fa:ImageAwesome.Style>
-                                    <Style TargetType="fa:ImageAwesome">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter Property="Opacity" Value="0.5" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </fa:ImageAwesome.Style>
-                            </fa:ImageAwesome>
+                            <fa:ImageAwesome Icon="SignOut" />
                         </StackPanel>
                     </Button>
                 </ToolBar>
