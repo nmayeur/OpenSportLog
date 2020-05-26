@@ -5,17 +5,22 @@ let OSL = window.OSL || {};
     'use strict'
 
     let _hrData = [];
+    let svg;
 
     this.loadData = function (hrData) {
         _hrData = hrData;
+        this.clear();
     }
+
+    this.clear = function () {
+        svg.selectAll("*").remove();
+    }
+
     this.drawHeartRate = function () {
-        // create svg element:
-        let svg = d3.select("#dataviz").append("svg").attr("width", 800).attr("height", 200)
 
         // prepare a helper function
         var curveFunc = d3.line()
-            .curve(d3.curveBasis)              // This is where you define the type of curve. Try curveStep for instance.
+            .curve(d3.curveBasis)
             .x(function (d) { return d.x })
             .y(function (d) { return d.y })
 
@@ -27,16 +32,17 @@ let OSL = window.OSL || {};
 
     }
 
+    this.init = function () {
+        // create svg element
+        svg = d3.select("#dataviz").append("svg").attr("width", 800).attr("height", 200)
+    }
+
 }).call(OSL);
 
 (function () {
     'use strict'
     window.addEventListener('load', function () {
         window.OSL = OSL;
-
-        //OSL.loadData([{ x: 0, y: 20 }, { x: 150, y: 150 }, { x: 300, y: 100 }, { x: 450, y: 20 }, { x: 600, y: 130 }]);
-        //OSL.drawHeartRate();
-
-
+        OSL.init();
     }, false)
 }())
