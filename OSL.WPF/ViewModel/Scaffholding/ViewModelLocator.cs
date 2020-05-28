@@ -71,7 +71,7 @@ namespace OSL.WPF.ViewModel.Scaffholding
             SimpleIoc.Default.Register<NewAthleteVM>();
             SimpleIoc.Default.Register<IDataAccessService, DataAccessService>();
             SimpleIoc.Default.Register<FitLogImporter>();
-            SimpleIoc.Default.Register<ID3jsService, D3jsService>();
+            SimpleIoc.Default.Register<IEChartsService, EChartsService>();
         }
 
         public MainWindowVM MainWindow

@@ -32,8 +32,8 @@ namespace OSL.WPF.ViewModel
         private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
 
         private readonly IDataAccessService _DbAccess;
-        private readonly ID3jsService _D3jsService;
-        public ActivityDetailsVM(IDataAccessService DbAccess, ID3jsService D3jsService)
+        private readonly IEChartsService _D3jsService;
+        public ActivityDetailsVM(IDataAccessService DbAccess, IEChartsService D3jsService)
         {
             _DbAccess = DbAccess;
             _D3jsService = D3jsService;
@@ -79,8 +79,6 @@ namespace OSL.WPF.ViewModel
 
                     var serializedPoints = _D3jsService.SerializeTrackDatas(trackPoints);
                     _ExecuteJavaScript(_WebBrowserActivityCharts, $"OSL.loadData({serializedPoints})");
-                    _ExecuteJavaScript(_WebBrowserActivityCharts, $"OSL.drawHeartRate()");
-
                 }
                 else
                 {

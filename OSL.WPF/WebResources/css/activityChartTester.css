@@ -1544,6 +1544,15 @@ a.ui-button:active,
  * http://api.jqueryui.com/category/theming/
  */
 
+body, html {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0; }
+
+#main {
+  min-height: 200px;
+  height: 100%; }
 
 body, html {
   width: 100%;
@@ -1551,14 +1560,14 @@ body, html {
   padding: 0;
   margin: 0; }
 
-#dataviz {
+#main {
   float: right;
   position: absolute;
-  height: 200px;
   right: 0;
   left: 200px;
   margin-top: 10px;
-  margin-left: 10px; }
+  margin-left: 10px;
+  border: 2px solid green; }
 
 #sidebar {
   background-color: palegreen;

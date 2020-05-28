@@ -5,14 +5,14 @@
     margin: 0;
 }
 
-#dataviz {
+#main {
     float: right;
     position: absolute;
-    height: 200px;
     right: 0;
     left: 200px;
     margin-top: 10px;
-    margin-left:10px;
+    margin-left: 10px;
+    border: 2px solid green;
 }
 
 #sidebar {

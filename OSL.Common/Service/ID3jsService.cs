@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OSL.Common.Service
 {
-    public interface ID3jsService
+    public interface IEChartsService
     {
         string SerializeTrackDatas(IEnumerable<TrackPointVO> trackPoints);
     }

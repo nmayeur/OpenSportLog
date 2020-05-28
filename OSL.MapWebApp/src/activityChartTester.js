@@ -7,7 +7,6 @@ let OSLTester = window.OSLTester || {};
     'use strict'
 
     this.init = function () {
-
         //---------------
         // Resizable divs
         //---------------
@@ -16,7 +15,7 @@ let OSLTester = window.OSLTester || {};
             e.preventDefault();
 
             dragging = true;
-            var main = $('#dataviz');
+            var main = $('#main');
             var ghostbar = $('<div>',
                 {
                     id: 'ghostbar',
@@ -35,7 +34,7 @@ let OSLTester = window.OSLTester || {};
         $(document).mouseup(function (e) {
             if (dragging) {
                 $('#sidebar').css("width", e.pageX + 2);
-                $('#dataviz').css("left", e.pageX + 2);
+                $('#main').css("left", e.pageX + 2);
                 $('#ghostbar').remove();
                 $(document).unbind('mousemove');
                 dragging = false;
@@ -48,23 +47,20 @@ let OSLTester = window.OSLTester || {};
         $(function () {
             $("#sidebar input[type=submit], #sidebar a, #sidebar button").button();
             $("#sidebar #btnGenerateData").click(function (event) {
-                let data = [];
-                for (let i = 0; i < 200; i++) {
-                    data.push({ x: i, y: _getRandomInt(30) + 140 });
+                let data = ['time', 'hr'];
+                let base_timestamp = Date.now() - 1000 * 60 * 60 * 24;
+                data.push([base_timestamp, 150 + Math.round(Math.random() * 30)]);
+
+                for (let i = 1; i < 20000; i++) {
+                    data.push([base_timestamp + i * 1000, Math.round(((Math.random() - 0.5) * 6) + data[i - 1][1])]);
                 }
                 OSL.loadData(data);
             });
             $("#sidebar #btnClear").click(function (event) {
                 OSL.clear();
             });
-            $("#sidebar #btnAddHR").click(function (event) {
-                OSL.drawHeartRate();
-            });
         });
 
-        function _getRandomInt(max) {
-            return Math.floor(Math.random() * Math.floor(max));
-        }
     }
 
 }).call(OSLTester);

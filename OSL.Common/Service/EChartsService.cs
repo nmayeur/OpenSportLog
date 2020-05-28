@@ -8,12 +8,18 @@ using System.Text;
 
 namespace OSL.Common.Service
 {
-    public class D3jsService : ID3jsService
+    public class EChartsService : IEChartsService
     {
         public string SerializeTrackDatas(IEnumerable<TrackPointVO> trackPoints)
         {
             //return "[{ x: 0, y: 20 }, { x: 150, y: 150 }, { x: 300, y: 100 }, { x: 450, y: 20 }, { x: 600, y: 130 }]";
-            var points=trackPoints.Select((tp, index) => new { x = index, y = tp.HeartRate }).ToArray();
+            object[] points = new object[trackPoints.Count() + 1];
+            points[0] = new object[] { "time", "hr" };
+            trackPoints.Select((tp, index) =>
+             {
+                 object[] array = { index, tp.HeartRate };
+                 return array;
+             }).ToArray().CopyTo(points, 1);
             var json = JsonConvert.SerializeObject(points);
             return json;
         }
