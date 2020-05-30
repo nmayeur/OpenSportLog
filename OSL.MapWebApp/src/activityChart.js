@@ -2,6 +2,7 @@ import $ from 'jquery';
 let echarts = require('echarts/lib/echarts');
 require('echarts/lib/chart/line');
 require('echarts/lib/component/tooltip');
+require('echarts/lib/component/legend');
 require('echarts/lib/component/toolbox');
 require('echarts/lib/component/dataZoom');
 
@@ -9,7 +10,7 @@ let OSL = window.OSL || {};
 (function () {
     'use strict'
 
-    let _hrData = [['time', 'hr']];
+    let _hrData = [['time', 'hr', 'candence', 'elevation']];
     let chart = null;
     this.loadData = function (hrData) {
         _hrData = hrData;
@@ -43,16 +44,23 @@ let OSL = window.OSL || {};
             dataset: {
                 source: _hrData
             },
+            legend: {
+                data: ['HR', 'Cadence', 'Elevation']
+            },
             xAxis: {
                 type: 'time'
             },
-            yAxis: {
-                type: 'value'
-            },
+            yAxis: [{
+                type: 'value',
+                name: 'HT / Cadence'
+            }, {
+                type: 'value',
+                name: 'Elevation'
+            }],
             dataZoom: [{
                 type: 'inside',
                 start: 0,
-                end: 10
+                end: 100
             }, {
                 start: 0,
                 end: 10,
@@ -87,11 +95,65 @@ let OSL = window.OSL || {};
                         }])
                     },
                     encode: { x: 'time', y: 'hr' }
+                }, {
+                    name: 'Cadence',
+                    type: 'line',
+                    smooth: true,
+                    symbol: 'none',
+                    sampling: 'average',
+                    itemStyle: {
+                        color: 'rgb(54, 32, 255)'
+                    },
+                    connectNulls: true,
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgb(190, 183, 255)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(54, 32, 255)'
+                        }])
+                    },
+                    encode: { x: 'time', y: 'cadence' }
+                }, {
+                    name: 'Elevation',
+                    type: 'line',
+                    smooth: true,
+                    yAxisIndex: 1,
+                    symbol: 'none',
+                    sampling: 'average',
+                    itemStyle: {
+                        color: 'rgb(245, 238, 95)'
+                    },
+                    connectNulls: true,
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgb(251, 248, 187)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(245, 238, 95)'
+                        }])
+                    },
+                    encode: { x: 'time', y: 'elevation' }
                 }
             ]
         };
 
         chart.setOption(option, true);
+
+        chart.on('dataZoom', function (evt) {
+            let axis = chart.getModel().option.xAxis[0];
+            let message = {
+                startTime: axis.rangeStart,
+                endTime: axis.rangeEnd,
+                startPercent: evt.start,
+                endPercent: evt.end
+            }
+            console.log('zoom', message);
+            if (typeof CefSharp !== "undefined") CefSharp.PostMessage(message);
+        })
+
     }
 
     this.init = function () {

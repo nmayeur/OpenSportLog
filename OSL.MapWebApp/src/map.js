@@ -16,7 +16,8 @@ let OSL = window.OSL || {};
     let _endMarker = null;
     const START_MARKER = 1;
     const END_MARKER = 2;
-    let _polyline = null;
+    let _lineString = null;
+    let _zoomedLineString = null;
 
     this.goToCoordinates = function (latitude, longitude) {
         if (!_map) throw "OSL map is not initialized";
@@ -34,18 +35,31 @@ let OSL = window.OSL || {};
             _endMarker = marker;
         }
     }
-    this.drawRoute = function (latlngs) {
+    this.drawRoute = function (geoJson) {
         if (!_map) throw "OSL map is not initialized";
 
-        if (_polyline) _map.removeLayer(_polyline);
-        _polyline = L.polyline(latlngs).addTo(_map);
-        _map.fitBounds(_polyline.getBounds());
+        if (_lineString) _map.removeLayer(_lineString);
+        _lineString = L.geoJSON(geoJson).addTo(_map);
+        _map.fitBounds(_lineString.getBounds());
+    }
+    this.drawZoomedRoute = function (geoJson) {
+        if (!_map) throw "OSL map is not initialized";
+
+        if (_zoomedLineString) _map.removeLayer(_zoomedLineString);
+        _zoomedLineString = L.geoJSON(geoJson);
+        _zoomedLineString.setStyle({
+            color: 'black'
+        });
+        _zoomedLineString.addTo(_map);
+        _map.fitBounds(_zoomedLineString.getBounds());
     }
     this.cleanMap = function () {
-        if (_polyline) _map.removeLayer(_polyline);
+        if (_lineString) _map.removeLayer(_lineString);
+        if (_zoomedLineString) _map.removeLayer(_zoomedLineString);
         if (_startMarker) _map.removeLayer(_startMarker);
         if (_endMarker) _map.removeLayer(_endMarker);
-        _polyline = null;
+        _lineString = null;
+        _zoomedLineString = null;
         _startMarker = null;
         _endMarker = null;
     }
@@ -65,7 +79,7 @@ let OSL = window.OSL || {};
         shadowUrl: shadowUrl
     });
 
-    const map = L.map('map');
+    const map = L.map('main');
     const defaultCenter = [38.889269, -77.050176];
     const defaultZoom = 15;
     const basemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
@@ -80,7 +94,5 @@ let OSL = window.OSL || {};
         window.OSL = OSL;
 
         OSL.init(map);
-        //OSL.goToCoordinates(48.875, 2.22);
-        //OSL.drawRoute([[48.875, 2.22], [48.8, 2.0]]);
     }, false)
 }())

@@ -8,8 +8,9 @@ module.exports = {
     mode: devMode ? "development" : "production",
     entry: {
         map: ["./src/map.js", "./src/styles/map.scss"],
+        mapTester: ["./src/map.js", "./src/tester.js", "./src/mapTester.js", "./src/styles/map.scss", "./src/styles/tester.scss"],
         activityChart: ["./src/activityChart.js", "./src/styles/activityChart.scss"],
-        activityChartTester: ["./src/activityChart.js", "./src/activityChartTester.js", "./src/styles/activityChart.scss", "./src/styles/activityChartTester.scss"]
+        activityChartTester: ["./src/activityChart.js", "./src/tester.js", "./src/activityChartTester.js", "./src/styles/activityChart.scss", "./src/styles/tester.scss"]
     },
     output: {
         path: path.resolve(__dirname, "./dist"),
@@ -104,6 +105,11 @@ module.exports = {
             chunks: ['map'],
             template: 'src/map.html',
             filename: 'map.html'
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['mapTester'],
+            template: 'src/mapTester.html',
+            filename: 'mapTester.html'
         }),
         new HtmlWebpackPlugin({
             chunks: ['activityChart'],

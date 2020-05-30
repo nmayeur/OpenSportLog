@@ -15,6 +15,11 @@ limitations under the License.
 using CefSharp;
 using CefSharp.SchemeHandler;
 using CefSharp.Wpf;
+using OSL.Common.Model.ECharts;
+using OSL.WPF.ViewModel;
+using System.ComponentModel;
+using System.Dynamic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace OSL.WPF.View
@@ -24,9 +29,27 @@ namespace OSL.WPF.View
     /// </summary>
     public partial class ActivityDetails : UserControl
     {
+        private readonly ActivityDetailsVM _VM;
+
         public ActivityDetails()
         {
             InitializeComponent();
+            BrowserActivityCharts.JavascriptMessageReceived += _OnBrowserJavascriptMessageReceived;
+            _VM = DataContext as ActivityDetailsVM;
+        }
+
+
+        private void _OnBrowserJavascriptMessageReceived(object sender, JavascriptMessageReceivedEventArgs e)
+        {
+            dynamic msg = e.ConvertMessageTo<ExpandoObject>();
+            switch (msg.type)
+            {
+                case "datazoom":
+                    var datazoom = e.ConvertMessageTo<DataZoomModel>();
+                    _VM.OnDataZoom(datazoom, new CancelEventArgs() { Cancel = false });
+                    break;
+            }
+
         }
     }
 }

@@ -639,7 +639,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	border-right-color: #fff;
 	}
 
-#map {
+#main {
   width: 100%;
   height: 100%;
   top: 0;

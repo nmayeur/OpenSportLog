@@ -24,6 +24,8 @@ using System;
 using System.Linq;
 using System.Globalization;
 using System.Windows;
+using System.ComponentModel;
+using OSL.Common.Model.ECharts;
 
 namespace OSL.WPF.ViewModel
 {
@@ -32,11 +34,13 @@ namespace OSL.WPF.ViewModel
         private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
 
         private readonly IDataAccessService _DbAccess;
-        private readonly IEChartsService _D3jsService;
-        public ActivityDetailsVM(IDataAccessService DbAccess, IEChartsService D3jsService)
+        private readonly IEChartsService _EChartsService;
+        private readonly IGeoJsonConverter _GeoJsonConverter;
+        public ActivityDetailsVM(IDataAccessService DbAccess, IEChartsService EChartsService, IGeoJsonConverter GeoJsonConverter)
         {
             _DbAccess = DbAccess;
-            _D3jsService = D3jsService;
+            _EChartsService = EChartsService;
+            _GeoJsonConverter = GeoJsonConverter;
             Messenger.Default.Register<NotificationMessage<ActivityEntity>>(this, message =>
             {
                 if (message.Notification == MessengerNotifications.SELECTED)
@@ -44,6 +48,12 @@ namespace OSL.WPF.ViewModel
                     SelectedActivity = message.Content;
                 }
             });
+        }
+
+        public void OnDataZoom(object sender, CancelEventArgs e)
+        {
+            var dataZoom = sender as DataZoomModel;
+            //_ExecuteJavaScript(_WebBrowser, "OSL.cleanMap()");
         }
 
         #region Data
@@ -68,16 +78,17 @@ namespace OSL.WPF.ViewModel
 
                 if (trackPoints != null)
                 {
-                    var latlngs = "[";
-                    foreach (var tp in trackPoints)
-                    {
-                        command = $"[{tp.Latitude:N6},{tp.Longitude:N6}],";
-                        latlngs += command.ToString(enCulture);
-                    }
-                    command = $"OSL.drawRoute({latlngs}])";
+                    var geoJson = _GeoJsonConverter.GetGeoJsonFromTrackPoints(trackPoints);
+                    //var geoJson = "[";
+                    //foreach (var tp in trackPoints)
+                    //{
+                    //    command = $"[{tp.Latitude:N6},{tp.Longitude:N6}],";
+                    //    geoJson += command.ToString(enCulture);
+                    //}
+                    command = $"OSL.drawRoute({geoJson})";
                     _ExecuteJavaScript(_WebBrowser, command.ToString(enCulture));
 
-                    var serializedPoints = _D3jsService.SerializeTrackDatas(trackPoints);
+                    var serializedPoints = _EChartsService.SerializeTrackDatas(trackPoints);
                     _ExecuteJavaScript(_WebBrowserActivityCharts, $"OSL.loadData({serializedPoints})");
                 }
                 else
@@ -102,6 +113,7 @@ namespace OSL.WPF.ViewModel
         }
         #endregion
 
+        #region Utils
         private void _ExecuteJavaScript(IWpfWebBrowser browser, string s)
         {
             try
@@ -114,5 +126,6 @@ namespace OSL.WPF.ViewModel
                 MessageBox.Show("Error while executing Javascript: " + e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        #endregion
     }
 }
