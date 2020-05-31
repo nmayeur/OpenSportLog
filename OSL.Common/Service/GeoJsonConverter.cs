@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace OSL.Common.Service
@@ -13,25 +14,51 @@ namespace OSL.Common.Service
             var geoJson = @"{
             ""type"": ""FeatureCollection"",
             ""features"": [
-                {
-                ""type"": ""Feature"",
-                    ""geometry"": {
-                    ""type"": ""LineString"",
-                        ""coordinates"": [";
+                ";
             var enCulture = CultureInfo.GetCultureInfo("en-US");
+            var isFirst = true;
+            geoJson += @"{""type"": ""Feature"",""geometry"": {""type"": ""LineString"",""coordinates"": [";
             foreach (var tp in TrackPoints)
             {
-                FormattableString coordinates = $"[{tp.Longitude:N6},{tp.Latitude:N6}],";
-                geoJson += coordinates.ToString(enCulture);
+                if (!isFirst)
+                {
+                    geoJson += ",";
+                }
+                else
+                {
+                    isFirst = false;
+                }
+                FormattableString coordinates2 = $"[{tp.Longitude:N6},{tp.Latitude:N6}]";
+                geoJson += coordinates2.ToString(enCulture);
             }
-            geoJson += @"]
-                    },
-                    ""properties"": {
-                        ""popupContent"": ""test popup"",
-                        ""zoomed"": false
-                    },
-                    ""id"": 1
-                }]}";
+            geoJson += $@"]}},""properties"":{{""zoomed"":false}},""id"": 1}}";
+            geoJson += @"]}";
+            return geoJson;
+        }
+
+        public string GetGeoJsonZoomFromTrackPoints(IEnumerable<TrackPointVO> TrackPoints, long StartEpochZoom, long EndEpochZoom)
+        {
+            var geoJson = @"{
+            ""type"": ""FeatureCollection"",
+            ""features"": [
+                ";
+            var enCulture = CultureInfo.GetCultureInfo("en-US");
+            var isFirst = true;
+            geoJson += @"{""type"": ""Feature"",""geometry"": {""type"": ""LineString"",""coordinates"": [";
+            foreach (var tp in TrackPoints.SkipWhile(tp => tp.Time < DateTimeOffset.FromUnixTimeSeconds(StartEpochZoom)).TakeWhile(tp => tp.Time <= DateTimeOffset.FromUnixTimeSeconds(EndEpochZoom)))
+            {
+                if (!isFirst)
+                {
+                    geoJson += ",";
+                } else
+                {
+                    isFirst = false;
+                }
+                FormattableString coordinates2 = $"[{tp.Longitude:N6},{tp.Latitude:N6}]";
+                geoJson += coordinates2.ToString(enCulture);
+            }
+            geoJson += $@"]}},""properties"":{{""zoomed"":false}},""id"": 1}}";
+            geoJson += @"]}";
             return geoJson;
         }
     }

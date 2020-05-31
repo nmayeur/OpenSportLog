@@ -50,11 +50,19 @@ namespace OSL.WPF.ViewModel
             });
         }
 
+        #region Zooming
+
         public void OnDataZoom(object sender, CancelEventArgs e)
         {
             var dataZoom = sender as DataZoomModel;
-            //_ExecuteJavaScript(_WebBrowser, "OSL.cleanMap()");
+            var trackPoints = _SelectedActivity?.Tracks.ElementAtOrDefault(0)?.TrackSegments.ElementAtOrDefault(0)?.TrackPoints?.OrderBy(tp => tp.Time);
+            if (trackPoints != null)
+            {
+                var geoJson = _GeoJsonConverter.GetGeoJsonZoomFromTrackPoints(trackPoints, dataZoom.startTime, dataZoom.endTime);
+                _ExecuteJavaScript(_WebBrowser, $"OSL.drawZoomedRoute({geoJson})");
+            }
         }
+        #endregion
 
         #region Data
         private ActivityEntity _SelectedActivity;
@@ -79,12 +87,6 @@ namespace OSL.WPF.ViewModel
                 if (trackPoints != null)
                 {
                     var geoJson = _GeoJsonConverter.GetGeoJsonFromTrackPoints(trackPoints);
-                    //var geoJson = "[";
-                    //foreach (var tp in trackPoints)
-                    //{
-                    //    command = $"[{tp.Latitude:N6},{tp.Longitude:N6}],";
-                    //    geoJson += command.ToString(enCulture);
-                    //}
                     command = $"OSL.drawRoute({geoJson})";
                     _ExecuteJavaScript(_WebBrowser, command.ToString(enCulture));
 

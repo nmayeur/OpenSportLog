@@ -145,6 +145,7 @@ let OSL = window.OSL || {};
         chart.on('dataZoom', function (evt) {
             let axis = chart.getModel().option.xAxis[0];
             let message = {
+                type: "datazoom",
                 startTime: axis.rangeStart,
                 endTime: axis.rangeEnd,
                 startPercent: evt.start,

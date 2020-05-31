@@ -17,7 +17,7 @@ namespace OSL.Common.Service
             points[0] = new object[] { "time", "hr", "cadence", "elevation" };
             trackPoints.Select((tp, index) =>
              {
-                 object[] array = { index, tp.HeartRate, tp.Cadence, tp.Elevation };
+                 object[] array = { tp.Time.ToUnixTimeSeconds(), tp.HeartRate, tp.Cadence, tp.Elevation };
                  return array;
              }).ToArray().CopyTo(points, 1);
             var json = JsonConvert.SerializeObject(points);
