@@ -17,6 +17,9 @@ let OSL = window.OSL || {};
         this.drawChart();
     }
 
+    let _userLocale = "en-US";//Default value
+    let _userTimezone = "UTC";//Default value
+
     this.clear = function () {
         _hrData = [];
         this.drawChart();
@@ -48,7 +51,14 @@ let OSL = window.OSL || {};
                 data: ['HR', 'Cadence', 'Elevation']
             },
             xAxis: {
-                type: 'time'
+                type: 'time',
+                axisLabel: {
+                    formatter: function (value, index) {
+                        let date = new Date(value);
+                        //return date.toLocaleTimeString(_userLocale, { timeZone: _userLocale });
+                        return date.toLocaleTimeString(_userLocale, { timeZone: _userTimezone });
+                    }
+                }
             },
             yAxis: [{
                 type: 'value',
@@ -157,7 +167,11 @@ let OSL = window.OSL || {};
 
     }
 
-    this.init = function () {
+    this.init = function (options) {
+        if (options) {
+            if (options.userLocale) _userLocale = options.userLocale;
+            if (options.userTimezone) _userTimezone = options.userTimezone;
+        }
         this.drawChart();
         $(window).on('resize', function () {
             if (chart != null && chart != undefined) {
@@ -172,6 +186,6 @@ let OSL = window.OSL || {};
     'use strict'
     window.addEventListener('load', function () {
         window.OSL = OSL;
-        OSL.init();
+        OSL.init({ userLocale: "fr-FR" });
     }, false)
 }())

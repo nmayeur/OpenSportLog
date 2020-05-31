@@ -45,7 +45,7 @@ namespace OSL.Common.Service
             var enCulture = CultureInfo.GetCultureInfo("en-US");
             var isFirst = true;
             geoJson += @"{""type"": ""Feature"",""geometry"": {""type"": ""LineString"",""coordinates"": [";
-            foreach (var tp in TrackPoints.SkipWhile(tp => tp.Time < DateTimeOffset.FromUnixTimeSeconds(StartEpochZoom)).TakeWhile(tp => tp.Time <= DateTimeOffset.FromUnixTimeSeconds(EndEpochZoom)))
+            foreach (var tp in TrackPoints.SkipWhile(tp => tp.Time < DateTimeOffset.FromUnixTimeMilliseconds(StartEpochZoom)).TakeWhile(tp => tp.Time <= DateTimeOffset.FromUnixTimeMilliseconds(EndEpochZoom)))
             {
                 if (!isFirst)
                 {
