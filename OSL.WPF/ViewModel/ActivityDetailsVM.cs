@@ -26,6 +26,8 @@ using System.Globalization;
 using System.Windows;
 using System.ComponentModel;
 using OSL.Common.Model.ECharts;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace OSL.WPF.ViewModel
 {
@@ -52,15 +54,31 @@ namespace OSL.WPF.ViewModel
 
         #region Zooming
 
+        CancellationTokenSource zoomCancelToken = null;
+        /// <summary>
+        /// Delay, in milliseconds, for waiting that all zoom events are received. Only proceed with the last event received.
+        /// </summary>
+        private static readonly int WAIT_FOR_ZOOM = 2000;
+
         public void OnDataZoom(object sender, CancelEventArgs e)
         {
-            var dataZoom = sender as DataZoomModel;
-            var trackPoints = _SelectedActivity?.Tracks.ElementAtOrDefault(0)?.TrackSegments.ElementAtOrDefault(0)?.TrackPoints?.OrderBy(tp => tp.Time);
-            if (trackPoints != null)
+            if (zoomCancelToken != null)
             {
-                var geoJson = _GeoJsonConverter.GetGeoJsonZoomFromTrackPoints(trackPoints, dataZoom.startTime, dataZoom.endTime);
-                _ExecuteJavaScript(_WebBrowser, $"OSL.drawZoomedRoute({geoJson})");
+                zoomCancelToken.Cancel();
             }
+            zoomCancelToken = new CancellationTokenSource();
+            var t = Task.Run(async delegate
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(WAIT_FOR_ZOOM), zoomCancelToken.Token);
+                _Logger.Debug("OnDataZoom called");
+                var dataZoom = sender as DataZoomModel;
+                var trackPoints = _SelectedActivity?.Tracks.ElementAtOrDefault(0)?.TrackSegments.ElementAtOrDefault(0)?.TrackPoints?.OrderBy(tp => tp.Time);
+                if (trackPoints != null)
+                {
+                    var geoJson = _GeoJsonConverter.GetGeoJsonZoomFromTrackPoints(trackPoints, dataZoom.startTime, dataZoom.endTime);
+                    _ExecuteJavaScript(_WebBrowser, $"OSL.drawZoomedRoute({geoJson})");
+                }
+            });
         }
         #endregion
 
