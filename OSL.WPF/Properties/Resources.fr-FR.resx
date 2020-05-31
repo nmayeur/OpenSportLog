@@ -181,7 +181,7 @@
     <value>Enregistrement</value>
   </data>
   <data name="MainWindow.DataSaved" xml:space="preserve">
-    <value>Les données ont été enregistrées.</value>
+    <value>Les données ont été enregistrées</value>
   </data>
   <data name="ActivityDetails_Name" xml:space="preserve">
     <value>Nom</value>
