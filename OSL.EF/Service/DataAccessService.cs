@@ -64,7 +64,8 @@ namespace OSL.EF.Service
 
         public IList<ActivityEntity> GetActivitiesForAthlete(AthleteEntity athlete)
         {
-            if (athlete == null || DbContext.Entry(athlete).State == EntityState.Added) return new List<ActivityEntity>();
+            if (athlete == null) return new List<ActivityEntity>();
+            if (DbContext.Entry(athlete).State == EntityState.Added) return athlete.Activities;
 
             DbContext.Entry(athlete).Collection(a => a.Activities).Load();
 

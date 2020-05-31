@@ -137,6 +137,27 @@ namespace OSL.WPF.ViewModel
                         }
                     }
                 });
+                if (_SelectedAthlete != null)
+                {
+                    _SelectedAthlete.Activities.CollectionChanged +=(sender,e) => {
+                        switch (e.Action)
+                        {
+                            case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                                foreach (ActivityEntity a in e.NewItems) Activities.Add(a);
+                                break;
+                            case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                                foreach (ActivityEntity a in e.OldItems) Activities.Remove(a);
+                                break;
+                            case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                                foreach (ActivityEntity a in e.OldItems) Activities.Remove(a);
+                                foreach (ActivityEntity a in e.NewItems) Activities.Add(a);
+                                break;
+                            case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                                Activities.Clear();
+                                break;
+                        }
+                    };
+                }
             }
         }
 
