@@ -13,9 +13,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
 using OSL.Common.Model;
 using OSL.Common.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -47,6 +49,19 @@ namespace OSL.EF.Service
             DbContext.Database.Migrate();
         }
 
+        public event EventHandler<IsDirtyEventArgs> IsDirtyEvent;
+
+        private bool _IsDirty = false;
+        public bool IsDirty
+        {
+            get => _IsDirty;
+            set
+            {
+                _IsDirty = value;
+                IsDirtyEvent?.Invoke(this, new IsDirtyEventArgs(IsDirty: value));
+            }
+        }
+
         public IList<AthleteEntity> GetAthletes()
         {
             return DbContext.Athletes.ToList();
@@ -55,11 +70,13 @@ namespace OSL.EF.Service
         public void SaveData()
         {
             DbContext.SaveChanges();
+            IsDirty = false;
         }
 
         public void AddAthlete(AthleteEntity athlete)
         {
             DbContext.Athletes.Add(athlete);
+            IsDirty = true;
         }
 
         public IList<ActivityEntity> GetActivitiesForAthlete(AthleteEntity athlete)
@@ -70,7 +87,7 @@ namespace OSL.EF.Service
             {
                 DbContext.Entry(athlete).Collection(a => a.Activities).Load();
             }
-
+            athlete.Activities.CollectionChanged += (s, e) => IsDirty = true;
             return athlete.Activities.OrderByDescending(x => x.Time).ToList();
         }
 
@@ -90,6 +107,7 @@ namespace OSL.EF.Service
         public void DeleteActivities(IList<ActivityEntity> activities)
         {
             DbContext.RemoveRange(activities);
+            IsDirty = true;
         }
     }
 }

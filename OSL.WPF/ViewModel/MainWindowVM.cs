@@ -27,6 +27,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using static OSL.EF.Service.DataAccessService;
 using static OSL.WPF.ViewModel.Scaffholding.MessengerNotifications;
 
 namespace OSL.WPF.ViewModel
@@ -93,6 +94,8 @@ namespace OSL.WPF.ViewModel
                     IsActivitySelected = message.Content != null;
                 }
             });
+
+            DbAccess.IsDirtyEvent += ((s, e) => { IsSaveFileEnabled = e.IsDirty; });
 
         }
 
@@ -220,7 +223,7 @@ namespace OSL.WPF.ViewModel
                 _Logger.Debug("Application exits saving mode");
             }
 
-            IsNewAthleteEnabled = IsActivitiesEnabled = IsExitEnabled = IsSaveFileEnabled = IsOpenFileEnabled = IsNewFileEnabled = !args.IsSaving;
+            IsNewAthleteEnabled = IsActivitiesEnabled = IsExitEnabled = IsOpenFileEnabled = IsNewFileEnabled = !args.IsSaving;
         }
         #endregion
 
@@ -281,7 +284,6 @@ namespace OSL.WPF.ViewModel
             IsProgressbarVisible = true;
             _DbAccess.OpenDatabase(path);
             IsFileOpened = true;
-            IsSaveFileEnabled = true;
             IsNewAthleteEnabled = true;
             IsActivitiesEnabled = false;
             IsProgressbarVisible = false;
@@ -318,7 +320,6 @@ namespace OSL.WPF.ViewModel
                 Messenger.Default.Send(new NotificationMessage<IList<AthleteEntity>>(null, MessengerNotifications.LOADED));
                 IsFileOpened = true;
                 IsSaveFileEnabled = true;
-                IsNewAthleteEnabled = true;
                 IsActivitiesEnabled = false;
                 Settings.Default.LastOpenedFile = path;
             }

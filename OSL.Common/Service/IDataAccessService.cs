@@ -13,6 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using OSL.Common.Model;
+using System;
 using System.Collections.Generic;
 
 namespace OSL.Common.Service
@@ -27,6 +28,17 @@ namespace OSL.Common.Service
 
         void DeleteActivities(IList<ActivityEntity> activities);
 
+        event EventHandler<IsDirtyEventArgs> IsDirtyEvent;
+
         void SaveData();
+    }
+
+    public class IsDirtyEventArgs : EventArgs
+    {
+        public IsDirtyEventArgs(bool IsDirty)
+        {
+            this.IsDirty = IsDirty;
+        }
+        public bool IsDirty { get; protected set; }
     }
 }
