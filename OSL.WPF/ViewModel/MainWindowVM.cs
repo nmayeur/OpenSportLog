@@ -378,14 +378,22 @@ namespace OSL.WPF.ViewModel
         public void _ExitDialog()
         {
             if (_IsClosing) return;
-            var response = MessageBox.Show(Resources.MainWindow_QuitConfirm, Resources.MainWindow_QuitConfirmHeader, MessageBoxButton.YesNo);
-            if (response == MessageBoxResult.Yes)
+            if (IsSaveFileEnabled)
             {
-                _IsClosing = true;
-                NLog.LogManager.Shutdown();
-                Settings.Default.Save();
-                MessengerInstance.Send(new CloseDialogMessage(this));
+                var response = MessageBox.Show(Resources.MainWindow_QuitConfirm, Resources.MainWindow_QuitConfirmHeader, MessageBoxButton.YesNoCancel);
+                if (response != MessageBoxResult.Yes && response != MessageBoxResult.No)
+                {
+                    return;
+                }
+                if (response == MessageBoxResult.Yes)
+                {
+                    _Save();
+                }
             }
+            _IsClosing = true;
+            NLog.LogManager.Shutdown();
+            Settings.Default.Save();
+            MessengerInstance.Send(new CloseDialogMessage(this));
         }
 
         public void OnWindowClosing(object sender, CancelEventArgs e)

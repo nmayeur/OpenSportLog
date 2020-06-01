@@ -169,7 +169,7 @@
     <value>Quit confirmation</value>
   </data>
   <data name="MainWindow_QuitConfirm" xml:space="preserve">
-    <value>Do you want to quit application?</value>
+    <value>Do you want to save data before exiting application?</value>
   </data>
   <data name="MainWindow.SavingFileProgressMessage" xml:space="preserve">
     <value>Saving file...</value>

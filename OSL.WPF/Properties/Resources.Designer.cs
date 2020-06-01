@@ -268,7 +268,7 @@ namespace OSL.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to quit application?.
+        ///   Looks up a localized string similar to Do you want to save data before exiting application?.
         /// </summary>
         public static string MainWindow_QuitConfirm {
             get {

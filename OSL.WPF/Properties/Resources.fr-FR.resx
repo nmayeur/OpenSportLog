@@ -172,7 +172,7 @@
     <value>Confirmation de sortie</value>
   </data>
   <data name="MainWindow_QuitConfirm" xml:space="preserve">
-    <value>Souhaitez-vous quitter l'application?</value>
+    <value>Souhaitez-vous sauvegarder les données avant de quitter l'application?</value>
   </data>
   <data name="MainWindow.SavingFileProgressMessage" xml:space="preserve">
     <value>Enregistrement du fichier en cours...</value>
