@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Windows;
 using static OSL.WPF.ViewModel.Scaffholding.MessengerNotifications;
 
@@ -79,11 +80,10 @@ namespace OSL.WPF.ViewModel
             {
                 if (message.Notification == MessengerNotifications.ASK_FOR_ACTION && message.Content == ACTION_TYPE.DELETE_SELECTED_ACTIVITIES)
                 {
-                    _DbAccess.DeleteActivities(SelectedActivities);
                     DispatcherHelper.CheckBeginInvokeOnUI(() =>
                     {
                         var toRemove = new List<ActivityEntity>(SelectedActivities);
-                        foreach (var activity in toRemove) Activities.Remove(activity);
+                        foreach (var activity in toRemove) _SelectedAthlete.Activities.Remove(activity);
                     });
                 }
             });
@@ -139,14 +139,19 @@ namespace OSL.WPF.ViewModel
                 });
                 if (_SelectedAthlete != null)
                 {
-                    _SelectedAthlete.Activities.CollectionChanged +=(sender,e) => {
+                    _SelectedAthlete.Activities.CollectionChanged += (sender, e) =>
+                    {
                         switch (e.Action)
                         {
                             case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
                                 foreach (ActivityEntity a in e.NewItems) Activities.Add(a);
                                 break;
                             case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
-                                foreach (ActivityEntity a in e.OldItems) Activities.Remove(a);
+                                foreach (ActivityEntity a in e.OldItems)
+                                {
+                                    SelectedActivity = null;
+                                    Activities.Remove(a);
+                                }
                                 break;
                             case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
                                 foreach (ActivityEntity a in e.OldItems) Activities.Remove(a);
@@ -233,25 +238,40 @@ namespace OSL.WPF.ViewModel
                         ViewsHelper.ExecuteWithSpinner(() =>
                         {
                             int cnt = 0;
+                            int duplicates = 0;
                             using (FileStream fs = File.OpenRead(path))
                             {
                                 foreach (var activity in _FitLogImporter.ImportActivitiesStream(fs, config))
                                 {
                                     cnt++;
-                                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                                    if (_SelectedAthlete.Activities.Where(act => act.OriginId == activity.OriginId).Count() > 0)
                                     {
-                                        _SelectedAthlete.Activities.Add(activity);
-                                    });
+                                        duplicates++;
+                                    }
+                                    else
+                                    {
+                                        DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                                        {
+                                            _SelectedAthlete.Activities.Add(activity);
+                                        });
+                                    }
                                 }
                             }
-                            if (cnt > 0)
+                            cnt -= duplicates;
+                            string message;
+                            if (cnt > 1)
                             {
-                                MessageBox.Show(string.Format(Resources.AthleteDetails_ImportDoneSingular, cnt));
+                                message = string.Format(Resources.AthleteDetails_ImportDonePlural, cnt);
                             }
                             else
                             {
-                                MessageBox.Show(string.Format(Resources.AthleteDetails_ImportDonePlural, cnt));
+                                message = string.Format(Resources.AthleteDetails_ImportDoneSingular, cnt);
                             }
+                            if (duplicates > 0)
+                            {
+                                message += "\n" + string.Format(Resources.AthleteDetails_ImportDuplicatesFound, duplicates);
+                            }
+                            MessageBox.Show(message);
                         }, Resources.AthleteDetails_ImportIsRunning);
                     }
                 });

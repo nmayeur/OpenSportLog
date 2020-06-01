@@ -83,6 +83,7 @@ namespace OSL.EF.Service
                 DbContext.Entry(activity).Collection(a => a.Tracks).Query().Include(t => t.TrackSegments).Load();
             }
 
+            if (activity.Tracks == null) return new List<TrackEntity>();
             return activity.Tracks.ToList();
         }
 

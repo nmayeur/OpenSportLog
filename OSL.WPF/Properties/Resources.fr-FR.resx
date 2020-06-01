@@ -255,4 +255,7 @@
   <data name="Toolbar_Exit" xml:space="preserve">
     <value>Sortir d'OSL</value>
   </data>
+  <data name="AthleteDetails_ImportDuplicatesFound" xml:space="preserve">
+    <value>Attention, {0} doublons n'ont pas été importés.</value>
+  </data>
 </root>

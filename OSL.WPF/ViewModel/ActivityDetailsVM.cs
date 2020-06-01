@@ -133,7 +133,7 @@ namespace OSL.WPF.ViewModel
             set
             {
                 Set(ref _WebBrowserActivityCharts, value);
-                _WebBrowserActivityCharts.DownloadHandler = new OSLCefDownloadHandler();
+                if (_WebBrowserActivityCharts != null) _WebBrowserActivityCharts.DownloadHandler = new OSLCefDownloadHandler();
             }
         }
         #endregion

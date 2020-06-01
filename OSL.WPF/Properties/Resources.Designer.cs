@@ -160,6 +160,15 @@ namespace OSL.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attention, {0} duplicates where not imported..
+        /// </summary>
+        public static string AthleteDetails_ImportDuplicatesFound {
+            get {
+                return ResourceManager.GetString("AthleteDetails_ImportDuplicatesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import is running....
         /// </summary>
         public static string AthleteDetails_ImportIsRunning {

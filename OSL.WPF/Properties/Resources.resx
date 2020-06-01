@@ -252,4 +252,7 @@
   <data name="Toolbar_Exit" xml:space="preserve">
     <value>Exit OSL</value>
   </data>
+  <data name="AthleteDetails_ImportDuplicatesFound" xml:space="preserve">
+    <value>Attention, {0} duplicates where not imported.</value>
+  </data>
 </root>
