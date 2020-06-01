@@ -38,10 +38,19 @@ let OSL = window.OSL || {};
             toolbox: {
                 feature: {
                     dataZoom: {
-                        yAxisIndex: 'none'
+                        yAxisIndex: 'none',
+                        title: {
+                            zoom: 'Area zooming',
+                            back: 'Restore area zooming'
+                        },
+                        show: true
                     },
-                    restore: {},
-                    saveAsImage: {}
+                    restore: {
+                        title: 'Restore'
+                    },
+                    saveAsImage: {
+                        title: 'Save as image'
+                    }
                 }
             },
             dataset: {
