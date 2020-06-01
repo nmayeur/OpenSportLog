@@ -65,10 +65,12 @@ namespace OSL.Common.Tests
             }
             activities.Should().HaveCountGreaterOrEqualTo(1, "expected data_mini.fitlog to contain at least 1 activity");
             activities.Should().ContainSingle(a => a.OriginId == "81f11f5f-fa73-42d4-a7f9-e71a74313ba6");
-            activities.Where(a => a.OriginId == "81f11f5f-fa73-42d4-a7f9-e71a74313ba6").Single().Tracks.Should().ContainSingle();
-            activities.Where(a => a.OriginId == "81f11f5f-fa73-42d4-a7f9-e71a74313ba6").Single().Tracks.Single().TrackSegments.Should().ContainSingle();
-            var tp = activities.Where(a => a.OriginId == "81f11f5f-fa73-42d4-a7f9-e71a74313ba6").Single().Tracks.Single().TrackSegments.Single().TrackPoints;
+            var activity = activities.Where(a => a.OriginId == "81f11f5f-fa73-42d4-a7f9-e71a74313ba6").Single();
+            activity.Tracks.Should().ContainSingle();
+            activity.Tracks.Single().TrackSegments.Should().ContainSingle();
+            var tp = activity.Tracks.Single().TrackSegments.Single().TrackPoints;
             tp.Should().HaveCountGreaterOrEqualTo(10);
+            activity.Should().Match<ActivityEntity>(a => (a.TimeSpan.Ticks > 0));
         }
 
         [Fact]

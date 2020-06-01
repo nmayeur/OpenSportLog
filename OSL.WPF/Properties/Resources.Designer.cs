@@ -70,6 +70,15 @@ namespace OSL.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        public static string ActivityDetails_Duration {
+            get {
+                return ResourceManager.GetString("ActivityDetails_Duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Location.
         /// </summary>
         public static string ActivityDetails_Location {

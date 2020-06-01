@@ -258,4 +258,7 @@
   <data name="AthleteDetails_ImportDuplicatesFound" xml:space="preserve">
     <value>Attention, {0} doublons n'ont pas été importés.</value>
   </data>
+  <data name="ActivityDetails_Duration" xml:space="preserve">
+    <value>Durée</value>
+  </data>
 </root>

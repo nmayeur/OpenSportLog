@@ -255,4 +255,7 @@
   <data name="AthleteDetails_ImportDuplicatesFound" xml:space="preserve">
     <value>Attention, {0} duplicates where not imported.</value>
   </data>
+  <data name="ActivityDetails_Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
 </root>

@@ -25,8 +25,10 @@
         <TextBox TextWrapping="Wrap" Text="{Binding SelectedActivity.Calories}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="103,49,10,0" Width="60"/>
         <Label Content="{x:Static p:Resources.ActivityDetails_Sport}" HorizontalAlignment="Left" Margin="160,46,0,0" VerticalAlignment="Top"  HorizontalContentAlignment="Right" Width="98"/>
         <TextBox TextWrapping="Wrap" Text="{Binding SelectedActivity.Sport}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="260,49,10,0" Width="150"/>
-        <Label Content="{x:Static p:Resources.ActivityDetails_Time}" HorizontalAlignment="Left" Margin="410,46,0,0" VerticalAlignment="Top"  HorizontalContentAlignment="Right" Width="98"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding SelectedActivity.Time, StringFormat=g}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="510,49,10,0" Width="150"/>
+        <Label Content="{x:Static p:Resources.ActivityDetails_Time}" HorizontalAlignment="Left" Margin="0,69,0,0" VerticalAlignment="Top"  HorizontalContentAlignment="Right" Width="98"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding SelectedActivity.Time, StringFormat=g}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="103,73,10,0" Width="150"/>
+        <Label Content="{x:Static p:Resources.ActivityDetails_Duration}" HorizontalAlignment="Left" Margin="260,69,0,0" VerticalAlignment="Top"  HorizontalContentAlignment="Right" Width="98"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding SelectedActivity.TimeSpan, StringFormat=g}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="363,73,10,0" Width="150"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>

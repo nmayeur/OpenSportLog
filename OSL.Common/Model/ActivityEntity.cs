@@ -121,6 +121,17 @@ namespace OSL.Common.Model
             }
         }
 
+        private TimeSpan _TimeSpan;
+        public TimeSpan TimeSpan
+        {
+            get { return _TimeSpan; }
+            set
+            {
+                _TimeSpan = value;
+                NotifyPropertyChanged("TimeSpan");
+            }
+        }
+
         private ObservableCollection<TrackEntity> _Tracks;
         public virtual ObservableCollection<TrackEntity> Tracks
         {
@@ -191,6 +202,12 @@ namespace OSL.Common.Model
             {
                 get { return _instance.Time; }
                 set { _instance.Time = value; }
+            }
+
+            public TimeSpan TimeSpan
+            {
+                get { return _instance.TimeSpan; }
+                set { _instance.TimeSpan = value; }
             }
 
             public List<TrackEntity> Tracks

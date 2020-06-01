@@ -40,6 +40,7 @@ namespace OSL.Common.Service.Importer
         private TrackSegmentEntity.Builder _CurrentTrackSegmentBuilder = null;
         //private AthleteEntity _CurrentAthlete = null;
         private DateTimeOffset _CurrentTrackStartTime;
+        private DateTimeOffset _LastTrackTime = DateTimeOffset.MinValue;
 
         public IEnumerable<ActivityEntity> ImportActivitiesStream(Stream stream, IDictionary<string, ACTIVITY_SPORT> categoryMapping)
         {
@@ -142,10 +143,9 @@ namespace OSL.Common.Service.Importer
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY_TRACK_PT;
                                     int tm;
                                     var tmAsString = reader.GetAttribute("tm");
-                                    DateTimeOffset tmTime;
                                     if (int.TryParse(tmAsString, out tm))
                                     {
-                                        tmTime = _CurrentTrackStartTime.AddSeconds(tm);
+                                        _LastTrackTime = _CurrentTrackStartTime.AddSeconds(tm);
                                     }
                                     else
                                     {
@@ -184,7 +184,7 @@ namespace OSL.Common.Service.Importer
                                     }
                                     TrackPointVO trackPoint = new TrackPointVO.Builder
                                     {
-                                        Time = tmTime,
+                                        Time = _LastTrackTime,
                                         Latitude = latitude,
                                         Longitude = longitude,
                                         Elevation = elevation,
@@ -193,7 +193,7 @@ namespace OSL.Common.Service.Importer
                                     };
                                     _CurrentTrackSegmentBuilder.TrackPoints.Add(trackPoint);
                                     _Logger.Debug(string.Format("Trackpoint time {0}, latitude {1}, longitude {2}, elevation {3}, heart-rate {4}, cadence {5}",
-                                        tmTime, latitude, longitude, elevation, hr, cadence));
+                                        _LastTrackTime, latitude, longitude, elevation, hr, cadence));
                                     break;
                             }
                             break;
@@ -221,9 +221,14 @@ namespace OSL.Common.Service.Importer
                                     break;
                                 case "Activity":
                                     _CurrentContext = PARSE_CONTEXT.FITNESS_WORKBOOK;
+                                    if (_LastTrackTime != DateTimeOffset.MinValue && _CurrentActivityBuilder.Time != null)
+                                    {
+                                        _CurrentActivityBuilder.TimeSpan = _LastTrackTime - _CurrentActivityBuilder.Time;
+                                    }
                                     var activity = _CurrentActivityBuilder.Build();
-                                    yield return activity;
                                     _CurrentActivityBuilder = null;
+                                    _LastTrackTime = DateTimeOffset.MinValue;
+                                    yield return activity;
                                     break;
                                 case "Metadata":
                                     _CurrentContext = PARSE_CONTEXT.ACTIVITY;
