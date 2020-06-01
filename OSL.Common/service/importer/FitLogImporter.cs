@@ -167,17 +167,20 @@ namespace OSL.Common.Service.Importer
                                     float elevation;
                                     if (!float.TryParse(reader.GetAttribute("ele"), style, culture, out elevation))
                                     {
-                                        break;
+                                        var countPoints = _CurrentTrackSegmentBuilder.TrackPoints.Count;
+                                        elevation = countPoints > 0 ? _CurrentTrackSegmentBuilder.TrackPoints[countPoints - 1].Elevation : 0;
                                     }
                                     int hr;
                                     if (!int.TryParse(reader.GetAttribute("hr"), out hr))
                                     {
-                                        break;
+                                        var countPoints = _CurrentTrackSegmentBuilder.TrackPoints.Count;
+                                        hr = countPoints > 0 ? _CurrentTrackSegmentBuilder.TrackPoints[countPoints - 1].HeartRate : 0;
                                     }
                                     int cadence;
                                     if (!int.TryParse(reader.GetAttribute("cadence"), out cadence))
                                     {
-                                        break;
+                                        var countPoints = _CurrentTrackSegmentBuilder.TrackPoints.Count;
+                                        cadence = countPoints > 0 ? _CurrentTrackSegmentBuilder.TrackPoints[countPoints - 1].Cadence : 0;
                                     }
                                     TrackPointVO trackPoint = new TrackPointVO.Builder
                                     {

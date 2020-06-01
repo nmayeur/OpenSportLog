@@ -20,6 +20,7 @@ using OSL.Common.Service.Importer;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Xunit;
 using Xunit.Abstractions;
@@ -63,6 +64,11 @@ namespace OSL.Common.Tests
                 { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ACTIVITY_SPORT.SWIMMING} }));
             }
             activities.Should().HaveCountGreaterOrEqualTo(1, "expected data_mini.fitlog to contain at least 1 activity");
+            activities.Should().ContainSingle(a => a.OriginId == "81f11f5f-fa73-42d4-a7f9-e71a74313ba6");
+            activities.Where(a => a.OriginId == "81f11f5f-fa73-42d4-a7f9-e71a74313ba6").Single().Tracks.Should().ContainSingle();
+            activities.Where(a => a.OriginId == "81f11f5f-fa73-42d4-a7f9-e71a74313ba6").Single().Tracks.Single().TrackSegments.Should().ContainSingle();
+            var tp = activities.Where(a => a.OriginId == "81f11f5f-fa73-42d4-a7f9-e71a74313ba6").Single().Tracks.Single().TrackSegments.Single().TrackPoints;
+            tp.Should().HaveCountGreaterOrEqualTo(10);
         }
 
         [Fact]
