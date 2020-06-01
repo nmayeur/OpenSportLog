@@ -15,19 +15,19 @@ limitations under the License.
 using CefSharp;
 using CefSharp.Wpf;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using OSL.Common.Model;
+using OSL.Common.Model.ECharts;
 using OSL.Common.Service;
+using OSL.WPF.Utils;
 using OSL.WPF.ViewModel.Scaffholding;
 using System;
-using System.Linq;
-using System.Globalization;
-using System.Windows;
 using System.ComponentModel;
-using OSL.Common.Model.ECharts;
+using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace OSL.WPF.ViewModel
 {
@@ -130,7 +130,11 @@ namespace OSL.WPF.ViewModel
         public IWpfWebBrowser WebBrowserActivityCharts
         {
             get { return _WebBrowserActivityCharts; }
-            set { Set(ref _WebBrowserActivityCharts, value); }
+            set
+            {
+                Set(ref _WebBrowserActivityCharts, value);
+                _WebBrowserActivityCharts.DownloadHandler = new OSLCefDownloadHandler();
+            }
         }
         #endregion
 
