@@ -108,6 +108,7 @@ namespace OSL.WPF.ViewModel
                     command = $"OSL.drawRoute({geoJson})";
                     _ExecuteJavaScript(_WebBrowser, command.ToString(enCulture));
 
+                    _ExecuteJavaScript(_WebBrowserActivityCharts, $"OSL.clear()");
                     var serializedPoints = _EChartsService.SerializeTrackDatas(trackPoints);
                     _ExecuteJavaScript(_WebBrowserActivityCharts, $"OSL.loadData({serializedPoints})");
                 }
