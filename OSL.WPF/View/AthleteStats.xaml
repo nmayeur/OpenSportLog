@@ -44,7 +44,7 @@
             </ToolBarTray>
         </DockPanel>
         <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1">
-            <wpf:ChromiumWebBrowser x:Name="BrowserStats" Address="http://internal/activityChart.html"
+            <wpf:ChromiumWebBrowser x:Name="BrowserStats" Address="http://internal/athleteStats.html"
                  WebBrowser="{Binding WebBrowserStats, Mode=OneWayToSource}"/>
         </Border>
     </Grid>

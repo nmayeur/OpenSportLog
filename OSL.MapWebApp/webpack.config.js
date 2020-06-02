@@ -10,7 +10,9 @@ module.exports = {
         map: ["./src/map.js", "./src/styles/map.scss"],
         mapTester: ["./src/map.js", "./src/tester.js", "./src/mapTester.js", "./src/styles/map.scss", "./src/styles/tester.scss"],
         activityChart: ["./src/activityChart.js", "./src/styles/activityChart.scss"],
-        activityChartTester: ["./src/activityChart.js", "./src/tester.js", "./src/activityChartTester.js", "./src/styles/activityChart.scss", "./src/styles/tester.scss"]
+        activityChartTester: ["./src/activityChart.js", "./src/tester.js", "./src/activityChartTester.js", "./src/styles/activityChart.scss", "./src/styles/tester.scss"],
+        athleteStats: ["./src/athleteStats.js", "./src/styles/athleteStats.scss"],
+        athleteStatsTester: ["./src/athleteStats.js", "./src/tester.js", "./src/athleteStatsTester.js", "./src/styles/athleteStats.scss", "./src/styles/tester.scss"]
     },
     output: {
         path: path.resolve(__dirname, "./dist"),
@@ -120,6 +122,16 @@ module.exports = {
             chunks: ['activityChartTester'],
             template: 'src/activityChartTester.html',
             filename: 'activityChartTester.html'
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['athleteStats'],
+            template: 'src/athleteStats.html',
+            filename: 'athleteStats.html'
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['athleteStatsTester'],
+            template: 'src/athleteStatsTester.html',
+            filename: 'athleteStatsTester.html'
         })
     ]
 };

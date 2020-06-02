@@ -29,7 +29,12 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="src\athleteStatsTester.js" />
+    <Content Include="src\athleteStatsTester.html" />
+    <Content Include="src\athleteStats.html" />
+    <Content Include="src\athleteStats.js" />
     <Content Include="src\mapTester.js" />
+    <Content Include="src\styles\athleteStats.scss" />
     <Content Include="src\tester.js" />
     <Content Include="src\activityChartTester.js" />
     <Content Include="src\activityChartTester.html" />
