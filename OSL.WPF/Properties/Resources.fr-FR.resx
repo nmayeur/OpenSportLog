@@ -261,4 +261,10 @@
   <data name="ActivityDetails_Duration" xml:space="preserve">
     <value>Durée</value>
   </data>
+  <data name="MainWindow_DetailTab" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="MainWindow_StatsTab" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
 </root>

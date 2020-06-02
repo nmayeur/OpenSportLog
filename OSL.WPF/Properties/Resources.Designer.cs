@@ -268,6 +268,15 @@ namespace OSL.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string MainWindow_DetailTab {
+            get {
+                return ResourceManager.GetString("MainWindow_DetailTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading file....
         /// </summary>
         public static string MainWindow_LoadingFile {
@@ -309,6 +318,15 @@ namespace OSL.WPF.Properties {
         public static string MainWindow_SQLiteFilter {
             get {
                 return ResourceManager.GetString("MainWindow_SQLiteFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics.
+        /// </summary>
+        public static string MainWindow_StatsTab {
+            get {
+                return ResourceManager.GetString("MainWindow_StatsTab", resourceCulture);
             }
         }
         

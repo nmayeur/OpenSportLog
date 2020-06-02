@@ -263,8 +263,12 @@
     </ApplicationDefinition>
     <Compile Include="Utils\OSLCefDownloadHandler.cs" />
     <Compile Include="Utils\InitSettings.cs" />
+    <Compile Include="ViewModel\AthleteStatsVM.cs" />
     <Compile Include="ViewModel\ImportSportsMatchingEntryVM.cs" />
     <Compile Include="ViewModel\NewAthleteVM.cs" />
+    <Compile Include="View\AthleteStats.xaml.cs">
+      <DependentUpon>AthleteStats.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NewAthleteDialog.xaml.cs">
       <DependentUpon>NewAthleteDialog.xaml</DependentUpon>
     </Compile>
@@ -278,6 +282,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AthleteDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AthleteStats.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

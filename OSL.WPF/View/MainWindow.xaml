@@ -111,6 +111,13 @@
         <TextBlock Grid.Row="1" Text="{Binding Path=ProgressbarText}" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <Views:AthleteDetails Grid.Column="0" Grid.Row="2"/>
         <GridSplitter Grid.Column="0" Grid.Row="3" Height="5" HorizontalAlignment="Stretch" />
-        <Views:ActivityDetails Grid.Column="0" Grid.Row="4" IsEnabled="{Binding Path=IsAthleteSelected}"/>
+        <TabControl Grid.Column="0" Grid.Row="4" >
+            <TabItem Header="{x:Static p:Resources.MainWindow_DetailTab}">
+                <Views:ActivityDetails IsEnabled="{Binding Path=IsAthleteSelected}"/>
+            </TabItem>
+            <TabItem Header="{x:Static p:Resources.MainWindow_StatsTab}" >
+                <Views:AthleteStats IsEnabled="{Binding Path=IsAthleteSelected}"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
