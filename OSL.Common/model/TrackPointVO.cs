@@ -26,6 +26,8 @@ namespace OSL.Common.Model
         public float Elevation { get; private set; }
         public int HeartRate { get; private set; }
         public int Cadence { get; private set; }
+        public int Power { get; private set; }
+        public float Temperature { get; private set; }
 
         protected override IEnumerable<object> GetAtomicValues()
         {
@@ -35,6 +37,8 @@ namespace OSL.Common.Model
             yield return Elevation;
             yield return HeartRate;
             yield return Cadence;
+            yield return Power;
+            yield return Temperature;
         }
 
         public sealed class Builder : BuilderBase<TrackPointVO>
@@ -75,6 +79,16 @@ namespace OSL.Common.Model
             {
                 get { return _instance.Cadence; }
                 set { _instance.Cadence = value; }
+            }
+            public int Power
+            {
+                get { return _instance.Power; }
+                set { _instance.Power = value; }
+            }
+            public float Temperature
+            {
+                get { return _instance.Temperature; }
+                set { _instance.Temperature = value; }
             }
         }
     }

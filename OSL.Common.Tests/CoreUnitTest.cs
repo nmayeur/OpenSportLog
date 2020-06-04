@@ -50,6 +50,25 @@ namespace OSL.Common.Tests
         }
 
         [Fact]
+        public void TestImportGpxData()
+        {
+            string path = @"data\data_tiny.gpx";
+            GpxImporter importer = new GpxImporter();
+
+            IList<ActivityEntity> activities;
+            using (FileStream fs = File.OpenRead(path))
+            {
+                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs, new Dictionary<string, ACTIVITY_SPORT> {
+                { "1", ACTIVITY_SPORT.BIKING},
+                { "2",ACTIVITY_SPORT.RUNNING},
+                { "3",ACTIVITY_SPORT.SWIMMING} }));
+            }
+            activities.Should().HaveCountGreaterOrEqualTo(1, "expected data_mini.fitlog to contain at least 1 activity");
+            var activity = activities.Where(a => a.OriginId == "StravaGPX2020-05-17T07:24:45Z").Single();
+            activity.Tracks.Should().ContainSingle();
+        }
+
+        [Fact]
         public void TestImportFitlogData()
         {
             string path = @"data\data_mini.fitlog";

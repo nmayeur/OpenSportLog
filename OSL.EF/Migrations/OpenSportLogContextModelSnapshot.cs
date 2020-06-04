@@ -149,6 +149,12 @@ namespace OSL.EF.Migrations
                             b1.Property<float>("Longitude")
                                 .HasColumnType("REAL");
 
+                            b1.Property<int>("Power")
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<float>("Temperature")
+                                .HasColumnType("REAL");
+
                             b1.Property<DateTimeOffset>("Time")
                                 .HasColumnType("TEXT");
 
