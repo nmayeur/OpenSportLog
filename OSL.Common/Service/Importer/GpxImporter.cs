@@ -28,6 +28,7 @@ namespace OSL.Common.Service.Importer
         public IEnumerable<ActivityEntity> ImportActivitiesStream(Stream stream, IDictionary<string, ACTIVITY_SPORT> categoryMapping)
         {
             _Logger.Info("Importing data stream");
+            _CurrentContext = PARSE_CONTEXT.ROOT;
             XmlReaderSettings settings = new XmlReaderSettings
             {
                 Async = false
@@ -332,6 +333,63 @@ namespace OSL.Common.Service.Importer
                     }
                 }
             }
+        }
+
+        public IDictionary<string, string> GetSports(Stream stream)
+        {
+            IDictionary<string, string> sports = new Dictionary<string, string>();
+
+            XmlReaderSettings settings = new XmlReaderSettings
+            {
+                Async = false
+            };
+            using (XmlReader reader = XmlReader.Create(stream, settings))
+            {
+                // SAX parsing for performance
+                _CurrentContext = PARSE_CONTEXT.ROOT;
+                while (reader.Read())
+                {
+                    switch (reader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            switch (reader.Name)
+                            {
+                                case "trk":
+                                    _CurrentContext = PARSE_CONTEXT.TRACK;
+                                    break;
+                                case "type":
+                                    _CurrentContext = PARSE_CONTEXT.TRACK_TYPE;
+                                    break;
+                            }
+                            break;
+                        case XmlNodeType.Text:
+                            switch (_CurrentContext)
+                            {
+                                case PARSE_CONTEXT.TRACK_TYPE:
+                                    string type = reader.Value;
+                                    if (!sports.ContainsKey(type))
+                                    {
+                                        sports.Add(type, type);
+                                        _Logger.Debug($"Activity sport {type}");
+                                    }
+                                    break;
+                            }
+                            break;
+                        case XmlNodeType.EndElement:
+                            switch (reader.Name)
+                            {
+                                case "trk":
+                                    _CurrentContext = PARSE_CONTEXT.ROOT;
+                                    break;
+                                case "type":
+                                    if(_CurrentContext == PARSE_CONTEXT.TRACK_TYPE) _CurrentContext=PARSE_CONTEXT.TRACK;
+                                    break;
+                            }
+                            break;
+                    }
+                }
+            }
+            return sports;
         }
     }
 }

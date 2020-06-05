@@ -18,6 +18,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
 using OSL.Common.Model;
 using OSL.Common.Service;
+using OSL.Common.Service.Importer;
 using OSL.WPF.Properties;
 using OSL.WPF.View;
 using OSL.WPF.ViewModel.Scaffholding;
@@ -477,9 +478,27 @@ namespace OSL.WPF.ViewModel
 
         private void _ImportFitLogDialogAsync()
         {
-            Messenger.Default.Send(new NotificationMessage<IMPORT_TYPE>(IMPORT_TYPE.FITLOG, MessengerNotifications.IMPORT));
+            Messenger.Default.Send(new NotificationMessage<ImporterTypeEnum>(ImporterTypeEnum.FITLOG, MessengerNotifications.IMPORT));
         }
         #endregion
 
+        #region ImportGpxCommand
+        private RelayCommand _ImportGpxCommand;
+        public RelayCommand ImportGpxCommand
+        {
+            get
+            {
+                return _ImportGpxCommand ??
+                    (_ImportGpxCommand = new RelayCommand(
+                        () => { Task.Run(() => _ImportGpxDialogAsync()); }
+                        ));
+            }
+        }
+
+        private void _ImportGpxDialogAsync()
+        {
+            Messenger.Default.Send(new NotificationMessage<ImporterTypeEnum>(ImporterTypeEnum.GPX, MessengerNotifications.IMPORT));
+        }
+        #endregion
     }
 }

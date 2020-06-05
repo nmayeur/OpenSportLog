@@ -151,6 +151,15 @@ namespace OSL.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GPX|*.gpx.
+        /// </summary>
+        public static string AthleteDetails_GpxFilter {
+            get {
+                return ResourceManager.GetString("AthleteDetails_GpxFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Imported {0} activities.
         /// </summary>
         public static string AthleteDetails_ImportDonePlural {
@@ -426,6 +435,15 @@ namespace OSL.WPF.Properties {
         public static string Menu_Import_Fitlog {
             get {
                 return ResourceManager.GetString("Menu_Import_Fitlog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _GPX.
+        /// </summary>
+        public static string Menu_Import_GPX {
+            get {
+                return ResourceManager.GetString("Menu_Import_GPX", resourceCulture);
             }
         }
         

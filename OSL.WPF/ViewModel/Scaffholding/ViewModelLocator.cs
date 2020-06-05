@@ -72,6 +72,7 @@ namespace OSL.WPF.ViewModel.Scaffholding
             SimpleIoc.Default.Register<AthleteStatsVM>();
             SimpleIoc.Default.Register<IDataAccessService, DataAccessService>();
             SimpleIoc.Default.Register<FitLogImporter>();
+            SimpleIoc.Default.Register<GpxImporter>();
             SimpleIoc.Default.Register<IEChartsService, EChartsService>();
             SimpleIoc.Default.Register<IGeoJsonConverter, GeoJsonConverter>();
         }

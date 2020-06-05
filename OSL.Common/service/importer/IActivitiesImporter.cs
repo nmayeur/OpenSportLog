@@ -20,6 +20,7 @@ namespace OSL.Common.Service.Importer
 {
     public interface IActivitiesImporter
     {
+        IDictionary<string, string> GetSports(Stream stream);
         IEnumerable<ActivityEntity> ImportActivitiesStream(Stream stream, IDictionary<string, ACTIVITY_SPORT> categoryMapping);
     }
 }

@@ -55,6 +55,7 @@
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.Menu_Import}">
                         <MenuItem Header="{x:Static p:Resources.Menu_Import_Fitlog}" Command="{Binding ImportFitLogCommand}"/>
+                        <MenuItem Header="{x:Static p:Resources.Menu_Import_GPX}" Command="{Binding ImportGpxCommand}"/>
                     </MenuItem>
                 </MenuItem>
             </Menu>

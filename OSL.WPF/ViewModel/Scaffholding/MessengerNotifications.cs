@@ -22,8 +22,6 @@ namespace OSL.WPF.ViewModel.Scaffholding
         public readonly static string NEW = "New";
         public readonly static string IMPORT = "Import";
 
-        public enum IMPORT_TYPE { FITLOG }
-
         public readonly static string ASK_FOR_ACTION = "AskForAction";
         public enum ACTION_TYPE { DELETE_SELECTED_ACTIVITIES }
     }

@@ -37,12 +37,15 @@ namespace OSL.WPF.ViewModel
     public class AthleteDetailsVM : ViewModelBase
     {
 
+        private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
         private readonly IDataAccessService _DbAccess;
         private readonly FitLogImporter _FitLogImporter;
-        public AthleteDetailsVM(IDataAccessService DbAccess, FitLogImporter FitLogImporter)
+        private readonly GpxImporter _GpxImporter;
+        public AthleteDetailsVM(IDataAccessService DbAccess, FitLogImporter FitLogImporter, GpxImporter GpxImporter)
         {
             _DbAccess = DbAccess;
             _FitLogImporter = FitLogImporter;
+            _GpxImporter = GpxImporter;
             Messenger.Default.Register<NotificationMessage<IList<AthleteEntity>>>(this, message =>
             {
                 if (message.Notification == MessengerNotifications.LOADED)
@@ -57,14 +60,11 @@ namespace OSL.WPF.ViewModel
                     }
                 }
             });
-            Messenger.Default.Register<NotificationMessage<IMPORT_TYPE>>(this, message =>
+            Messenger.Default.Register<NotificationMessage<ImporterTypeEnum>>(this, message =>
             {
                 if (message.Notification == MessengerNotifications.IMPORT)
                 {
-                    if (message.Content == IMPORT_TYPE.FITLOG)
-                    {
-                        ImportFitLogDialog();
-                    }
+                    ImportDialog(message.Content);
                 }
             });
             Messenger.Default.Register<NotificationMessage<AthleteEntity>>(this, message =>
@@ -201,11 +201,24 @@ namespace OSL.WPF.ViewModel
         #endregion
 
         #region Import Fitlog
-        private void ImportFitLogDialog()
+        private void ImportDialog(ImporterTypeEnum ImportType)
         {
+            IActivitiesImporter importer;
+            switch (ImportType)
+            {
+                case ImporterTypeEnum.FITLOG:
+                    importer = _FitLogImporter;
+                    break;
+                case ImporterTypeEnum.GPX:
+                    importer = _GpxImporter;
+                    break;
+                default:
+                    _Logger.Error("Invalid type for importer");
+                    return;
+            }
             var openFileDialog = new OpenFileDialog()
             {
-                Filter = Resources.AthleteDetails_FitlogFilter
+                Filter = ImportType == ImporterTypeEnum.FITLOG ? Resources.AthleteDetails_FitlogFilter : Resources.AthleteDetails_GpxFilter
             };
             if (openFileDialog.ShowDialog() == true)
             {
@@ -218,7 +231,7 @@ namespace OSL.WPF.ViewModel
                     dialogDataContext.ImportSportsMatchingEntries.Clear();
                     using (FileStream fs = File.OpenRead(path))
                     {
-                        foreach (var sport in _FitLogImporter.GetSports(fs))
+                        foreach (var sport in importer.GetSports(fs))
                         {
                             dialogDataContext.ImportSportsMatchingEntries.Add(new ImportSportsMatchingEntryVM
                             {
@@ -241,7 +254,7 @@ namespace OSL.WPF.ViewModel
                             int duplicates = 0;
                             using (FileStream fs = File.OpenRead(path))
                             {
-                                foreach (var activity in _FitLogImporter.ImportActivitiesStream(fs, config))
+                                foreach (var activity in importer.ImportActivitiesStream(fs, config))
                                 {
                                     cnt++;
                                     if (_SelectedAthlete.Activities.Where(act => act.OriginId == activity.OriginId).Count() > 0)

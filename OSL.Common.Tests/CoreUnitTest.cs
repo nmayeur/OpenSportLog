@@ -50,6 +50,20 @@ namespace OSL.Common.Tests
         }
 
         [Fact]
+        public void TestImportGpxSports()
+        {
+            string path = @"data\data_tiny.gpx";
+            IActivitiesImporter importer = new GpxImporter();
+
+            IDictionary<string, string> sports;
+            using (FileStream fs = File.OpenRead(path))
+            {
+                sports = importer.GetSports(fs);
+            }
+            sports.Should().HaveCountGreaterOrEqualTo(1, "expected data_tiny.gpx to contain at least 1 sport");
+        }
+
+        [Fact]
         public void TestImportGpxData()
         {
             string path = @"data\data_tiny.gpx";
