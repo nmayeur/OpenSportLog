@@ -10,7 +10,7 @@ let OSL = window.OSL || {};
 (function () {
     'use strict'
 
-    let _hrData = [['time', 'hr', 'candence', 'elevation']];
+    let _hrData = [['time', 'hr', 'candence', 'elevation', 'power', 'temperature']];
     let chart = null;
     this.loadData = function (hrData) {
         _hrData = hrData;

@@ -14,10 +14,10 @@ namespace OSL.Common.Service
         {
             //return "[{ x: 0, y: 20 }, { x: 150, y: 150 }, { x: 300, y: 100 }, { x: 450, y: 20 }, { x: 600, y: 130 }]";
             object[] points = new object[trackPoints.Count() + 1];
-            points[0] = new object[] { "time", "hr", "cadence", "elevation" };
+            points[0] = new object[] { "time", "hr", "cadence", "elevation", "power", "temperature" };
             trackPoints.Select((tp, index) =>
              {
-                 object[] array = { tp.Time.ToUnixTimeMilliseconds(), tp.HeartRate, tp.Cadence, tp.Elevation };
+                 object[] array = { tp.Time.ToUnixTimeMilliseconds(), tp.HeartRate, tp.Cadence, tp.Elevation, tp.Power, tp.Temperature };
                  return array;
              }).ToArray().CopyTo(points, 1);
             var json = JsonConvert.SerializeObject(points);

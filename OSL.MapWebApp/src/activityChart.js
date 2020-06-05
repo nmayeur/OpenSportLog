@@ -10,7 +10,7 @@ let OSL = window.OSL || {};
 (function () {
     'use strict'
 
-    let _hrData = [['time', 'hr', 'candence', 'elevation']];
+    let _hrData = [['time', 'hr', 'candence', 'elevation', 'power', 'temperature']];
     let chart = null;
     this.loadData = function (hrData) {
         _hrData = hrData;
@@ -57,7 +57,7 @@ let OSL = window.OSL || {};
                 source: _hrData
             },
             legend: {
-                data: ['HR', 'Cadence', 'Elevation']
+                data: ['HR', 'Cadence', 'Elevation', 'Power', 'Temperature']
             },
             xAxis: {
                 type: 'time',
@@ -71,7 +71,7 @@ let OSL = window.OSL || {};
             },
             yAxis: [{
                 type: 'value',
-                name: 'HT / Cadence'
+                name: 'HT / Cad / Power / Temp'
             }, {
                 type: 'value',
                 name: 'Elevation'
@@ -155,6 +155,46 @@ let OSL = window.OSL || {};
                         }])
                     },
                     encode: { x: 'time', y: 'elevation' }
+                }, {
+                    name: 'Power',
+                    type: 'line',
+                    smooth: true,
+                    symbol: 'none',
+                    sampling: 'average',
+                    itemStyle: {
+                        color: 'rgb(255, 0, 0)'
+                    },
+                    connectNulls: true,
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgb(190, 183, 255)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(255, 100, 0)'
+                        }])
+                    },
+                    encode: { x: 'time', y: 'power' }
+                }, {
+                    name: 'Temperature',
+                    type: 'line',
+                    smooth: true,
+                    symbol: 'none',
+                    sampling: 'average',
+                    itemStyle: {
+                        color: 'rgb(225, 255, 0)'
+                    },
+                    connectNulls: true,
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgb(0, 255, 253)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(225, 255, 0)'
+                        }])
+                    },
+                    encode: { x: 'time', y: 'temperature' }
                 }
             ]
         };
