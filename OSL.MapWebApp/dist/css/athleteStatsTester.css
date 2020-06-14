@@ -1564,7 +1564,7 @@ body, html {
   float: right;
   position: absolute;
   right: 0;
-  left: 200px;
+  left: 250px;
   margin-top: 10px;
   margin-left: 10px;
   border: 2px solid green; }
@@ -1572,7 +1572,7 @@ body, html {
 #sidebar {
   background-color: palegreen;
   margin-top: 10px;
-  width: 200px;
+  width: 250px;
   float: left;
   position: absolute;
   height: 100%;
@@ -1595,4 +1595,10 @@ body, html {
 
 #sidebar button {
   margin: 3px 3px 5px 5px; }
+
+#sidebar input {
+  margin: 3px 3px 5px 5px; }
+
+#sidebar fieldset {
+  margin: 7px 5px 5px 5px; }
 

@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import { polyline } from 'leaflet';
 
 let MapTester = window.MapTester || {};
 (function () {
@@ -9,7 +8,7 @@ let MapTester = window.MapTester || {};
 
     this.init = function () {
 
-        var _polylinePoints = {
+        let _geoJson = {
             "type": "FeatureCollection",
             "features": [
                 {
@@ -41,8 +40,7 @@ let MapTester = window.MapTester || {};
                         ]
                     },
                     "properties": {
-                        "popupContent": "test popup",
-                        "zoomed": false
+                        "zoomed": "false"
                     },
                     "id": 1
                 }
@@ -55,20 +53,39 @@ let MapTester = window.MapTester || {};
         //--------
         $(function () {
             $("#sidebar #btnGotoStart").click(function (event) {
-                OSL.goToCoordinates(_polylinePoints.features[0].geometry.coordinates[0][1], _polylinePoints.features[0].geometry.coordinates[0][0]);
+                OSL.goToCoordinates(_geoJson.features[0].geometry.coordinates[0][1], _geoJson.features[0].geometry.coordinates[0][0]);
             });
             $("#sidebar #btnDrawRoute").click(function (event) {
-                OSL.drawRoute(_polylinePoints);
+                OSL.drawRoute(_geoJson);
             });
             $("#sidebar #btnDrawZoomedRoute").click(function (event) {
-                let countPoints = _polylinePoints.features[0].geometry.coordinates.length;
-                OSL.drawZoomedRoute(polylinePoints.slice(Math.round(countPoints * 0.2), Math.round(countPoints * 0.8)));
+                let countPoints = _geoJson.features[0].geometry.coordinates.length;
+                let zoomed = {
+                    "type": "FeatureCollection",
+                    "features": [
+                        {
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "LineString",
+                                "coordinates": _geoJson.features[0].geometry.coordinates.slice(Math.round(countPoints * 0.2), Math.round(countPoints * 0.8))
+                            },
+                            "properties": {
+                                "zoomed": "true"
+                            },
+                            "id": 1
+                        }
+                    ]
+                }
+                OSL.drawZoomedRoute(zoomed);
             });
             $("#sidebar #btnDrawMarkers").click(function (event) {
-                OSL.setMarker(_polylinePoints.features[0].geometry.coordinates[0][1], _polylinePoints.features[0].geometry.coordinates[0][0], START_MARKER);
-                let countLines = _polylinePoints.features.length;
-                let countPoints = _polylinePoints.features[countLines - 1].geometry.coordinates.length;
-                OSL.setMarker(_polylinePoints.features[countLines - 1].geometry.coordinates[countPoints - 1][1], _polylinePoints.features[countLines - 1].geometry.coordinates[countPoints - 1][0], END_MARKER);
+                OSL.setMarker(_geoJson.features[0].geometry.coordinates[0][1], _geoJson.features[0].geometry.coordinates[0][0], START_MARKER);
+                let countLines = _geoJson.features.length;
+                let countPoints = _geoJson.features[countLines - 1].geometry.coordinates.length;
+                OSL.setMarker(_geoJson.features[countLines - 1].geometry.coordinates[countPoints - 1][1], _geoJson.features[countLines - 1].geometry.coordinates[countPoints - 1][0], END_MARKER);
+            });
+            $("#sidebar #btnChangeBaseMap").click(function (event) {
+                OSL.changeBaseMap("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors');
             });
             $("#sidebar #btnClear").click(function (event) {
                 OSL.cleanMap();

@@ -57,7 +57,7 @@ namespace OSL.Common.Service
                 FormattableString coordinates2 = $"[{tp.Longitude:N6},{tp.Latitude:N6}]";
                 geoJson += coordinates2.ToString(enCulture);
             }
-            geoJson += $@"]}},""properties"":{{""zoomed"":false}},""id"": 1}}";
+            geoJson += $@"]}},""properties"":{{""zoomed"":true}},""id"": 1}}";
             geoJson += @"]}";
             return geoJson;
         }

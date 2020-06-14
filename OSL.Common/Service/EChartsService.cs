@@ -12,7 +12,6 @@ namespace OSL.Common.Service
     {
         public string SerializeTrackDatas(IEnumerable<TrackPointVO> trackPoints)
         {
-            //return "[{ x: 0, y: 20 }, { x: 150, y: 150 }, { x: 300, y: 100 }, { x: 450, y: 20 }, { x: 600, y: 130 }]";
             object[] points = new object[trackPoints.Count() + 1];
             points[0] = new object[] { "time", "hr", "cadence", "elevation", "power", "temperature" };
             trackPoints.Select((tp, index) =>

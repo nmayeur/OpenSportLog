@@ -27,7 +27,7 @@ let MapTester = window.MapTester || {};
                 Math.round(((Math.random() - 0.5) * 3) + data[i - 1][2]),
                 Math.round(((Math.random() - 0.5) * 20) + data[i - 1][3]),
                 Math.round(((Math.random() - 0.5) * 2) + data[i - 1][4]),
-                Math.round(((Math.random() - 0.5) * 0.3) + data[i - 1][5])]);
+                Math.round(((Math.random() - 0.5) * 2) + data[i - 1][5])]);
             }
             OSL.loadData(data);
         });

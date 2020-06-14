@@ -10,22 +10,245 @@ let OSL = window.OSL || {};
 (function () {
     'use strict'
 
-    let _hrData = [['time', 'hr', 'candence', 'elevation', 'power', 'temperature']];
     let chart = null;
-    this.loadData = function (hrData) {
-        _hrData = hrData;
-        this.drawChart();
+
+    this.clear = function () {
+        this.drawChart([]);
     }
 
     let _userLocale = "en-US";//Default value
     let _userTimezone = "UTC";//Default value
 
-    this.clear = function () {
-        _hrData = [];
-        this.drawChart();
-    }
+    this.drawChart = function (data, labels, axis) {
+        let legends = [];
+        if (labels.hr) legends.push(labels.hr);
+        if (labels.cadence) legends.push(labels.cadence);
+        if (labels.elevation) legends.push(labels.elevation);
+        if (labels.power) legends.push(labels.power);
+        if (labels.temperature) legends.push(labels.temperature);
+        if (labels.distance) legends.push(labels.distance);
+        if (labels.duration) legends.push(labels.duration);
 
-    this.drawChart = function () {
+
+        let series = [];
+        let yAxisLabelsLeft = "";
+        let yAxisLabelsRight = "";
+        if (axis.hr && labels.hr) {
+            if (axis.hr == "left") {
+                yAxisLabelsLeft += labels.hr;
+            } else {
+                yAxisLabelsRight += labels.hr;
+            }
+            series.push({
+                name: labels.hr,
+                type: 'line',
+                smooth: true,
+                yAxisIndex: axis.hr == "right" ? 1 : 0,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    color: 'rgb(255, 70, 131)'
+                },
+                connectNulls: true,
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(255, 158, 68)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(255, 70, 131)'
+                    }])
+                },
+                encode: { x: 'time', y: 'hr' }
+            });
+        }
+        if (axis.cadence && labels.cadence) {
+            if (axis.cadence == "left") {
+                if (yAxisLabelsLeft) yAxisLabelsLeft += " / ";
+                yAxisLabelsLeft += labels.cadence;
+            } else {
+                if (yAxisLabelsRight) yAxisLabelsRight += " / ";
+                yAxisLabelsRight += labels.cadence;
+            }
+            series.push({
+                name: labels.cadence,
+                type: 'line',
+                smooth: true,
+                yAxisIndex: axis.cadence == "right" ? 1 : 0,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    color: 'rgb(54, 32, 255)'
+                },
+                connectNulls: true,
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(190, 183, 255)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(54, 32, 255)'
+                    }])
+                },
+                encode: { x: 'time', y: 'cadence' }
+            });
+        }
+        if (axis.elevation && labels.elevation) {
+            if (axis.elevation == "left") {
+                if (yAxisLabelsLeft) yAxisLabelsLeft += " / ";
+                yAxisLabelsLeft += labels.elevation;
+            } else {
+                if (yAxisLabelsRight) yAxisLabelsRight += " / ";
+                yAxisLabelsRight += labels.elevation;
+            }
+            series.push({
+                name: labels.elevation,
+                type: 'line',
+                smooth: true,
+                yAxisIndex: axis.elevation == "right" ? 1 : 0,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    color: 'rgb(245, 238, 95)'
+                },
+                connectNulls: true,
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(251, 248, 187)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(245, 238, 95)'
+                    }])
+                },
+                encode: { x: 'time', y: 'elevation' }
+            });
+        }
+        if (axis.power && labels.power) {
+            if (axis.power == "left") {
+                if (yAxisLabelsLeft) yAxisLabelsLeft += " / ";
+                yAxisLabelsLeft += labels.power;
+            } else {
+                if (yAxisLabelsRight) yAxisLabelsRight += " / ";
+                yAxisLabelsRight += labels.power;
+            }
+            series.push({
+                name: 'Power',
+                type: 'line',
+                smooth: true,
+                yAxisIndex: axis.power == "right" ? 1 : 0,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    color: 'rgb(255, 0, 0)'
+                },
+                connectNulls: true,
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(190, 183, 255)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(255, 100, 0)'
+                    }])
+                },
+                encode: { x: 'time', y: 'power' }
+            });
+        }
+        if (axis.temperature && labels.temperature) {
+            if (axis.temperature == "left") {
+                if (yAxisLabelsLeft) yAxisLabelsLeft += " / ";
+                yAxisLabelsLeft += labels.temperature;
+            } else {
+                if (yAxisLabelsRight) yAxisLabelsRight += " / ";
+                yAxisLabelsRight += labels.temperature;
+            }
+            series.push({
+                name: labels.temperature,
+                type: 'line',
+                smooth: true,
+                yAxisIndex: axis.temperature == "right" ? 1 : 0,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    color: 'rgb(225, 255, 0)'
+                },
+                connectNulls: true,
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(0, 255, 253)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(225, 255, 0)'
+                    }])
+                },
+                encode: { x: 'time', y: 'temperature' }
+            });
+        }
+        if (axis.distance && labels.distance) {
+            if (axis.distance == "left") {
+                if (yAxisLabelsLeft) yAxisLabelsLeft += " / ";
+                yAxisLabelsLeft += labels.distance;
+            } else {
+                if (yAxisLabelsRight) yAxisLabelsRight += " / ";
+                yAxisLabelsRight += labels.distance;
+            }
+            series.push({
+                name: labels.distance,
+                type: 'line',
+                smooth: true,
+                yAxisIndex: axis.distance == "right" ? 1 : 0,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    color: 'rgb(225, 255, 0)'
+                },
+                connectNulls: true,
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(0, 255, 253)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(225, 255, 0)'
+                    }])
+                },
+                encode: { x: 'time', y: 'distance' }
+            });
+        }
+        if (axis.duration && labels.duration) {
+            if (axis.duration == "left") {
+                if (yAxisLabelsLeft) yAxisLabelsLeft += " / ";
+                yAxisLabelsLeft += labels.duration;
+            } else {
+                if (yAxisLabelsRight) yAxisLabelsRight += " / ";
+                yAxisLabelsRight += labels.duration;
+            }
+            series.push({
+                name: labels.duration,
+                type: 'line',
+                smooth: true,
+                yAxisIndex: axis.duration == "right" ? 1 : 0,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    color: 'rgb(225, 255, 0)'
+                },
+                connectNulls: true,
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(0, 255, 253)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(225, 255, 0)'
+                    }])
+                },
+                encode: { x: 'time', y: 'duration' }
+            });
+        }
+
         chart = echarts.init(document.getElementById('main'));
 
         let option = {
@@ -54,27 +277,26 @@ let OSL = window.OSL || {};
                 }
             },
             dataset: {
-                source: _hrData
+                source: data
             },
             legend: {
-                data: ['HR', 'Cadence', 'Elevation']
+                data: legends
             },
             xAxis: {
                 type: 'time',
                 axisLabel: {
                     formatter: function (value, index) {
                         let date = new Date(value);
-                        //return date.toLocaleTimeString(_userLocale, { timeZone: _userLocale });
-                        return date.toLocaleTimeString(_userLocale, { timeZone: _userTimezone });
+                        return date.getFullYear() + "-" + ("0" + (date.getMonth() + 1).toString()).substring(0, 2);
                     }
                 }
             },
             yAxis: [{
                 type: 'value',
-                name: 'HT / Cadence'
+                name: yAxisLabelsLeft
             }, {
                 type: 'value',
-                name: 'Elevation'
+                    name: yAxisLabelsRight
             }],
             dataZoom: [{
                 type: 'inside',
@@ -93,70 +315,7 @@ let OSL = window.OSL || {};
                     shadowOffsetY: 2
                 }
             }],
-            series: [
-                {
-                    name: 'HR',
-                    type: 'line',
-                    smooth: true,
-                    symbol: 'none',
-                    sampling: 'average',
-                    itemStyle: {
-                        color: 'rgb(255, 70, 131)'
-                    },
-                    connectNulls: true,
-                    areaStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgb(255, 158, 68)'
-                        }, {
-                            offset: 1,
-                            color: 'rgb(255, 70, 131)'
-                        }])
-                    },
-                    encode: { x: 'time', y: 'hr' }
-                }, {
-                    name: 'Cadence',
-                    type: 'line',
-                    smooth: true,
-                    symbol: 'none',
-                    sampling: 'average',
-                    itemStyle: {
-                        color: 'rgb(54, 32, 255)'
-                    },
-                    connectNulls: true,
-                    areaStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgb(190, 183, 255)'
-                        }, {
-                            offset: 1,
-                            color: 'rgb(54, 32, 255)'
-                        }])
-                    },
-                    encode: { x: 'time', y: 'cadence' }
-                }, {
-                    name: 'Elevation',
-                    type: 'line',
-                    smooth: true,
-                    yAxisIndex: 1,
-                    symbol: 'none',
-                    sampling: 'average',
-                    itemStyle: {
-                        color: 'rgb(245, 238, 95)'
-                    },
-                    connectNulls: true,
-                    areaStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgb(251, 248, 187)'
-                        }, {
-                            offset: 1,
-                            color: 'rgb(245, 238, 95)'
-                        }])
-                    },
-                    encode: { x: 'time', y: 'elevation' }
-                }
-            ]
+            series: series
         };
 
         chart.setOption(option, true);
@@ -181,7 +340,7 @@ let OSL = window.OSL || {};
             if (options.userLocale) _userLocale = options.userLocale;
             if (options.userTimezone) _userTimezone = options.userTimezone;
         }
-        this.drawChart();
+        this.drawChart([], {}, {});
         $(window).on('resize', function () {
             if (chart != null && chart != undefined) {
                 chart.resize();

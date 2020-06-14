@@ -12,7 +12,7 @@ module.exports = {
         activityChart: ["./src/activityChart.js", "./src/styles/activityChart.scss"],
         activityChartTester: ["./src/activityChart.js", "./src/tester.js", "./src/activityChartTester.js", "./src/styles/activityChart.scss", "./src/styles/tester.scss"],
         athleteStats: ["./src/athleteStats.js", "./src/styles/athleteStats.scss"],
-        athleteStatsTester: ["./src/athleteStats.js", "./src/tester.js", "./src/athleteStatsTester.js", "./src/styles/athleteStats.scss", "./src/styles/tester.scss"]
+        athleteStatsTester: ["./src/athleteStats.js", "./src/tester.js", "./src/athleteStatsTester.js", "./src/styles/athleteStats.scss", "./src/styles/tester.scss", "./node_modules/jquery-ui/themes/base/all.css"]
     },
     output: {
         path: path.resolve(__dirname, "./dist"),
