@@ -273,4 +273,7 @@
   <data name="AthleteDetails_GpxFilter" xml:space="preserve">
     <value>GPX|*.gpx</value>
   </data>
+  <data name="ActivityDetails_HR" xml:space="preserve">
+    <value>HR</value>
+  </data>
 </root>

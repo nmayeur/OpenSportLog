@@ -16,6 +16,7 @@ using OSL.Common.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml;
 
 namespace OSL.Common.Service.Importer
@@ -225,6 +226,11 @@ namespace OSL.Common.Service.Importer
                                     {
                                         _CurrentActivityBuilder.TimeSpan = _LastTrackTime - _CurrentActivityBuilder.Time;
                                     }
+                                    var allPoints = _CurrentActivityBuilder.Tracks.SelectMany(track => track.TrackSegments.SelectMany(s => s.TrackPoints));
+                                    _CurrentActivityBuilder.HeartRate = (int)Math.Round(allPoints.Where(point => point.HeartRate > 0).DefaultIfEmpty().Average(point => point?.HeartRate) ?? 0);
+                                    _CurrentActivityBuilder.Cadence = (int)Math.Round(allPoints.Where(point => point.Cadence > 0).DefaultIfEmpty().Average(point => point?.Cadence) ?? 0);
+                                    _CurrentActivityBuilder.Power = (int)Math.Round(allPoints.Where(point => point.Power > 0).DefaultIfEmpty().Average(point => point?.Power) ?? 0);
+                                    _CurrentActivityBuilder.Temperature = (int)Math.Round(allPoints.Where(point => point.Temperature > 0).DefaultIfEmpty().Average(point => point?.Temperature) ?? 0);
                                     var activity = _CurrentActivityBuilder.Build();
                                     _CurrentActivityBuilder = null;
                                     _LastTrackTime = DateTimeOffset.MinValue;

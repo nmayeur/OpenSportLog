@@ -19,8 +19,9 @@ let OSL = window.OSL || {};
     let _userLocale = "en-US";//Default value
     let _userTimezone = "UTC";//Default value
 
-    this.drawChart = function (data, labels, axis) {
+    this.drawChart = function (config) {
         let legends = [];
+        let labels = config.labels;
         if (labels.hr) legends.push(labels.hr);
         if (labels.cadence) legends.push(labels.cadence);
         if (labels.elevation) legends.push(labels.elevation);
@@ -277,10 +278,10 @@ let OSL = window.OSL || {};
                 }
             },
             dataset: {
-                source: data
+                source: config.data
             },
             legend: {
-                data: legends
+                data: config.legends
             },
             xAxis: {
                 type: 'time',

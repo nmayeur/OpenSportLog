@@ -93,16 +93,16 @@ let MapTester = window.MapTester || {};
         $(function () {
             $("#sidebar #btnGenerateData").click(function (event) {
                 _data = _GenerateTestData();
-                OSL.drawChart(_PrepareData(_data), _PrepareLegend(), _PrepareAxis());
+                OSL.drawChart({ data: _PrepareData(_data), legends: _PrepareLegend(), axis: _PrepareAxis() });
             });
             $("#sidebar #btnClear").click(function (event) {
                 OSL.clear();
             });
             $("#sidebar select").on('change', function () {
-                OSL.drawChart(_PrepareData(_data), _PrepareLegend(), _PrepareAxis());
+                OSL.drawChart({ data: _PrepareData(_data), legends: _PrepareLegend(), axis: _PrepareAxis() });
             });
             $('#sidebar :checkbox').on('change', function () {
-                OSL.drawChart(_PrepareData(_data), _PrepareLegend(), _PrepareAxis());
+                OSL.drawChart({ data: _PrepareData(_data), legends: _PrepareLegend(), axis: _PrepareAxis() });
             });
         });
 

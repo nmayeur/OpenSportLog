@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -256,6 +257,11 @@ namespace OSL.Common.Service.Importer
                             switch (reader.Name)
                             {
                                 case "gpx":
+                                    var allPoints = _CurrentActivityBuilder.Tracks.SelectMany(track => track.TrackSegments.SelectMany(segment => segment.TrackPoints));
+                                    _CurrentActivityBuilder.HeartRate = (int)Math.Round(allPoints.Where(point => point.HeartRate > 0).DefaultIfEmpty().Average(point => point?.HeartRate) ?? 0);
+                                    _CurrentActivityBuilder.Cadence = (int)Math.Round(allPoints.Where(point => point.Cadence > 0).DefaultIfEmpty().Average(point => point?.Cadence) ?? 0);
+                                    _CurrentActivityBuilder.Power = (int)Math.Round(allPoints.Where(point => point.Power > 0).DefaultIfEmpty().Average(point => point?.Power) ?? 0);
+                                    _CurrentActivityBuilder.Temperature = (int)Math.Round(allPoints.Where(point => point.Temperature > 0).DefaultIfEmpty().Average(point => point?.Temperature) ?? 0);
                                     var activity = _CurrentActivityBuilder.Build();
                                     _CurrentActivityBuilder = null;
                                     _CurrentContext = PARSE_CONTEXT.ROOT;
@@ -382,7 +388,7 @@ namespace OSL.Common.Service.Importer
                                     _CurrentContext = PARSE_CONTEXT.ROOT;
                                     break;
                                 case "type":
-                                    if(_CurrentContext == PARSE_CONTEXT.TRACK_TYPE) _CurrentContext=PARSE_CONTEXT.TRACK;
+                                    if (_CurrentContext == PARSE_CONTEXT.TRACK_TYPE) _CurrentContext = PARSE_CONTEXT.TRACK;
                                     break;
                             }
                             break;

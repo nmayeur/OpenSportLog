@@ -9,5 +9,6 @@ namespace OSL.Common.Service
     public interface IEChartsService
     {
         string SerializeTrackDatas(IEnumerable<TrackPointVO> trackPoints);
+        string SerializeAthleteData(IEnumerable<ActivityEntity> activities);
     }
 }

@@ -99,6 +99,50 @@ namespace OSL.Common.Model
             }
         }
 
+        private int _HeartRate;
+        public int HeartRate
+        {
+            get { return _HeartRate; }
+            set
+            {
+                _HeartRate = value;
+                NotifyPropertyChanged("HeartRate");
+            }
+        }
+
+        private int _Cadence;
+        public int Cadence
+        {
+            get { return _Cadence; }
+            set
+            {
+                _Cadence = value;
+                NotifyPropertyChanged("Cadence");
+            }
+        }
+
+        private int _Power;
+        public int Power
+        {
+            get { return _Power; }
+            set
+            {
+                _Power = value;
+                NotifyPropertyChanged("Power");
+            }
+        }
+
+        private int _Temperature;
+        public int Temperature
+        {
+            get { return _Temperature; }
+            set
+            {
+                _Temperature = value;
+                NotifyPropertyChanged("Temperature");
+            }
+        }
+
         private ACTIVITY_SPORT _Sport;
         public ACTIVITY_SPORT Sport
         {
@@ -190,6 +234,30 @@ namespace OSL.Common.Model
             {
                 get { return _instance.Calories; }
                 set { _instance.Calories = value; }
+            }
+
+            public int HeartRate
+            {
+                get { return _instance.HeartRate; }
+                set { _instance.HeartRate = value; }
+            }
+
+            public int Cadence
+            {
+                get { return _instance.Cadence; }
+                set { _instance.Cadence = value; }
+            }
+
+            public int Power
+            {
+                get { return _instance.Power; }
+                set { _instance.Power = value; }
+            }
+
+            public int Temperature
+            {
+                get { return _instance.Temperature; }
+                set { _instance.Temperature = value; }
             }
 
             public ACTIVITY_SPORT Sport

@@ -25,7 +25,13 @@ namespace OSL.EF.Migrations
                     b.Property<int?>("AthleteId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Cadence")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Calories")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("HeartRate")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Location")
@@ -40,7 +46,13 @@ namespace OSL.EF.Migrations
                     b.Property<string>("OriginSystem")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Power")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Sport")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Temperature")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset>("Time")

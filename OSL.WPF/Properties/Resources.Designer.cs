@@ -79,6 +79,15 @@ namespace OSL.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HR.
+        /// </summary>
+        public static string ActivityDetails_HR {
+            get {
+                return ResourceManager.GetString("ActivityDetails_HR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Location.
         /// </summary>
         public static string ActivityDetails_Location {

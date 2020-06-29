@@ -174,6 +174,50 @@ namespace OSL.Common.Tests
         }
 
         [Fact]
+        public void TestImportFitlogAverages()
+        {
+            string fitlog = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<FitnessWorkbook xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns=""http://www.zonefivesoftware.com/xmlschemas/FitnessLogbook/v3"">
+ <AthleteLog>
+  <Athlete Id=""989703a1-f7b8-4af3-b4ae-9dd862fed016"" Name=""Nicolas Mayeur"" />
+  <Activity StartTime=""2019-12-25T09:45:07Z"" Id=""9fe01c40-fe66-48e2-b5fa-97370c94e9e8"">
+   <Metadata Source="""" Created=""2020-01-19T10:16:01Z"" Modified=""2020-01-19T10:16:17Z"" />
+   <Calories TotalCal=""2153"" />
+   <Name>Lonchamp de Noël</Name>
+   <Category Id=""e41b80e4-fa5f-48e3-95be-d0e66b72ab7c"" Name=""Vélo"" />
+   <Location Name=""Longchamps"" />
+   <EquipmentUsed>
+    <EquipmentItem Id=""67713a66-5c4d-43b6-9386-df3e431d06fa"" Name=""Giant - TCR advanced 2007"" />
+   </EquipmentUsed>
+   <Track StartTime=""2019-12-25T09:45:07Z"">
+    <pt tm=""0"" lat=""48.8676490783691"" lon=""2.20366406440735"" ele=""91.4405212402344"" hr=""140"" cadence=""0"" />
+    <pt tm=""1"" lat=""48.8676490783691"" lon=""2.2036669254303"" ele=""91.4514389038086"" hr=""140"" cadence=""100"" />
+    <pt tm=""8"" lat=""48.8676490783691"" lon=""2.2036759853363"" ele=""91.4860000610352"" hr=""150"" cadence=""100"" />
+    <pt tm=""10"" lat=""48.8676147460938"" lon=""2.20368194580078"" ele=""91.4503021240234"" hr=""150"" cadence=""160"" />
+   </Track>
+  </Activity>
+ </AthleteLog>
+</FitnessWorkbook>";
+            byte[] byteArray = Encoding.UTF8.GetBytes(fitlog);
+
+            FitLogImporter importer = new FitLogImporter();
+
+            List<ActivityEntity> activities;
+            using (Stream fs = new MemoryStream(byteArray))
+            {
+                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs, new Dictionary<string, ACTIVITY_SPORT> {
+                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ACTIVITY_SPORT.BIKING},
+                { "eca38408-cb82-42ed-b242-166b43b785a6",ACTIVITY_SPORT.RUNNING},
+                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ACTIVITY_SPORT.SWIMMING} }));
+            }
+
+            activities.Should().HaveCountLessOrEqualTo(1, "expected data_tiny.fitlog to contain at least 1 activity");
+            var activity = activities[0];
+            activity.Cadence.Should().Be(120);
+            activity.HeartRate.Should().Be(145);
+        }
+
+        [Fact]
         public void TestImportMultiTracksFitlogStream()
         {
             string fitlog = @"<?xml version=""1.0"" encoding=""utf-8""?>
@@ -289,6 +333,25 @@ namespace OSL.Common.Tests
             athlete.Activities.Should().HaveCount(1);
             athlete.Activities[0].Tracks[0].TrackSegments[0].TrackPoints.Should().HaveCount(3);
             athlete.Activities[0].Tracks[0].TrackSegments[0].TrackPoints[2].Cadence.Should().Be(95);
+        }
+
+        [Fact]
+        public void TestPrepareEchartsAthleteData()
+        {
+            string path = @"data\data_mini.fitlog";
+            FitLogImporter importer = new FitLogImporter();
+
+            IList<ActivityEntity> activities;
+            using (FileStream fs = File.OpenRead(path))
+            {
+                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs, new Dictionary<string, ACTIVITY_SPORT> {
+                { "e41b80e4-fa5f-48e3-95be-d0e66b72ab7c", ACTIVITY_SPORT.BIKING},
+                { "eca38408-cb82-42ed-b242-166b43b785a6",ACTIVITY_SPORT.RUNNING},
+                { "6f2fdaf9-4c5a-4c2c-a4fa-5be42e9733dd",ACTIVITY_SPORT.SWIMMING} }));
+            }
+
+            IEChartsService eChartsService = new EChartsService();
+            eChartsService.SerializeAthleteData(activities);
         }
     }
 }
