@@ -12,7 +12,21 @@ namespace OSL.WPF.ViewModel.Scaffholding
             try
             {
                 _Logger.Debug($"Execute Javascript {s}");
-                browser.ExecuteScriptAsync(s);
+                if (browser.IsBrowserInitialized)
+                {
+                    browser.ExecuteScriptAsync(s);
+                }
+                else
+                {
+                    browser.LoadingStateChanged += (sender, args) =>
+                    {
+                        //Wait for the Page to finish loading
+                        if (args.IsLoading == false)
+                        {
+                            browser.ExecuteScriptAsync(s);
+                        }
+                    };
+                }
             }
             catch (Exception e)
             {

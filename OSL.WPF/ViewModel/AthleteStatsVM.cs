@@ -58,7 +58,10 @@ namespace OSL.WPF.ViewModel
             set
             {
                 Set(ref _WebBrowserStats, value);
-                if (_WebBrowserStats != null) _WebBrowserStats.DownloadHandler = new OSLCefDownloadHandler();
+                if (_WebBrowserStats != null)
+                {
+                    _WebBrowserStats.DownloadHandler = new OSLCefDownloadHandler();
+                }
             }
         }
 
