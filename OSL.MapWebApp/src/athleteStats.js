@@ -12,6 +12,34 @@ let OSL = window.OSL || {};
 
     let chart = null;
 
+    function _PrepareLegend() {
+        let labels = {};
+        if ($("#hr").is(":checked")) labels.hr = "HR";
+        if ($("#cadence").is(":checked")) labels.cadence = "Cadence";
+        if ($("#elevation").is(":checked")) labels.elevation = "Elevation";
+        if ($("#power").is(":checked")) labels.power = "Power";
+        if ($("#temperature").is(":checked")) labels.temperature = "Temperature";
+        if ($("#distance").is(":checked")) labels.distance = "Distance";
+        if ($("#duration").is(":checked")) labels.duration = "Duration";
+        return labels;
+    }
+
+    function _PrepareAxis() {
+        let axis = {};
+        axis.hr = $("#hr_axe").val();
+        axis.cadence = $("#cadence_axe").val();
+        axis.elevation = $("#elevation_axe").val();
+        axis.power = $("#power_axe").val();
+        axis.temperature = $("#temperature_axe").val();
+        axis.distance = $("#distance_axe").val();
+        axis.duration = $("#duration_axe").val();
+        return axis;
+    }
+
+    this.loadData = function (_data) {
+        this.drawChart({ data: _PrepareData(_data), legends: _PrepareLegend(), axis: _PrepareAxis() });
+    }
+
     this.clear = function () {
         this.drawChart([]);
     }

@@ -13,11 +13,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using GalaSoft.MvvmLight;
+using OSL.WPF.ViewModel.Scaffholding;
 
 namespace OSL.WPF.ViewModel
 {
-    public class NewAthleteVM : ViewModelBase
+    public class NewAthleteVM : OSLViewModel
     {
+        public NewAthleteVM()
+        {
+            _Logger = NLog.LogManager.GetCurrentClassLogger();
+        }
+
         #region Data
         private string _Name;
         public string Name

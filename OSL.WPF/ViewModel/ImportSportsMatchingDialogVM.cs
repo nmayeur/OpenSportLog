@@ -12,18 +12,16 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using OSL.Common.Model;
-using System.Collections.Generic;
+using OSL.WPF.ViewModel.Scaffholding;
 using System.Collections.ObjectModel;
 
 namespace OSL.WPF.ViewModel
 {
-    public class ImportSportsMatchingDialogVM : ViewModelBase
+    public class ImportSportsMatchingDialogVM : OSLViewModel
     {
         public ImportSportsMatchingDialogVM()
         {
+            _Logger = NLog.LogManager.GetCurrentClassLogger();
         }
 
         #region Data

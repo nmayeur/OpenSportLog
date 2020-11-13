@@ -351,7 +351,8 @@ namespace OSL.Common.Tests
             }
 
             IEChartsService eChartsService = new EChartsService();
-            eChartsService.SerializeAthleteData(activities);
+            var json = eChartsService.SerializeAthleteData(activities);
+            json.Length.Should().BeGreaterThan(0);
         }
     }
 }

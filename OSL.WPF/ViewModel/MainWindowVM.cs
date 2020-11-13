@@ -45,9 +45,8 @@ namespace OSL.WPF.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainWindowVM : ViewModelBase
+    public class MainWindowVM : OSLViewModel
     {
-        private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
         public class SavingNotificationEventArgs : EventArgs
         {
             public SavingNotificationEventArgs(bool IsSaving)
@@ -65,6 +64,7 @@ namespace OSL.WPF.ViewModel
         /// </summary>
         public MainWindowVM(IDataAccessService DbAccess)
         {
+            _Logger = NLog.LogManager.GetCurrentClassLogger();
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.

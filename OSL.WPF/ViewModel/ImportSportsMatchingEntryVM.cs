@@ -14,11 +14,17 @@ limitations under the License.
 */
 using GalaSoft.MvvmLight;
 using OSL.Common.Model;
+using OSL.WPF.ViewModel.Scaffholding;
 
 namespace OSL.WPF.ViewModel
 {
-    public class ImportSportsMatchingEntryVM : ViewModelBase
+    public class ImportSportsMatchingEntryVM : OSLViewModel
     {
+        public ImportSportsMatchingEntryVM()
+        {
+            _Logger = NLog.LogManager.GetCurrentClassLogger();
+        }
+
         #region Data
         private ACTIVITY_SPORT _OslSport;
         public ACTIVITY_SPORT OslSport

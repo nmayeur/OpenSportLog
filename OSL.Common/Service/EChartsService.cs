@@ -22,25 +22,28 @@ namespace OSL.Common.Service
             public int temperature;
             public int distance;
             public int duration;
+            public int calories;
         }
 
         public string SerializeAthleteData(IEnumerable<ActivityEntity> activities)
         {
             var now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-            DateTimeOffset StartingDate = now.AddYears(-2);
+            DateTimeOffset StartingDate = new DateTime(now.Year - 2, 1, 1);
             DateTimeOffset EndingDate = now;
 
             //calculate the number of months
             var MonthsCount = _MonthDifference(EndingDate, StartingDate);
             object[] stat = new object[MonthsCount];
 
-            var startSlice = StartingDate.Year * 100 + StartingDate.Month;
-            for (var i = startSlice; i <= EndingDate.Year * 100 + EndingDate.Month; i++)
+            for (var i = 0; i < (EndingDate.Year - StartingDate.Year) * 12 + EndingDate.Month; i++)
             {
-                activities.Where(a => a.Time.Year * 100 + a.Time.Month == i).Sum(a=>a.Calories);
-                stat[i-startSlice] = new _AthleteStatData
+                var monthActivities = activities.Where(a => (EndingDate.Year - a.Time.Year) * 12 + a.Time.Month == i).ToList();
+                stat[i] = monthActivities.Count == 0 ? null : new _AthleteStatData
                 {
                     time = StartingDate.AddMonths(i).ToUnixTimeMilliseconds(),
+                    calories = monthActivities.Sum(a => a.Calories),
+                    power = (int)Math.Round(monthActivities.Average(a => a.Power)),
+                    temperature = (int)Math.Round(monthActivities.Average(a => a.Temperature)),
                     //hr= activities.Where(a => a.Time.Year * 100 + a.Time.Month == i).Sum(a => a.Tracks)
                 };
             }
@@ -50,7 +53,7 @@ namespace OSL.Common.Service
 
         private int _MonthDifference(DateTimeOffset lValue, DateTimeOffset rValue)
         {
-            return (lValue.Month - rValue.Month) + 12 * (lValue.Year - rValue.Year);
+            return (lValue.Month - rValue.Month) + 12 * (lValue.Year - rValue.Year) + 1;
         }
 
         public string SerializeTrackDatas(IEnumerable<TrackPointVO> trackPoints)

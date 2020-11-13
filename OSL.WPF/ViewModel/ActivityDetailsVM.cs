@@ -12,9 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using CefSharp;
 using CefSharp.Wpf;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using OSL.Common.Model;
 using OSL.Common.Model.ECharts;
@@ -27,19 +25,17 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace OSL.WPF.ViewModel
 {
-    public class ActivityDetailsVM : ViewModelBase
+    public class ActivityDetailsVM : BrowserViewModel
     {
-        private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
-
         private readonly IDataAccessService _DbAccess;
         private readonly IEChartsService _EChartsService;
         private readonly IGeoJsonConverter _GeoJsonConverter;
         public ActivityDetailsVM(IDataAccessService DbAccess, IEChartsService EChartsService, IGeoJsonConverter GeoJsonConverter)
         {
+            _Logger = NLog.LogManager.GetCurrentClassLogger();
             _DbAccess = DbAccess;
             _EChartsService = EChartsService;
             _GeoJsonConverter = GeoJsonConverter;
@@ -76,7 +72,7 @@ namespace OSL.WPF.ViewModel
                 if (trackPoints != null)
                 {
                     var geoJson = _GeoJsonConverter.GetGeoJsonZoomFromTrackPoints(trackPoints, dataZoom.startTime, dataZoom.endTime);
-                    _ExecuteJavaScript(_WebBrowser, $"OSL.drawZoomedRoute({geoJson})");
+                    ExecuteJavaScript(_WebBrowser, $"OSL.drawZoomedRoute({geoJson})");
                 }
             });
         }
@@ -97,24 +93,24 @@ namespace OSL.WPF.ViewModel
                 var longitude = trackPoint?.Longitude ?? 2.3488;
                 FormattableString command = $"OSL.goToCoordinates({latitude:N6},{longitude:N6})";
                 var enCulture = CultureInfo.GetCultureInfo("en-US");
-                _ExecuteJavaScript(_WebBrowser, command.ToString(enCulture));
+                ExecuteJavaScript(_WebBrowser, command.ToString(enCulture));
 
                 command = $"OSL.setMarker({latitude:N6},{longitude:N6},OSL.START_MARKER)";
-                _ExecuteJavaScript(_WebBrowser, command.ToString(enCulture));
+                ExecuteJavaScript(_WebBrowser, command.ToString(enCulture));
 
                 if (trackPoints != null)
                 {
                     var geoJson = _GeoJsonConverter.GetGeoJsonFromTrackPoints(trackPoints);
                     command = $"OSL.drawRoute({geoJson})";
-                    _ExecuteJavaScript(_WebBrowser, command.ToString(enCulture));
+                    ExecuteJavaScript(_WebBrowser, command.ToString(enCulture));
 
-                    _ExecuteJavaScript(_WebBrowserActivityCharts, $"OSL.clear()");
+                    ExecuteJavaScript(_WebBrowserActivityCharts, $"OSL.clear()");
                     var serializedPoints = _EChartsService.SerializeTrackDatas(trackPoints);
-                    _ExecuteJavaScript(_WebBrowserActivityCharts, $"OSL.loadData({serializedPoints})");
+                    ExecuteJavaScript(_WebBrowserActivityCharts, $"OSL.loadData({serializedPoints})");
                 }
                 else
                 {
-                    _ExecuteJavaScript(_WebBrowser, "OSL.cleanMap()");
+                    ExecuteJavaScript(_WebBrowser, "OSL.cleanMap()");
                 }
             }
         }
@@ -138,19 +134,5 @@ namespace OSL.WPF.ViewModel
         }
         #endregion
 
-        #region Utils
-        private void _ExecuteJavaScript(IWpfWebBrowser browser, string s)
-        {
-            try
-            {
-                _Logger.Debug($"Execute Javascript {s}");
-                browser.ExecuteScriptAsync(s);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error while executing Javascript: " + e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        #endregion
     }
 }

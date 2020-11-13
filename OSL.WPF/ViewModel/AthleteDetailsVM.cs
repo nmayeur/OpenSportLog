@@ -34,15 +34,15 @@ using static OSL.WPF.ViewModel.Scaffholding.MessengerNotifications;
 
 namespace OSL.WPF.ViewModel
 {
-    public class AthleteDetailsVM : ViewModelBase
+    public class AthleteDetailsVM : OSLViewModel
     {
 
-        private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
         private readonly IDataAccessService _DbAccess;
         private readonly FitLogImporter _FitLogImporter;
         private readonly GpxImporter _GpxImporter;
         public AthleteDetailsVM(IDataAccessService DbAccess, FitLogImporter FitLogImporter, GpxImporter GpxImporter)
         {
+            _Logger = NLog.LogManager.GetCurrentClassLogger();
             _DbAccess = DbAccess;
             _FitLogImporter = FitLogImporter;
             _GpxImporter = GpxImporter;
@@ -136,6 +136,7 @@ namespace OSL.WPF.ViewModel
                             Activities.Add(activity);
                         }
                     }
+                    Messenger.Default.Send(new NotificationMessage<IList<ActivityEntity>>(Activities, MessengerNotifications.LOADED));
                 });
                 if (_SelectedAthlete != null)
                 {
@@ -162,6 +163,7 @@ namespace OSL.WPF.ViewModel
                                 break;
                         }
                     };
+                    Messenger.Default.Send(new NotificationMessage<IList<ActivityEntity>>(Activities, MessengerNotifications.LOADED));
                 }
             }
         }
@@ -196,7 +198,10 @@ namespace OSL.WPF.ViewModel
         public ObservableCollection<ActivityEntity> Activities
         {
             get => _Activities;
-            private set { Set(() => Activities, ref _Activities, value); }
+            private set
+            {
+                Set(() => Activities, ref _Activities, value);
+            }
         }
         #endregion
 
