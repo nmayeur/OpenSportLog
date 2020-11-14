@@ -136,7 +136,7 @@ namespace OSL.WPF.ViewModel
                             Activities.Add(activity);
                         }
                     }
-                    Messenger.Default.Send(new NotificationMessage<IList<ActivityEntity>>(Activities, MessengerNotifications.LOADED));
+                    //Messenger.Default.Send(new NotificationMessage<IList<ActivityEntity>>(Activities, MessengerNotifications.LOADED));
                 });
                 if (_SelectedAthlete != null)
                 {

@@ -2,28 +2,14 @@
 using OSL.Common.Model;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 
 namespace OSL.Common.Service
 {
     public class EChartsService : IEChartsService
     {
 
-        private class _AthleteStatData
-        {
-            public double time;
-            public int hr;
-            public int cadence;
-            public int elevation;
-            public int power;
-            public int temperature;
-            public int distance;
-            public int duration;
-            public int calories;
-        }
+        private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public string SerializeAthleteData(IEnumerable<ActivityEntity> activities)
         {
@@ -33,21 +19,37 @@ namespace OSL.Common.Service
 
             //calculate the number of months
             var MonthsCount = _MonthDifference(EndingDate, StartingDate);
-            object[] stat = new object[MonthsCount];
+            object[] data = new object[MonthsCount + 1];
+            data[0] = new string[] { "time", "hr", "calories", "power", "temperature" };
 
             for (var i = 0; i < (EndingDate.Year - StartingDate.Year) * 12 + EndingDate.Month; i++)
             {
-                var monthActivities = activities.Where(a => (EndingDate.Year - a.Time.Year) * 12 + a.Time.Month == i).ToList();
-                stat[i] = monthActivities.Count == 0 ? null : new _AthleteStatData
+                var monthActivities = activities.Where(a =>
+                    (a.Time.Year - StartingDate.Year) * 12 + a.Time.Month - 1 == i
+                ).ToList();
+                var monthTrackPoints = monthActivities
+                    .Where(a => a.Tracks != null).SelectMany(a => a.Tracks)
+                    .Where(t => t.TrackSegments != null).SelectMany(t => t.TrackSegments)
+                    .Where(s => s.TrackPoints != null).SelectMany(s => s.TrackPoints)
+                    .DefaultIfEmpty(new TrackPointVO.Builder { Cadence = 0, Elevation = 0, HeartRate = 0, Latitude = 0, Longitude = 0, Power = 0, Temperature = 0 });
+                //TODO : tracks not loaded
+                data[i + 1] = monthActivities.Count == 0 ? new object[] { StartingDate.AddMonths(i).ToUnixTimeMilliseconds(), 0, 0, 0 } : new object[]
                 {
-                    time = StartingDate.AddMonths(i).ToUnixTimeMilliseconds(),
-                    calories = monthActivities.Sum(a => a.Calories),
-                    power = (int)Math.Round(monthActivities.Average(a => a.Power)),
-                    temperature = (int)Math.Round(monthActivities.Average(a => a.Temperature)),
-                    //hr= activities.Where(a => a.Time.Year * 100 + a.Time.Month == i).Sum(a => a.Tracks)
+                    StartingDate.AddMonths(i).ToUnixTimeMilliseconds(),
+                    (int)Math.Round(monthTrackPoints.Average(p=>p.HeartRate)),
+                    monthActivities.Sum(a => a.Calories),
+                    (int)Math.Round(monthActivities.Average(a => a.Power)),
+                    (int)Math.Round(monthActivities.Average(a => a.Temperature))
                 };
             }
-            var json = JsonConvert.SerializeObject(stat);
+            var ret = new
+            {
+                data = data,
+                labels = new { hr = "HR", calories = "Calories", power = "Power", temperature = "Temperature" },
+                axis = new { hr = "left", calories = "right", power = "left", temperature = "left" }
+            };
+            var json = JsonConvert.SerializeObject(ret);
+            _Logger.Debug($"Serialized data for athlete stats : {json}");
             return json;
         }
 

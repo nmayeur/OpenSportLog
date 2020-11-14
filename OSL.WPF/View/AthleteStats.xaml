@@ -32,12 +32,12 @@
         <DockPanel Grid.Row="0" Grid.Column="0">
             <ToolBarTray DockPanel.Dock="Top">
                 <ToolBar>
-                    <Button Command="{Binding NewFileCommand}">
+                    <Button Command="{Binding StartCommand}">
                         <StackPanel Orientation="Horizontal">
                             <StackPanel.ToolTip>
                                 <ToolTip Content="{x:Static p:Resources.Toolbar_New}"/>
                             </StackPanel.ToolTip>
-                            <fa:ImageAwesome Icon="FileOutline"/>
+                            <fa:ImageAwesome Icon="Play"/>
                         </StackPanel>
                     </Button>
                 </ToolBar>

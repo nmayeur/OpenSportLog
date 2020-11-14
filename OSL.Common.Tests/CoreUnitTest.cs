@@ -14,6 +14,8 @@ limitations under the License.
 */
 using FakeItEasy;
 using FluentAssertions;
+using NLog;
+using NLog.Config;
 using OSL.Common.Model;
 using OSL.Common.Service;
 using OSL.Common.Service.Importer;
@@ -29,10 +31,14 @@ namespace OSL.Common.Tests
 {
     public class CoreUnitTest
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private readonly ILogger _Logger;
 
         public CoreUnitTest(ITestOutputHelper output)
         {
+            LogFactory logFactory = new LogFactory();
+            logFactory.Configuration = new XmlLoggingConfiguration(@"NLog.config");
+            logFactory.ThrowConfigExceptions = false;
+            _Logger = logFactory.GetCurrentClassLogger();
         }
 
         [Fact]

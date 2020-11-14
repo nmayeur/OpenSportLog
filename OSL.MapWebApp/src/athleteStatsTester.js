@@ -61,7 +61,7 @@ let MapTester = window.MapTester || {};
         return formattedData;
     }
 
-    function _PrepareLegend() {
+    function _PrepareLabels() {
         let labels = {};
         if ($("#hr").is(":checked")) labels.hr = "HR";
         if ($("#cadence").is(":checked")) labels.cadence = "Cadence";
@@ -93,16 +93,16 @@ let MapTester = window.MapTester || {};
         $(function () {
             $("#sidebar #btnGenerateData").click(function (event) {
                 _data = _GenerateTestData();
-                OSL.drawChart({ data: _PrepareData(_data), legends: _PrepareLegend(), axis: _PrepareAxis() });
+                OSL.drawChart({ data: _PrepareData(_data), labels: _PrepareLabels(), axis: _PrepareAxis() });
             });
             $("#sidebar #btnClear").click(function (event) {
                 OSL.clear();
             });
             $("#sidebar select").on('change', function () {
-                OSL.drawChart({ data: _PrepareData(_data), legends: _PrepareLegend(), axis: _PrepareAxis() });
+                OSL.drawChart({ data: _PrepareData(_data), labels: _PrepareLabels(), axis: _PrepareAxis() });
             });
             $('#sidebar :checkbox').on('change', function () {
-                OSL.drawChart({ data: _PrepareData(_data), legends: _PrepareLegend(), axis: _PrepareAxis() });
+                OSL.drawChart({ data: _PrepareData(_data), labels: _PrepareLabels(), axis: _PrepareAxis() });
             });
         });
 

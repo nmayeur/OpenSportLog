@@ -37,6 +37,7 @@ let OSL = window.OSL || {};
     }
 
     this.loadData = function (_data) {
+        alert(_data);
         this.drawChart({ data: _PrepareData(_data), legends: _PrepareLegend(), axis: _PrepareAxis() });
     }
 
@@ -62,6 +63,7 @@ let OSL = window.OSL || {};
         let series = [];
         let yAxisLabelsLeft = "";
         let yAxisLabelsRight = "";
+        let axis = config.axis;
         if (axis.hr && labels.hr) {
             if (axis.hr == "left") {
                 yAxisLabelsLeft += labels.hr;
@@ -151,6 +153,37 @@ let OSL = window.OSL || {};
                     }])
                 },
                 encode: { x: 'time', y: 'elevation' }
+            });
+        }
+        if (axis.calories && labels.calories) {
+            if (axis.calories == "left") {
+                if (yAxisLabelsLeft) yAxisLabelsLeft += " / ";
+                yAxisLabelsLeft += labels.elevation;
+            } else {
+                if (yAxisLabelsRight) yAxisLabelsRight += " / ";
+                yAxisLabelsRight += labels.elevation;
+            }
+            series.push({
+                name: labels.calories,
+                type: 'line',
+                smooth: true,
+                yAxisIndex: axis.calories == "right" ? 1 : 0,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    color: 'rgb(245, 238, 95)'
+                },
+                connectNulls: true,
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(251, 248, 187)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(245, 238, 95)'
+                    }])
+                },
+                encode: { x: 'time', y: 'calories' }
             });
         }
         if (axis.power && labels.power) {

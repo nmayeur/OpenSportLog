@@ -193,7 +193,7 @@ namespace OSL.Common.Service.Importer
                                         Cadence = cadence
                                     };
                                     _CurrentTrackSegmentBuilder.TrackPoints.Add(trackPoint);
-                                    _Logger.Debug(string.Format("Trackpoint time {0}, latitude {1}, longitude {2}, elevation {3}, heart-rate {4}, cadence {5}",
+                                    _Logger.Trace(string.Format("Trackpoint time {0}, latitude {1}, longitude {2}, elevation {3}, heart-rate {4}, cadence {5}",
                                         _LastTrackTime, latitude, longitude, elevation, hr, cadence));
                                     break;
                             }

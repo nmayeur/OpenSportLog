@@ -1,14 +1,12 @@
-﻿using CefSharp;
-using CefSharp.Wpf;
+﻿using CefSharp.Wpf;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using OSL.Common.Model;
 using OSL.Common.Service;
 using OSL.WPF.Utils;
 using OSL.WPF.ViewModel.Scaffholding;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace OSL.WPF.ViewModel
 {
@@ -48,7 +46,7 @@ namespace OSL.WPF.ViewModel
             {
                 Set(() => Activities, ref _Activities, value);
                 var serializedActivities = _EChartsService.SerializeAthleteData(_Activities);
-                ExecuteJavaScript(WebBrowserStats, $"OSL.loadData({serializedActivities})");
+                ExecuteJavaScript(WebBrowserStats, $"OSL.drawChart({serializedActivities})");
             }
         }
 
@@ -65,6 +63,39 @@ namespace OSL.WPF.ViewModel
             }
         }
 
+        private bool _IsStartEnabled = true;
+        public bool IsStartEnabled
+        {
+            get => _IsStartEnabled;
+            set
+            {
+                Set(() => IsStartEnabled, ref _IsStartEnabled, value);
+            }
+        }
+
+
         #endregion
+
+        #region StartCommand
+        private RelayCommand _StartCommand;
+        public RelayCommand StartCommand
+        {
+            get
+            {
+                return _StartCommand ??
+                    (_StartCommand = new RelayCommand(
+                        () => { _Start(); },
+                        () => { return IsStartEnabled; }
+                        ));
+            }
+        }
+
+        private void _Start()
+        {
+            var serializedActivities = _EChartsService.SerializeAthleteData(_Activities);
+            ExecuteJavaScript(WebBrowserStats, $"OSL.drawChart({serializedActivities})");
+        }
+        #endregion
+
     }
 }
