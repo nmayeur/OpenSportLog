@@ -231,6 +231,7 @@ namespace OSL.Common.Service.Importer
                                     _CurrentActivityBuilder.Cadence = (int)Math.Round(allPoints.Where(point => point.Cadence > 0).DefaultIfEmpty().Average(point => point?.Cadence) ?? 0);
                                     _CurrentActivityBuilder.Power = (int)Math.Round(allPoints.Where(point => point.Power > 0).DefaultIfEmpty().Average(point => point?.Power) ?? 0);
                                     _CurrentActivityBuilder.Temperature = (int)Math.Round(allPoints.Where(point => point.Temperature > 0).DefaultIfEmpty().Average(point => point?.Temperature) ?? 0);
+                                    _CurrentActivityBuilder.TracksPointsCount = allPoints.Count();
                                     var activity = _CurrentActivityBuilder.Build();
                                     _CurrentActivityBuilder = null;
                                     _LastTrackTime = DateTimeOffset.MinValue;

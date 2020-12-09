@@ -107,7 +107,12 @@ namespace OSL.EF.Service
         public IEnumerable<TrackEntity> GetActivitiesTracks(IEnumerable<ActivityEntity> activities)
         {
             if (activities == null) return new List<TrackEntity>();
-            return activities.ToList().SelectMany(a => GetActivityTracks(a));
+            var list = new List<TrackEntity>();
+            foreach(var track in activities)
+            {
+                list.AddRange(GetActivityTracks(track));
+            }
+            return list;
         }
 
         public void DeleteActivities(IList<ActivityEntity> activities)

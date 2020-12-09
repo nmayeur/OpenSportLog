@@ -14,7 +14,7 @@ namespace OSL.EF.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.4");
+                .HasAnnotation("ProductVersion", "3.1.9");
 
             modelBuilder.Entity("OSL.Common.Model.ActivityEntity", b =>
                 {
@@ -60,6 +60,9 @@ namespace OSL.EF.Migrations
 
                     b.Property<TimeSpan>("TimeSpan")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("TracksPointsCount")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

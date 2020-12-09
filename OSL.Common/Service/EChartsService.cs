@@ -23,22 +23,17 @@ namespace OSL.Common.Service
                 var monthActivities = activities.Where(a =>
                     (a.Time.Year - config.StartingDate.Year) * 12 + a.Time.Month - 1 == i
                 ).ToList();
-                //Load tracks for each activity
-                //monthActivities.ForEach(a => _DbAccess.GetActivityTracks(a));
 
-                var monthTrackPoints = monthActivities
-                    .Where(a => a.Tracks != null).SelectMany(a => a.Tracks)
-                    .Where(t => t.TrackSegments != null).SelectMany(t => t.TrackSegments)
-                    .Where(s => s.TrackPoints != null).SelectMany(s => s.TrackPoints)
-                    .DefaultIfEmpty(new TrackPointVO.Builder { Cadence = 0, Elevation = 0, HeartRate = 0, Latitude = 0, Longitude = 0, Power = 0, Temperature = 0 });
+                int totalWeight = monthActivities.Sum(a => a.TracksPointsCount);
+                if (totalWeight == 0) totalWeight = 1; //Should not occur, but avoids DivedByZero in case of corrupted database
                 data[i + 1] = monthActivities.Count == 0 ? new object[] { config.StartingDate.AddMonths(i).ToUnixTimeMilliseconds(), 0, 0, 0 } : new object[]
-                {
+               {
                     config.StartingDate.AddMonths(i).ToUnixTimeMilliseconds(),
-                    (int)Math.Round(monthTrackPoints.Average(p=>p.HeartRate)),
+                    (int)Math.Round((decimal)monthActivities.Sum(a=>a.HeartRate*a.TracksPointsCount)/totalWeight),
                     monthActivities.Sum(a => a.Calories),
-                    (int)Math.Round(monthActivities.Average(a => a.Power)),
-                    (int)Math.Round(monthActivities.Average(a => a.Temperature))
-                };
+                    (int)Math.Round((decimal)monthActivities.Sum(a=>a.Power*a.TracksPointsCount)/totalWeight),
+                    (int)Math.Round((decimal)monthActivities.Sum(a=>a.Temperature*a.TracksPointsCount)/totalWeight)
+               };
             }
             var ret = new
             {

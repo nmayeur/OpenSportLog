@@ -183,6 +183,21 @@ namespace OSL.Common.Model
             set { _Tracks = value; }
         }
 
+        private int _TracksPointsCount;
+        public int TracksPointsCount
+        {
+            get
+            {
+                return _TracksPointsCount;
+            }
+            set
+            {
+                _TracksPointsCount = value;
+                NotifyPropertyChanged("TracksPointsCount");
+            }
+        }
+
+
         public sealed class Builder : BuilderBase<ActivityEntity>
         {
             private ActivityEntity _instance = new ActivityEntity();
@@ -283,6 +298,13 @@ namespace OSL.Common.Model
                 get { return _Tracks; }
                 set { _Tracks = value; }
             }
+
+            public int TracksPointsCount
+            {
+                get { return _instance.TracksPointsCount; }
+                set { _instance.TracksPointsCount = value; }
+            }
+
         }
     }
 }

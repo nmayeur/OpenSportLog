@@ -54,7 +54,7 @@ namespace OSL.WPF.ViewModel
                 DateTimeOffset StartingDate = new DateTime(now.Year - 2, 1, 1);
                 DateTimeOffset EndingDate = now;
 
-                _LoadTracksForActivities(StartingDate, EndingDate);
+                //_LoadTracksForActivities(StartingDate, EndingDate);
                 var serializedActivities = _EChartsService.SerializeAthleteData(_Activities, new SerializeAthleteDataConfig { StartingDate = StartingDate, EndingDate = EndingDate });
                 ExecuteJavaScript(WebBrowserStats, $"OSL.drawChart({serializedActivities})");
             }
@@ -112,7 +112,7 @@ namespace OSL.WPF.ViewModel
             var now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             DateTimeOffset StartingDate = new DateTime(now.Year - 2, 1, 1);
             DateTimeOffset EndingDate = now;
-            _LoadTracksForActivities(StartingDate, EndingDate);
+            //_LoadTracksForActivities(StartingDate, EndingDate);
             var serializedActivities = _EChartsService.SerializeAthleteData(_Activities, new SerializeAthleteDataConfig { StartingDate = StartingDate, EndingDate = EndingDate });
             ExecuteJavaScript(WebBrowserStats, $"OSL.drawChart({serializedActivities})");
         }
