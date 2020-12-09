@@ -11,31 +11,29 @@ namespace OSL.Common.Service
 
         private static readonly NLog.Logger _Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public string SerializeAthleteData(IEnumerable<ActivityEntity> activities)
+        public string SerializeAthleteData(IEnumerable<ActivityEntity> activities, SerializeAthleteDataConfig config)
         {
-            var now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-            DateTimeOffset StartingDate = new DateTime(now.Year - 2, 1, 1);
-            DateTimeOffset EndingDate = now;
-
             //calculate the number of months
-            var MonthsCount = _MonthDifference(EndingDate, StartingDate);
+            var MonthsCount = _MonthDifference(config.EndingDate, config.StartingDate);
             object[] data = new object[MonthsCount + 1];
             data[0] = new string[] { "time", "hr", "calories", "power", "temperature" };
 
-            for (var i = 0; i < (EndingDate.Year - StartingDate.Year) * 12 + EndingDate.Month; i++)
+            for (var i = 0; i < (config.EndingDate.Year - config.StartingDate.Year) * 12 + config.EndingDate.Month; i++)
             {
                 var monthActivities = activities.Where(a =>
-                    (a.Time.Year - StartingDate.Year) * 12 + a.Time.Month - 1 == i
+                    (a.Time.Year - config.StartingDate.Year) * 12 + a.Time.Month - 1 == i
                 ).ToList();
+                //Load tracks for each activity
+                //monthActivities.ForEach(a => _DbAccess.GetActivityTracks(a));
+
                 var monthTrackPoints = monthActivities
                     .Where(a => a.Tracks != null).SelectMany(a => a.Tracks)
                     .Where(t => t.TrackSegments != null).SelectMany(t => t.TrackSegments)
                     .Where(s => s.TrackPoints != null).SelectMany(s => s.TrackPoints)
                     .DefaultIfEmpty(new TrackPointVO.Builder { Cadence = 0, Elevation = 0, HeartRate = 0, Latitude = 0, Longitude = 0, Power = 0, Temperature = 0 });
-                //TODO : tracks not loaded
-                data[i + 1] = monthActivities.Count == 0 ? new object[] { StartingDate.AddMonths(i).ToUnixTimeMilliseconds(), 0, 0, 0 } : new object[]
+                data[i + 1] = monthActivities.Count == 0 ? new object[] { config.StartingDate.AddMonths(i).ToUnixTimeMilliseconds(), 0, 0, 0 } : new object[]
                 {
-                    StartingDate.AddMonths(i).ToUnixTimeMilliseconds(),
+                    config.StartingDate.AddMonths(i).ToUnixTimeMilliseconds(),
                     (int)Math.Round(monthTrackPoints.Average(p=>p.HeartRate)),
                     monthActivities.Sum(a => a.Calories),
                     (int)Math.Round(monthActivities.Average(a => a.Power)),

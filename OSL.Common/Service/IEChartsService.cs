@@ -9,6 +9,12 @@ namespace OSL.Common.Service
     public interface IEChartsService
     {
         string SerializeTrackDatas(IEnumerable<TrackPointVO> trackPoints);
-        string SerializeAthleteData(IEnumerable<ActivityEntity> activities);
+        string SerializeAthleteData(IEnumerable<ActivityEntity> activities, SerializeAthleteDataConfig config);
+    }
+
+    public class SerializeAthleteDataConfig
+    {
+        public DateTimeOffset StartingDate;
+        public DateTimeOffset EndingDate;
     }
 }

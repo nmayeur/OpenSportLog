@@ -23,7 +23,8 @@ namespace OSL.Common.Service
         void OpenDatabase(string DatabasePath, bool ForceNew = false);
         IList<AthleteEntity> GetAthletes();
         IList<ActivityEntity> GetActivitiesForAthlete(AthleteEntity athlete);
-        IList<TrackEntity> GetActivityTracks(ActivityEntity activity);
+        IEnumerable<TrackEntity> GetActivityTracks(ActivityEntity activity);
+        IEnumerable<TrackEntity> GetActivitiesTracks(IEnumerable<ActivityEntity> activities);
         void AddAthlete(AthleteEntity athlete);
 
         void DeleteActivities(IList<ActivityEntity> activities);

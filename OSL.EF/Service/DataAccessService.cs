@@ -91,7 +91,7 @@ namespace OSL.EF.Service
             return athlete.Activities.OrderByDescending(x => x.Time).ToList();
         }
 
-        public IList<TrackEntity> GetActivityTracks(ActivityEntity activity)
+        public IEnumerable<TrackEntity> GetActivityTracks(ActivityEntity activity)
         {
             if (activity == null) return new List<TrackEntity>();
 
@@ -102,6 +102,12 @@ namespace OSL.EF.Service
 
             if (activity.Tracks == null) return new List<TrackEntity>();
             return activity.Tracks.ToList();
+        }
+
+        public IEnumerable<TrackEntity> GetActivitiesTracks(IEnumerable<ActivityEntity> activities)
+        {
+            if (activities == null) return new List<TrackEntity>();
+            return activities.ToList().SelectMany(a => GetActivityTracks(a));
         }
 
         public void DeleteActivities(IList<ActivityEntity> activities)

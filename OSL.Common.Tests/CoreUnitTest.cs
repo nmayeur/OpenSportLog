@@ -357,7 +357,13 @@ namespace OSL.Common.Tests
             }
 
             IEChartsService eChartsService = new EChartsService();
-            var json = eChartsService.SerializeAthleteData(activities);
+
+            var now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            DateTimeOffset StartingDate = new DateTime(now.Year - 2, 1, 1);
+            DateTimeOffset EndingDate = now;
+
+            var json = eChartsService.SerializeAthleteData(activities,
+                new SerializeAthleteDataConfig { StartingDate = StartingDate, EndingDate = EndingDate });
             json.Length.Should().BeGreaterThan(0);
         }
     }

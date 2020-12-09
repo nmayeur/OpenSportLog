@@ -5,8 +5,10 @@ using OSL.Common.Model;
 using OSL.Common.Service;
 using OSL.WPF.Utils;
 using OSL.WPF.ViewModel.Scaffholding;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace OSL.WPF.ViewModel
 {
@@ -15,10 +17,12 @@ namespace OSL.WPF.ViewModel
 
         private readonly IEChartsService _EChartsService;
         private IWpfWebBrowser _WebBrowserStats;
+        private readonly IDataAccessService _DbAccess;
 
-        public AthleteStatsVM(IEChartsService EChartsService)
+        public AthleteStatsVM(IDataAccessService DbAccess, IEChartsService EChartsService)
         {
             _Logger = NLog.LogManager.GetCurrentClassLogger();
+            _DbAccess = DbAccess;
             _EChartsService = EChartsService;
             Messenger.Default.Register<NotificationMessage<IList<ActivityEntity>>>(this, message =>
             {
@@ -45,9 +49,22 @@ namespace OSL.WPF.ViewModel
             private set
             {
                 Set(() => Activities, ref _Activities, value);
-                var serializedActivities = _EChartsService.SerializeAthleteData(_Activities);
+
+                var now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+                DateTimeOffset StartingDate = new DateTime(now.Year - 2, 1, 1);
+                DateTimeOffset EndingDate = now;
+
+                _LoadTracksForActivities(StartingDate, EndingDate);
+                var serializedActivities = _EChartsService.SerializeAthleteData(_Activities, new SerializeAthleteDataConfig { StartingDate = StartingDate, EndingDate = EndingDate });
                 ExecuteJavaScript(WebBrowserStats, $"OSL.drawChart({serializedActivities})");
             }
+        }
+
+        private void _LoadTracksForActivities(DateTimeOffset StartingDate, DateTimeOffset EndingDate)
+        {
+            var activities = _Activities.Where(a =>
+                          a.Time >= StartingDate && a.Time <= EndingDate);
+            _DbAccess.GetActivitiesTracks(activities);
         }
 
         public IWpfWebBrowser WebBrowserStats
@@ -92,7 +109,11 @@ namespace OSL.WPF.ViewModel
 
         private void _Start()
         {
-            var serializedActivities = _EChartsService.SerializeAthleteData(_Activities);
+            var now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            DateTimeOffset StartingDate = new DateTime(now.Year - 2, 1, 1);
+            DateTimeOffset EndingDate = now;
+            _LoadTracksForActivities(StartingDate, EndingDate);
+            var serializedActivities = _EChartsService.SerializeAthleteData(_Activities, new SerializeAthleteDataConfig { StartingDate = StartingDate, EndingDate = EndingDate });
             ExecuteJavaScript(WebBrowserStats, $"OSL.drawChart({serializedActivities})");
         }
         #endregion
