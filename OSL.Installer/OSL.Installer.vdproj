@@ -39,12 +39,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_02E44BF855C64DD3AF6D3DA282036A63"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_038269929025162224FF6C70529AD34B"
         "OwnerKey" = "8:_9C8E0070F531E35D2378BF5307ECAD3E"
         "MsmSig" = "8:_UNDEFINED"
@@ -105,13 +99,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_05D274A9B5A64DEEBAE1636B6BA96A9D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_073AB88CE4134E51926218D4253D2D8C"
+        "MsmKey" = "8:_069C0EDB596F448D85330D5D332C0DF1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -143,12 +131,6 @@
         {
         "MsmKey" = "8:_0A540571664E043745A44C2209730CCD"
         "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0A7C046AA73D4848A9F4F28A44C43A28"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -411,12 +393,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1CC5FD147C2A4B2EA8B72CEC428DABCF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1F46EFB8904D42F0A210C26A27315034"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -513,12 +489,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_28BEBE395EED441D8F2C0C3BCB9E3660"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_28EDB72D91B849D399DB85481F7E4410"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -585,12 +555,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_31A59690EC6F44C88C7C2272976607B6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_321A266B4B514E2F8F3806D4AEA001A0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -599,6 +563,12 @@
         {
         "MsmKey" = "8:_32C5104D1EC374A4CFB76578010DE6E0"
         "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_32F69F8B35E54ECC933A95233413B89F"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -681,6 +651,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3BF86C6AE74A43E3BAC7D2674C02FAF8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3D3AC4BBAC2199C3438035C0B15681A5"
         "OwnerKey" = "8:_398B2B581A9EA721EC574C243625264A"
         "MsmSig" = "8:_UNDEFINED"
@@ -719,12 +695,6 @@
         {
         "MsmKey" = "8:_41187153B2A4E751960EE81C60513DD3"
         "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_41E69C51077846D78449991CE3537FB8"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -825,6 +795,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_47FD6B2A594241DD89820BEFDF28B9EB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_48205177CD148A04BA491542413377D4"
         "OwnerKey" = "8:_5C30E9CA43144785A1E5E8872497BDE9"
         "MsmSig" = "8:_UNDEFINED"
@@ -849,13 +825,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_49F75631D324431B9AC8BF41C19A207C"
+        "MsmKey" = "8:_492E350CB7844912AD352AE0E274C854"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4D66A14DA3A1484087E050CEE73BF67D"
+        "MsmKey" = "8:_49F75631D324431B9AC8BF41C19A207C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -915,6 +891,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_55E4110BC0D04BE1BDC5C27248718C79"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5725D29910401373701C76273D077853"
         "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
         "MsmSig" = "8:_UNDEFINED"
@@ -939,6 +921,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5EC520A974EC41DC913F95790FDB8DB4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6011398ABD184105BF14CC17BD6CF520"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_60C9FA79A431127392B7F3C7404BA9E2"
         "OwnerKey" = "8:_284CB2F0D70B6760DAA3428003996CCD"
         "MsmSig" = "8:_UNDEFINED"
@@ -947,12 +941,6 @@
         {
         "MsmKey" = "8:_60C9FA79A431127392B7F3C7404BA9E2"
         "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_60CD9B76F8F9452F9D3B097F747E84E7"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1119,6 +1107,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_74105E2F02D14AC58554B2ECBBC4FFD0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_747FD6E20BBADA39EE9C8FAD147547AC"
         "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
         "MsmSig" = "8:_UNDEFINED"
@@ -1133,6 +1127,18 @@
         {
         "MsmKey" = "8:_7646DF295AD57329F541F18835853B62"
         "OwnerKey" = "8:_61CB7DFB88AF2B432F2A79CC2B0D304F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_76C70E8D87014087ADA23A9D5F6F8F8F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7736D8B68A324849864C0FBE3A7415C0"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1287,12 +1293,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_821A3797529B43498D82503816CB7871"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_825E68DA6EC484A95EDD63C05DCDBBB2"
         "OwnerKey" = "8:_DB5CE144226CE61EB5096ACF9C658BBB"
         "MsmSig" = "8:_UNDEFINED"
@@ -1403,6 +1403,12 @@
         {
         "MsmKey" = "8:_85BA3663A522482CB9AFB110434B8808"
         "OwnerKey" = "8:_998CD6DD0202635B5BAE9B6E285C31AF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8652FA882A69476B94A8F19B40026CCC"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1575,12 +1581,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_993380D18B0C4882A815A4457072F19A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_998CD6DD0202635B5BAE9B6E285C31AF"
         "OwnerKey" = "8:_284CB2F0D70B6760DAA3428003996CCD"
         "MsmSig" = "8:_UNDEFINED"
@@ -1617,12 +1617,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_9A3E902B17964D41A3081410ACFE7E8A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_9BD893C7F20B021AC0E6E1DFF006F5F7"
         "OwnerKey" = "8:_B6C7384926B3CE5FAEDBBF292479A853"
         "MsmSig" = "8:_UNDEFINED"
@@ -1637,12 +1631,6 @@
         {
         "MsmKey" = "8:_9BD893C7F20B021AC0E6E1DFF006F5F7"
         "OwnerKey" = "8:_70EAA5F05FFB9B3BED8DB3AA1A92EF12"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9C2364B765F94EB58DC5AE13696A4642"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1689,8 +1677,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_9FAEE5C489784D8EA7DF68ECA60CB234"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A076DA4FF08D40360AF6009803DA8116"
         "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A09DD0C581714BA7BDFE2A099525E4C8"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1708,6 +1708,12 @@
         "Entry"
         {
         "MsmKey" = "8:_A42C48DBFF9C404BB60421EDE71244CF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A46E05FC7174456A96A8260AE4995697"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1822,12 +1828,6 @@
         "Entry"
         {
         "MsmKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_ACF16608018E44DCAD9A7A6B8D4C954E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2037,6 +2037,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C3ACBF725BD6460282004B9AC551EDAC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C482BA4964033CEFA48F2DDBC5DC506B"
         "OwnerKey" = "8:_F4175959EC3F27CE3DD2282F73B5B656"
         "MsmSig" = "8:_UNDEFINED"
@@ -2051,6 +2057,12 @@
         {
         "MsmKey" = "8:_C48AEE74F74D1B208DDFD6771579A5E4"
         "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C52F72573A4F44B0B6D916B75086A235"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2111,6 +2123,12 @@
         {
         "MsmKey" = "8:_C9746A941E57AEE0FE872FE21AFA28DA"
         "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C986CD13EC1044FB85701B60C53A0218"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2199,14 +2217,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D955002E5E5F62BF58D1BF6DD016C61A"
-        "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
+        "MsmKey" = "8:_D6B2E9622F7343BEB2CB6EAC61A9F0C5"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_DAB3FA6AEBE84D9BB251772013323052"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_D955002E5E5F62BF58D1BF6DD016C61A"
+        "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2415,18 +2433,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E7E7587F5DA545ABBEF9C9F32FC256CC"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E80C75E5C1E448719CAD7CAF59FB4E71"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_EA6A2897609DCBA733ADA666BB276A5A"
         "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
         "MsmSig" = "8:_UNDEFINED"
@@ -2477,6 +2483,12 @@
         {
         "MsmKey" = "8:_EE3BD5B3F01C1F6F969B0379E7B613CF"
         "OwnerKey" = "8:_4F5F078FB88A45A6B80A70C976816529"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EE4A7DF0CC5945AAA49B855F21D29F60"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2555,18 +2567,6 @@
         {
         "MsmKey" = "8:_F4F29CE321FDFA34201F28702ED2E42B"
         "OwnerKey" = "8:_AC2DBA1DBE82450499529FBAE7F69DAC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F590D7DB223645419ECC46AF3573E4B5"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F7D7AC41499C48BCB71911417F2DD7CF"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3814,26 +3814,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_02E44BF855C64DD3AF6D3DA282036A63"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\marker-icon-2x.png"
-            "TargetName" = "8:marker-icon-2x.png"
-            "Tag" = "8:"
-            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_038269929025162224FF6C70529AD34B"
             {
             "AssemblyRegister" = "3:1"
@@ -3916,32 +3896,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_05D274A9B5A64DEEBAE1636B6BA96A9D"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_069C0EDB596F448D85330D5D332C0DF1"
             {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\activityChart.html"
-            "TargetName" = "8:activityChart.html"
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\css\\activityChart.css"
+            "TargetName" = "8:activityChart.css"
             "Tag" = "8:"
-            "Folder" = "8:_D7626CF011554976A44451D6F811AEAB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_073AB88CE4134E51926218D4253D2D8C"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\ui-icons_cc0000_256x240.png"
-            "TargetName" = "8:ui-icons_cc0000_256x240.png"
-            "Tag" = "8:"
-            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
+            "Folder" = "8:_9127240C5518450DA292205C8F55D167"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4087,26 +4047,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0A7C046AA73D4848A9F4F28A44C43A28"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\layers.png"
-            "TargetName" = "8:layers.png"
-            "Tag" = "8:"
-            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0B83129B61A0A9F16F7AC5663264EE83"
@@ -4519,26 +4459,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1CC5FD147C2A4B2EA8B72CEC428DABCF"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\css\\activityChart.css"
-            "TargetName" = "8:activityChart.css"
-            "Tag" = "8:"
-            "Folder" = "8:_9127240C5518450DA292205C8F55D167"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F46EFB8904D42F0A210C26A27315034"
             {
             "SourcePath" = "8:..\\OSL.WPF\\bin\\Release\\x86\\libcef.dll"
@@ -4887,26 +4807,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_28BEBE395EED441D8F2C0C3BCB9E3660"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\css\\map.css"
-            "TargetName" = "8:map.css"
-            "Tag" = "8:"
-            "Folder" = "8:_9127240C5518450DA292205C8F55D167"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_28EDB72D91B849D399DB85481F7E4410"
             {
             "SourcePath" = "8:..\\OSL.WPF\\bin\\Release\\x86\\locales\\da.pak"
@@ -5142,26 +5042,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_31A59690EC6F44C88C7C2272976607B6"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\ui-icons_444444_256x240.png"
-            "TargetName" = "8:ui-icons_444444_256x240.png"
-            "Tag" = "8:"
-            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_321A266B4B514E2F8F3806D4AEA001A0"
             {
             "SourcePath" = "8:..\\OSL.WPF\\bin\\Release\\x86\\locales\\en-GB.pak"
@@ -5211,6 +5091,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_32F69F8B35E54ECC933A95233413B89F"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\marker-icon.png"
+            "TargetName" = "8:marker-icon.png"
+            "Tag" = "8:"
+            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_33290E7FA631A834761C277CD6C802F2"
@@ -5501,6 +5401,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3BF86C6AE74A43E3BAC7D2674C02FAF8"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\athleteStats.html"
+            "TargetName" = "8:athleteStats.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D7626CF011554976A44451D6F811AEAB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3D3AC4BBAC2199C3438035C0B15681A5"
             {
             "AssemblyRegister" = "3:1"
@@ -5592,26 +5512,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_41E69C51077846D78449991CE3537FB8"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\athleteStats.html"
-            "TargetName" = "8:athleteStats.html"
-            "Tag" = "8:"
-            "Folder" = "8:_D7626CF011554976A44451D6F811AEAB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_41F59017E063B6277DF31FA9660EA941"
@@ -5931,6 +5831,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_47FD6B2A594241DD89820BEFDF28B9EB"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\layers-2x.png"
+            "TargetName" = "8:layers-2x.png"
+            "Tag" = "8:"
+            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_48205177CD148A04BA491542413377D4"
             {
             "AssemblyRegister" = "3:1"
@@ -5993,12 +5913,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_49F75631D324431B9AC8BF41C19A207C"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_492E350CB7844912AD352AE0E274C854"
             {
-            "SourcePath" = "8:..\\OSL.WPF\\bin\\Release\\runtimes\\win-x86\\native\\e_sqlite3.dll"
-            "TargetName" = "8:e_sqlite3.dll"
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\css\\athleteStats.css"
+            "TargetName" = "8:athleteStats.css"
             "Tag" = "8:"
-            "Folder" = "8:_BD341967EDBE4FA0A981493C6773FBC4"
+            "Folder" = "8:_9127240C5518450DA292205C8F55D167"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6013,12 +5933,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4D66A14DA3A1484087E050CEE73BF67D"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_49F75631D324431B9AC8BF41C19A207C"
             {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\map.html"
-            "TargetName" = "8:map.html"
+            "SourcePath" = "8:..\\OSL.WPF\\bin\\Release\\runtimes\\win-x86\\native\\e_sqlite3.dll"
+            "TargetName" = "8:e_sqlite3.dll"
             "Tag" = "8:"
-            "Folder" = "8:_D7626CF011554976A44451D6F811AEAB"
+            "Folder" = "8:_BD341967EDBE4FA0A981493C6773FBC4"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6279,6 +6199,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_55E4110BC0D04BE1BDC5C27248718C79"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\js\\athleteStats.js"
+            "TargetName" = "8:athleteStats.js"
+            "Tag" = "8:"
+            "Folder" = "8:_34DCBCD434EF479192B30697F9C43CEA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5725D29910401373701C76273D077853"
             {
             "AssemblyRegister" = "3:1"
@@ -6392,6 +6332,46 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5EC520A974EC41DC913F95790FDB8DB4"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\marker-shadow.png"
+            "TargetName" = "8:marker-shadow.png"
+            "Tag" = "8:"
+            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6011398ABD184105BF14CC17BD6CF520"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\ui-icons_777620_256x240.png"
+            "TargetName" = "8:ui-icons_777620_256x240.png"
+            "Tag" = "8:"
+            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_60C9FA79A431127392B7F3C7404BA9E2"
             {
             "AssemblyRegister" = "3:1"
@@ -6421,26 +6401,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_60CD9B76F8F9452F9D3B097F747E84E7"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\ui-icons_555555_256x240.png"
-            "TargetName" = "8:ui-icons_555555_256x240.png"
-            "Tag" = "8:"
-            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_61CB7DFB88AF2B432F2A79CC2B0D304F"
@@ -7061,6 +7021,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_74105E2F02D14AC58554B2ECBBC4FFD0"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\ui-icons_444444_256x240.png"
+            "TargetName" = "8:ui-icons_444444_256x240.png"
+            "Tag" = "8:"
+            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_747FD6E20BBADA39EE9C8FAD147547AC"
             {
             "AssemblyRegister" = "3:1"
@@ -7121,6 +7101,46 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_76C70E8D87014087ADA23A9D5F6F8F8F"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\ui-icons_ffffff_256x240.png"
+            "TargetName" = "8:ui-icons_ffffff_256x240.png"
+            "Tag" = "8:"
+            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7736D8B68A324849864C0FBE3A7415C0"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\css\\map.css"
+            "TargetName" = "8:map.css"
+            "Tag" = "8:"
+            "Folder" = "8:_9127240C5518450DA292205C8F55D167"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_78468E9590B14CC9A6DEC4EB2DC4DAEF"
@@ -7460,26 +7480,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_821A3797529B43498D82503816CB7871"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\js\\activityChart.js"
-            "TargetName" = "8:activityChart.js"
-            "Tag" = "8:"
-            "Folder" = "8:_34DCBCD434EF479192B30697F9C43CEA"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_825E68DA6EC484A95EDD63C05DCDBBB2"
             {
             "AssemblyRegister" = "3:1"
@@ -7571,6 +7571,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8652FA882A69476B94A8F19B40026CCC"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\marker-icon-2x.png"
+            "TargetName" = "8:marker-icon-2x.png"
+            "Tag" = "8:"
+            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_86899B2DAD6906CF648F489EC4389580"
@@ -8107,26 +8127,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_993380D18B0C4882A815A4457072F19A"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\js\\map.js"
-            "TargetName" = "8:map.js"
-            "Tag" = "8:"
-            "Folder" = "8:_34DCBCD434EF479192B30697F9C43CEA"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_998CD6DD0202635B5BAE9B6E285C31AF"
             {
             "AssemblyRegister" = "3:1"
@@ -8209,26 +8209,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A3E902B17964D41A3081410ACFE7E8A"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\marker-icon.png"
-            "TargetName" = "8:marker-icon.png"
-            "Tag" = "8:"
-            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9BD893C7F20B021AC0E6E1DFF006F5F7"
             {
             "AssemblyRegister" = "3:1"
@@ -8258,26 +8238,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C2364B765F94EB58DC5AE13696A4642"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\ui-icons_ffffff_256x240.png"
-            "TargetName" = "8:ui-icons_ffffff_256x240.png"
-            "Tag" = "8:"
-            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9C8E0070F531E35D2378BF5307ECAD3E"
@@ -8413,6 +8373,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9FAEE5C489784D8EA7DF68ECA60CB234"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\layers.png"
+            "TargetName" = "8:layers.png"
+            "Tag" = "8:"
+            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A076DA4FF08D40360AF6009803DA8116"
             {
             "AssemblyRegister" = "3:1"
@@ -8442,6 +8422,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A09DD0C581714BA7BDFE2A099525E4C8"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\js\\map.js"
+            "TargetName" = "8:map.js"
+            "Tag" = "8:"
+            "Folder" = "8:_34DCBCD434EF479192B30697F9C43CEA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A18CD96662B24D84B88F439E78109BBD"
@@ -8512,6 +8512,26 @@
             "TargetName" = "8:nl.pak"
             "Tag" = "8:"
             "Folder" = "8:_72441BC310A5465197AB836B304F7864"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A46E05FC7174456A96A8260AE4995697"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\activityChart.html"
+            "TargetName" = "8:activityChart.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D7626CF011554976A44451D6F811AEAB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -8850,26 +8870,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ACF16608018E44DCAD9A7A6B8D4C954E"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\css\\athleteStats.css"
-            "TargetName" = "8:athleteStats.css"
-            "Tag" = "8:"
-            "Folder" = "8:_9127240C5518450DA292205C8F55D167"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AD4ACC79969B471498AFE15B9D5A5C78"
@@ -9422,6 +9422,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C3ACBF725BD6460282004B9AC551EDAC"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\js\\activityChart.js"
+            "TargetName" = "8:activityChart.js"
+            "Tag" = "8:"
+            "Folder" = "8:_34DCBCD434EF479192B30697F9C43CEA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C482BA4964033CEFA48F2DDBC5DC506B"
             {
             "AssemblyRegister" = "3:1"
@@ -9482,6 +9502,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C52F72573A4F44B0B6D916B75086A235"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\ui-icons_555555_256x240.png"
+            "TargetName" = "8:ui-icons_555555_256x240.png"
+            "Tag" = "8:"
+            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C558B5939AEB97E63633B13AC426C506"
@@ -9761,6 +9801,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C986CD13EC1044FB85701B60C53A0218"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\map.html"
+            "TargetName" = "8:map.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D7626CF011554976A44451D6F811AEAB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CAEF2289E03048350B114AEE6E86F875"
@@ -10071,6 +10131,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6B2E9622F7343BEB2CB6EAC61A9F0C5"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\ui-icons_777777_256x240.png"
+            "TargetName" = "8:ui-icons_777777_256x240.png"
+            "Tag" = "8:"
+            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D955002E5E5F62BF58D1BF6DD016C61A"
             {
             "AssemblyRegister" = "3:1"
@@ -10100,26 +10180,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DAB3FA6AEBE84D9BB251772013323052"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\layers-2x.png"
-            "TargetName" = "8:layers-2x.png"
-            "Tag" = "8:"
-            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DB15C437ADF642E5BC44B8BDCCF9215F"
@@ -10512,46 +10572,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E7E7587F5DA545ABBEF9C9F32FC256CC"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\ui-icons_777620_256x240.png"
-            "TargetName" = "8:ui-icons_777620_256x240.png"
-            "Tag" = "8:"
-            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E80C75E5C1E448719CAD7CAF59FB4E71"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\ui-icons_777777_256x240.png"
-            "TargetName" = "8:ui-icons_777777_256x240.png"
-            "Tag" = "8:"
-            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EA6A2897609DCBA733ADA666BB276A5A"
             {
             "AssemblyRegister" = "3:1"
@@ -10756,6 +10776,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EE4A7DF0CC5945AAA49B855F21D29F60"
+            {
+            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\ui-icons_cc0000_256x240.png"
+            "TargetName" = "8:ui-icons_cc0000_256x240.png"
+            "Tag" = "8:"
+            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EE81B1008530475684595204262E222A"
@@ -11044,46 +11084,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F590D7DB223645419ECC46AF3573E4B5"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\images\\marker-shadow.png"
-            "TargetName" = "8:marker-shadow.png"
-            "Tag" = "8:"
-            "Folder" = "8:_45E6962CCF0E44F1AA488E78E1E69CC7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F7D7AC41499C48BCB71911417F2DD7CF"
-            {
-            "SourcePath" = "8:..\\OSL.MapWebApp\\dist\\js\\athleteStats.js"
-            "TargetName" = "8:athleteStats.js"
-            "Tag" = "8:"
-            "Folder" = "8:_34DCBCD434EF479192B30697F9C43CEA"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F9273E47F94873DCB668507515D590E2"
@@ -11532,7 +11532,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:OpenSportLog"
         "ProductCode" = "8:{CDE2B585-655F-45ED-9633-8265E53CD40E}"
-        "PackageCode" = "8:{9A503D8F-6318-4C01-B597-BCEEA221985A}"
+        "PackageCode" = "8:{25AAC8A3-5E0C-4684-84A1-7172D77E479F}"
         "UpgradeCode" = "8:{CBA71A2E-86AE-412B-94ED-8080F006C67C}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
