@@ -61,13 +61,15 @@ namespace OSL.WPF
                 SchemeHandlerFactory = new FolderSchemeHandlerFactory(
                     rootFolder: @"WebResources",
                     hostName: "internal",
-                    defaultPage: "index.html"
+                    defaultPage: "map.html"
                 ),
             });
 #if DEBUG
             settings.RemoteDebuggingPort = 8088;
 #endif
             // Set BrowserSubProcessPath based on app bitness at runtime
+            //System.Windows.Forms.MessageBox.Show(Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase,
+            //                                       Environment.Is64BitProcess ? "x64" : "x86").ToString());
             settings.BrowserSubprocessPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase,
                                                    Environment.Is64BitProcess ? "x64" : "x86",
                                                    "CefSharp.BrowserSubprocess.exe");
