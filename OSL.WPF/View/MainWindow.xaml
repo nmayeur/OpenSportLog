@@ -58,6 +58,9 @@
                         <MenuItem Header="{x:Static p:Resources.Menu_Import_GPX}" Command="{Binding ImportGpxCommand}"/>
                     </MenuItem>
                 </MenuItem>
+                <MenuItem Header="{x:Static p:Resources.Menu_About}">
+                    <MenuItem Header="{x:Static p:Resources.Menu_About_Infos}" Command="{Binding InfosCommand}"/>
+                </MenuItem>
             </Menu>
             <ToolBarTray DockPanel.Dock="Top">
                 <ToolBar>

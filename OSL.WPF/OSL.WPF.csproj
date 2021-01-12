@@ -270,11 +270,15 @@
     <Compile Include="Utils\InitSettings.cs" />
     <Compile Include="ViewModel\AthleteStatsVM.cs" />
     <Compile Include="ViewModel\ImportSportsMatchingEntryVM.cs" />
+    <Compile Include="ViewModel\InfosVM.cs" />
     <Compile Include="ViewModel\NewAthleteVM.cs" />
     <Compile Include="ViewModel\Scaffholding\BrowserViewModel.cs" />
     <Compile Include="ViewModel\Scaffholding\OSLViewModel.cs" />
     <Compile Include="View\AthleteStats.xaml.cs">
       <DependentUpon>AthleteStats.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InfosDialog.xaml.cs">
+      <DependentUpon>InfosDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\NewAthleteDialog.xaml.cs">
       <DependentUpon>NewAthleteDialog.xaml</DependentUpon>
@@ -297,6 +301,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ImportSportsMatchingDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InfosDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -69,6 +69,7 @@ namespace OSL.WPF.ViewModel.Scaffholding
             SimpleIoc.Default.Register<ActivityDetailsVM>();
             SimpleIoc.Default.Register<ImportSportsMatchingDialogVM>();
             SimpleIoc.Default.Register<NewAthleteVM>();
+            SimpleIoc.Default.Register<InfosVM>();
             SimpleIoc.Default.Register<AthleteStatsVM>();
             SimpleIoc.Default.Register<IDataAccessService, DataAccessService>();
             SimpleIoc.Default.Register<FitLogImporter>();
@@ -114,6 +115,14 @@ namespace OSL.WPF.ViewModel.Scaffholding
             get
             {
                 return ServiceLocator.Current.GetInstance<NewAthleteVM>();
+            }
+        }
+
+        public InfosVM InfosDialog
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<InfosVM>();
             }
         }
 

@@ -259,6 +259,42 @@ namespace OSL.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Author.
+        /// </summary>
+        public static string InfosDialog_Author {
+            get {
+                return ResourceManager.GetString("InfosDialog_Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licence.
+        /// </summary>
+        public static string InfosDialog_Licence {
+            get {
+                return ResourceManager.GetString("InfosDialog_Licence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informations.
+        /// </summary>
+        public static string InfosDialog_Title {
+            get {
+                return ResourceManager.GetString("InfosDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string InfosDialog_Version {
+            get {
+                return ResourceManager.GetString("InfosDialog_Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data saved.
         /// </summary>
         public static string MainWindow_DataSaved {
@@ -354,6 +390,24 @@ namespace OSL.WPF.Properties {
         public static string MainWindow_WorkInProgress {
             get {
                 return ResourceManager.GetString("MainWindow_WorkInProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A_bout.
+        /// </summary>
+        public static string Menu_About {
+            get {
+                return ResourceManager.GetString("Menu_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Informations.
+        /// </summary>
+        public static string Menu_About_Infos {
+            get {
+                return ResourceManager.GetString("Menu_About_Infos", resourceCulture);
             }
         }
         

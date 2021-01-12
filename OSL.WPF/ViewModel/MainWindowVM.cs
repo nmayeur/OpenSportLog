@@ -25,6 +25,7 @@ using OSL.WPF.ViewModel.Scaffholding;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -460,6 +461,26 @@ namespace OSL.WPF.ViewModel
             IsProgressbarVisible = true;
             Messenger.Default.Send(new NotificationMessage<ACTION_TYPE>(ACTION_TYPE.DELETE_SELECTED_ACTIVITIES, ASK_FOR_ACTION));
             IsProgressbarVisible = false;
+        }
+        #endregion
+
+        #region InfosCommand
+        private RelayCommand _InfosCommand;
+        public RelayCommand InfosCommand
+        {
+            get
+            {
+                return _InfosCommand ??
+                    (_InfosCommand = new RelayCommand(
+                        () => { _Infos(); }
+                        ));
+            }
+        }
+
+        private void _Infos()
+        {
+            InfosDialog dialog = new InfosDialog();
+            dialog.ShowDialog();
         }
         #endregion
 

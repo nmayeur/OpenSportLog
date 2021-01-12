@@ -273,4 +273,22 @@
   <data name="ActivityDetails_HR" xml:space="preserve">
     <value>HR</value>
   </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>A_bout</value>
+  </data>
+  <data name="Menu_About_Infos" xml:space="preserve">
+    <value>_Informations</value>
+  </data>
+  <data name="InfosDialog_Title" xml:space="preserve">
+    <value>Informations</value>
+  </data>
+  <data name="InfosDialog_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="InfosDialog_Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="InfosDialog_Licence" xml:space="preserve">
+    <value>Licence</value>
+  </data>
 </root>
