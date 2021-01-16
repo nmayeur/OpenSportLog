@@ -257,39 +257,48 @@ namespace OSL.WPF.ViewModel
                         {
                             int cnt = 0;
                             int duplicates = 0;
-                            using (FileStream fs = File.OpenRead(path))
+                            try
                             {
-                                foreach (var activity in importer.ImportActivitiesStream(fs, config))
+                                using (FileStream fs = File.OpenRead(path))
                                 {
-                                    cnt++;
-                                    if (_SelectedAthlete.Activities.Where(act => act.OriginId == activity.OriginId).Count() > 0)
+                                    var existingIds = _SelectedAthlete.Activities.Select(a => a.OriginId).ToList();
+                                    foreach (var activity in importer.ImportActivitiesStream(fs, config))
                                     {
-                                        duplicates++;
-                                    }
-                                    else
-                                    {
-                                        DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                                        cnt++;
+                                        if (existingIds.Contains(activity.OriginId))
                                         {
-                                            _SelectedAthlete.Activities.Add(activity);
-                                        });
+                                            duplicates++;
+                                        }
+                                        else
+                                        {
+                                            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                                            {
+                                                _SelectedAthlete.Activities.Add(activity);
+                                            });
+                                        }
                                     }
                                 }
+                                cnt -= duplicates;
+                                string message;
+                                if (cnt > 1)
+                                {
+                                    message = string.Format(Resources.AthleteDetails_ImportDonePlural, cnt);
+                                }
+                                else
+                                {
+                                    message = string.Format(Resources.AthleteDetails_ImportDoneSingular, cnt);
+                                }
+                                if (duplicates > 0)
+                                {
+                                    message += "\n" + string.Format(Resources.AthleteDetails_ImportDuplicatesFound, duplicates);
+                                }
+                                MessageBox.Show(message);
                             }
-                            cnt -= duplicates;
-                            string message;
-                            if (cnt > 1)
+                            catch (Exception e)
                             {
-                                message = string.Format(Resources.AthleteDetails_ImportDonePlural, cnt);
+                                MessageBox.Show($"Error while importing data : {e.Message}");
+                                _Logger.Error(e, "Error while importing data : {0}", e.Message);
                             }
-                            else
-                            {
-                                message = string.Format(Resources.AthleteDetails_ImportDoneSingular, cnt);
-                            }
-                            if (duplicates > 0)
-                            {
-                                message += "\n" + string.Format(Resources.AthleteDetails_ImportDuplicatesFound, duplicates);
-                            }
-                            MessageBox.Show(message);
                         }, Resources.AthleteDetails_ImportIsRunning);
                     }
                 });
