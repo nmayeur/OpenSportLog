@@ -12,7 +12,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using Microsoft.Win32;
@@ -28,7 +27,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Windows;
 using static OSL.WPF.ViewModel.Scaffholding.MessengerNotifications;
 
@@ -205,9 +203,15 @@ namespace OSL.WPF.ViewModel
         }
         #endregion
 
-        #region Import Fitlog
+        #region Import Data
         private void ImportDialog(ImporterTypeEnum ImportType)
         {
+            var dlgResult = MessageBox.Show(Resources.Menu_Import_Confirm, Resources.Menu_Import_Confirm_Title, MessageBoxButton.YesNo);
+            if (dlgResult == MessageBoxResult.No)
+            {
+                return;
+            }
+
             IActivitiesImporter importer;
             switch (ImportType)
             {
@@ -255,50 +259,59 @@ namespace OSL.WPF.ViewModel
                         }
                         ViewsHelper.ExecuteWithSpinner(() =>
                         {
+                            _DbAccess.SaveData();
+
                             int cnt = 0;
                             int duplicates = 0;
-                            try
+                            int batchSize = 5;
+                            //try
+                            //{
+                            using (FileStream fs = File.OpenRead(path))
                             {
-                                using (FileStream fs = File.OpenRead(path))
+                                var existingIds = _SelectedAthlete.Activities.Select(a => a.OriginId).ToList();
+                                foreach (var activity in importer.ImportActivitiesStream(fs, config))
                                 {
-                                    var existingIds = _SelectedAthlete.Activities.Select(a => a.OriginId).ToList();
-                                    foreach (var activity in importer.ImportActivitiesStream(fs, config))
+                                    cnt++;
+                                    if (existingIds.Contains(activity.OriginId))
                                     {
-                                        cnt++;
-                                        if (existingIds.Contains(activity.OriginId))
+                                        duplicates++;
+                                    }
+                                    else
+                                    {
+                                        DispatcherHelper.CheckBeginInvokeOnUI(() =>
                                         {
-                                            duplicates++;
-                                        }
-                                        else
+                                            _SelectedAthlete.Activities.Add(activity);
+                                        });
+                                        if ((cnt - duplicates) % batchSize == 0)
                                         {
-                                            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                                            {
-                                                _SelectedAthlete.Activities.Add(activity);
-                                            });
+                                            _Logger.Info("Savepoint in data import");
+                                            _DbAccess.SaveData();
                                         }
                                     }
                                 }
-                                cnt -= duplicates;
-                                string message;
-                                if (cnt > 1)
-                                {
-                                    message = string.Format(Resources.AthleteDetails_ImportDonePlural, cnt);
-                                }
-                                else
-                                {
-                                    message = string.Format(Resources.AthleteDetails_ImportDoneSingular, cnt);
-                                }
-                                if (duplicates > 0)
-                                {
-                                    message += "\n" + string.Format(Resources.AthleteDetails_ImportDuplicatesFound, duplicates);
-                                }
-                                MessageBox.Show(message);
                             }
-                            catch (Exception e)
+                            _DbAccess.SaveData();
+                            cnt -= duplicates;
+                            string message;
+                            if (cnt > 1)
                             {
-                                MessageBox.Show($"Error while importing data : {e.Message}");
-                                _Logger.Error(e, "Error while importing data : {0}", e.Message);
+                                message = string.Format(Resources.AthleteDetails_ImportDonePlural, cnt);
                             }
+                            else
+                            {
+                                message = string.Format(Resources.AthleteDetails_ImportDoneSingular, cnt);
+                            }
+                            if (duplicates > 0)
+                            {
+                                message += "\n" + string.Format(Resources.AthleteDetails_ImportDuplicatesFound, duplicates);
+                            }
+                            MessageBox.Show(message);
+                            //}
+                            //catch (Exception e)
+                            //{
+                            //    MessageBox.Show($"Error while importing data : {e.Message}");
+                            //    _Logger.Error(e, "Error while importing data : {0}", e.Message);
+                            //}
                         }, Resources.AthleteDetails_ImportIsRunning);
                     }
                 });

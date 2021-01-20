@@ -493,6 +493,24 @@ namespace OSL.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Importing data will force saving. Are you sure you want to proceed?.
+        /// </summary>
+        public static string Menu_Import_Confirm {
+            get {
+                return ResourceManager.GetString("Menu_Import_Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attention.
+        /// </summary>
+        public static string Menu_Import_Confirm_Title {
+            get {
+                return ResourceManager.GetString("Menu_Import_Confirm_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _FitLog (SportTracks).
         /// </summary>
         public static string Menu_Import_Fitlog {

@@ -294,4 +294,10 @@
   <data name="InfosDialog_Licence" xml:space="preserve">
     <value>Licence</value>
   </data>
+  <data name="Menu_Import_Confirm_Title" xml:space="preserve">
+    <value>Attention</value>
+  </data>
+  <data name="Menu_Import_Confirm" xml:space="preserve">
+    <value>L'import de données force la sauvegarde. Confirmez-vous l'opération?</value>
+  </data>
 </root>
