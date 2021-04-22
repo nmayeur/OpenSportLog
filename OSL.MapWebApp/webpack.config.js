@@ -37,19 +37,27 @@ module.exports = {
                     {
                         loader: "postcss-loader",
                         options: {
-                            ident: "postcss",
-                            plugins: devMode
-                                ? () => []
-                                : () => [
-                                    postcssPresetEnv({
-                                        // Compile our CSS code to support browsers
-                                        // that are used in more than 1% of the
-                                        // global market browser share.
-                                        // https://github.com/browserslist/browserslist#queries
-                                        browsers: [">1%"]
-                                    }),
-                                    require("cssnano")()
-                                ]
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        "postcss-preset-env",
+                                        {
+                                            browsers: [">1%"]
+                                        },
+                                    ], require("cssnano")()
+                                ],
+                            },
+
+                        //    ident: "postcss",
+                        //    plugins: devMode
+                        //        ? () => []
+                        //        : () => [
+                        //            postcssPresetEnv({
+                        //                // https://github.com/browserslist/browserslist#queries
+                        //                browsers: [">1%"]
+                        //            }),
+                        //            require("cssnano")()
+                        //        ]
                         }
                     },
                     {
@@ -65,15 +73,26 @@ module.exports = {
                     {
                         loader: "postcss-loader",
                         options: {
-                            ident: "postcss",
-                            plugins: devMode
-                                ? () => []
-                                : () => [
-                                    postcssPresetEnv({
-                                        browsers: [">1%"]
-                                    }),
-                                    require("cssnano")()
-                                ]
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        "postcss-preset-env",
+                                        {
+                                            browsers: [">1%"]
+                                        },
+                                    ], require("cssnano")()
+                                ],
+                            },
+
+                            //ident: "postcss",
+                            //    plugins: devMode
+                            //        ? () => []
+                            //        : () => [
+                            //            postcssPresetEnv({
+                            //                browsers: [">1%"]
+                            //            }),
+                            //            require("cssnano")()
+                            //        ]
                         }
                     }
                 ]

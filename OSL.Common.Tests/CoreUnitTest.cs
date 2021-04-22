@@ -366,5 +366,39 @@ namespace OSL.Common.Tests
                 new SerializeAthleteDataConfig { StartingDate = StartingDate, EndingDate = EndingDate });
             json.Length.Should().BeGreaterThan(0);
         }
+
+        [Fact]
+        public void TestImportFitSports()
+        {
+            string path = @"data\170768730.fit";
+            IActivitiesImporter importer = new FitImporter();
+
+            IDictionary<string, string> sports;
+            using (FileStream fs = File.OpenRead(path))
+            {
+                sports = importer.GetSports(fs);
+            }
+            sports.Should().HaveCountGreaterOrEqualTo(1, "expected 170768730.fit to contain at least 1 sport");
+        }
+
+        [Fact]
+        public void TestImportFitData()
+        {
+            string path = @"data\170768730.fit";
+            IActivitiesImporter importer = new FitImporter();
+
+            IList<ActivityEntity> activities;
+            using (FileStream fs = File.OpenRead(path))
+            {
+                activities = new List<ActivityEntity>(importer.ImportActivitiesStream(fs, new Dictionary<string, ACTIVITY_SPORT> {
+                { "1", ACTIVITY_SPORT.BIKING},
+                { "2",ACTIVITY_SPORT.RUNNING},
+                { "3",ACTIVITY_SPORT.SWIMMING} }));
+            }
+            activities.Should().HaveCountGreaterOrEqualTo(1, "expected 170768730.fit to contain at least 1 activity");
+            var activity = activities.Where(a => a.OriginId == "3872857442").Single();
+            activity.Tracks.Should().ContainSingle();
+        }
+
     }
 }

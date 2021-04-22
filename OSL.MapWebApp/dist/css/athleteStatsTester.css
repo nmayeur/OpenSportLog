@@ -1287,31 +1287,31 @@ a.ui-button:active,
 }
 .ui-icon,
 .ui-widget-content .ui-icon {
-	background-image: url(images/ui-icons_444444_256x240.png);
+	background-image: url(images/ui-icons_444444_256x240.png)/*{iconsContent}*/;
 }
 .ui-widget-header .ui-icon {
-	background-image: url(images/ui-icons_444444_256x240.png);
+	background-image: url(images/ui-icons_444444_256x240.png)/*{iconsHeader}*/;
 }
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon,
 .ui-button:hover .ui-icon,
 .ui-button:focus .ui-icon {
-	background-image: url(images/ui-icons_555555_256x240.png);
+	background-image: url(images/ui-icons_555555_256x240.png)/*{iconsHover}*/;
 }
 .ui-state-active .ui-icon,
 .ui-button:active .ui-icon {
-	background-image: url(images/ui-icons_ffffff_256x240.png);
+	background-image: url(images/ui-icons_ffffff_256x240.png)/*{iconsActive}*/;
 }
 .ui-state-highlight .ui-icon,
 .ui-button .ui-state-highlight.ui-icon {
-	background-image: url(images/ui-icons_777620_256x240.png);
+	background-image: url(images/ui-icons_777620_256x240.png)/*{iconsHighlight}*/;
 }
 .ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
-	background-image: url(images/ui-icons_cc0000_256x240.png);
+	background-image: url(images/ui-icons_cc0000_256x240.png)/*{iconsError}*/;
 }
 .ui-button .ui-icon {
-	background-image: url(images/ui-icons_777777_256x240.png);
+	background-image: url(images/ui-icons_777777_256x240.png)/*{iconsDefault}*/;
 }
 
 /* positioning */
@@ -1543,62 +1543,5 @@ a.ui-button:active,
  *
  * http://api.jqueryui.com/category/theming/
  */
-
-body, html {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0; }
-
-#main {
-  min-height: 200px;
-  height: 100%; }
-
-body, html {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0; }
-
-#main {
-  float: right;
-  position: absolute;
-  right: 0;
-  left: 250px;
-  margin-top: 10px;
-  margin-left: 10px;
-  border: 2px solid green; }
-
-#sidebar {
-  background-color: palegreen;
-  margin-top: 10px;
-  width: 250px;
-  float: left;
-  position: absolute;
-  height: 100%;
-  overflow-y: hidden; }
-
-#dragbar {
-  background-color: black;
-  height: 100%;
-  float: right;
-  width: 3px;
-  cursor: col-resize; }
-
-#ghostbar {
-  width: 3px;
-  background-color: #000;
-  opacity: 0.5;
-  position: absolute;
-  cursor: col-resize;
-  z-index: 999; }
-
-#sidebar button {
-  margin: 3px 3px 5px 5px; }
-
-#sidebar input {
-  margin: 3px 3px 5px 5px; }
-
-#sidebar fieldset {
-  margin: 7px 5px 5px 5px; }
-
+body,html{width:100%;height:100%;padding:0;margin:0}#main{min-height:200px;height:100%}
+body,html{width:100%;height:100%;padding:0;margin:0}#main{float:right;right:0;left:250px;margin-left:10px;border:2px solid green}#main,#sidebar{position:absolute;margin-top:10px}#sidebar{background-color:#98fb98;width:250px;float:left;height:100%;overflow-y:hidden}#dragbar{height:100%;float:right}#dragbar,#ghostbar{background-color:#000;width:3px;cursor:col-resize}#ghostbar{opacity:.5;position:absolute;z-index:999}#sidebar button,#sidebar input{margin:3px 3px 5px 5px}#sidebar fieldset{margin:7px 5px 5px}
